@@ -1,8 +1,7 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import React from 'react';
-import { AccountSettingTabs, BuildingHandBookTabs, HandleRequestTabs, HomeTabs, ManagementTabs, MyTabsVehicle, ServiceHistoryTabs, StayAbsentTabs } from './TabNavigation';
 import { DrawContent } from '../screens/DrawContent';
-import Vehicle from '../screens/Vehicle';
+import { AccountSettingTabs, BuildingHandBookTabs, HandleRequestTabs, HomeTabs, ManagementTabs, MyTabsVehicle, ServiceHistoryTabs, StayAbsentTabs } from './TabNavigation';
 const Drawer = createDrawerNavigator();
 
 function DrawerNavigation() {

@@ -1,80 +1,88 @@
 import { AntDesign } from '@expo/vector-icons';
 import React from 'react';
-import { Button, Image, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, ImageBackground } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
-import BannerImage from '../assets/images/banner1.png';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
+import HomeImage from '../assets/images/home.png';
 
 export default function Parking({ navigation }) {
     return <View style={styles.wrapper}>
-        <Header navigation={navigation} />
         <View style={styles.wrapContent}>
-            <View style={styles.banner}>
-                <Image source={BannerImage} style={styles.imageBanner} />
-                <View style={styles.overlay}></View>
-                <View style={styles.textBanner}>
-                    <Text style={styles.test}>Đăng kí</Text>
-                </View>
-            </View>
-            <View style={styles.main}>
-                <View style={styles.confirm}>
-                    <AntDesign name="arrowleft" size={40} color="#9966FF" />
-                    <Text style={styles.textConfirm}>Gửi xe</Text>
-                </View>
-                <View style={styles.headerText}>
-                    <View style={[styles.wrapItem, styles.active]}>
-                        <Text style={styles.textItem}>Ô tô</Text>
-                    </View>
-                    <View style={[styles.wrapItem, styles.noneBorder]}>
-                        <Text style={styles.textItem}>Xe máy</Text>
-                    </View>
-                    <View style={styles.wrapItem}>
-                        <Text style={styles.textItem}>Xe điện</Text>
-                    </View>
-                </View>
-                <View style={styles.features}>
-                    <ScrollView>
-                        <View style={styles.numberCar}>
-                            <Text style={styles.textNumber}>Số lượng xe:</Text>
-                            <NumericInput type='up-down' />
-                        </View>
-                        <View>
-                            <View style={styles.featureItem}>
-                                <Text style={styles.textNumber}>Xe thứ nhất:</Text>
-                                <NumericInput type='up-down' />
-                            </View>
-                            <View style={styles.featureInput}>
-                                <TextInput placeholder="Loại xe" style={styles.input} />
-                                <TextInput placeholder="Màu xe" style={styles.input} />
-                            </View>
-                            <View style={styles.featureInput}>
-                                <TextInput placeholder="Biển số" style={styles.input} />
-                                <Text style={styles.textPrice}>Phí xe: 1.000.000đ</Text>
+            <ImageBackground source={HomeImage} style={styles.image}>
+                <View style={styles.overlay}>
+                    <View style={styles.main}>
+                        <View style={styles.confirm}>
+                            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.btnBack}>
+                                <AntDesign name="arrowleft" size={30} color="#fff" />
+                            </TouchableOpacity>
+                            <View style={styles.wrapText}>
+                                <Text style={styles.textConfirm}>Gửi xe</Text>
                             </View>
                         </View>
-                        <View>
-                            <View style={styles.featureItem}>
-                                <Text style={styles.textNumber}>Xe thứ hai:</Text>
-                                <NumericInput type='up-down' />
+                        <View style={styles.headerText}>
+                            <View style={[styles.wrapItem, styles.active]}>
+                                <Text style={styles.textItem}>Ô tô</Text>
                             </View>
-                            <View style={styles.featureInput}>
-                                <TextInput placeholder="Loại xe" style={styles.input} />
-                                <TextInput placeholder="Màu xe" style={styles.input} />
+                            <View style={[styles.wrapItem, styles.noneBorder]}>
+                                <Text style={styles.textItem}>Xe máy</Text>
                             </View>
-                            <View style={styles.featureInput}>
-                                <TextInput placeholder="Biển số" style={styles.input} />
-                                <Text style={styles.textPrice}>Phí xe: 1.000.000đ</Text>
+                            <View style={styles.wrapItem}>
+                                <Text style={styles.textItem}>Xe điện</Text>
                             </View>
                         </View>
-                    </ScrollView>
-                </View>
-                <View style={styles.wrapBtn}>
-                    <View style={styles.btnConfirm}>
-                        <Button title="Xác nhận" color="white" onPress={() => navigation.navigate('ServiceQuote')} />
+                        <View style={styles.features}>
+                            <ScrollView>
+                                <View style={styles.numberCar}>
+                                    <Text style={styles.textNumber}>Số lượng xe:</Text>
+                                    <NumericInput type='up-down' 
+                                    totalWidth={60} 
+                                    totalHeight={35} 
+                                    iconSize={18}/>
+                                </View>
+                                <View style={{padding:15}}>
+                                    <View style={styles.featureItem}>
+                                        <Text style={styles.textNumber}>Xe thứ nhất:</Text>
+                                        <NumericInput type='up-down'
+                                        totalWidth={60} 
+                                        totalHeight={35} 
+                                        />
+                                    </View>
+                                    <View style={styles.featureInput}>
+                                        <TextInput placeholder="Loại xe" style={styles.input} />
+                                        <TextInput placeholder="Màu xe" style={[styles.input,{marginLeft:10}]} />
+                                    </View>
+                                    <View style={styles.featureInput}>
+                                        <TextInput placeholder="Biển số" style={styles.input} />
+                                        <Text style={styles.textPrice}>Phí xe: 1.000.000đ</Text>
+                                    </View>
+                                </View>
+                                <View style={{padding:15}}>
+                                    <View style={styles.featureItem}>
+                                        <Text style={styles.textNumber}>Xe thứ hai:</Text>
+                                        <NumericInput type='up-down'
+                                        totalWidth={60} 
+                                        totalHeight={35} 
+                                        />
+                                    </View>
+                                    <View style={styles.featureInput}>
+                                        <TextInput placeholder="Loại xe" style={styles.input} />
+                                        <TextInput placeholder="Màu xe" style={[styles.input,{marginLeft:10}]} />
+                                    </View>
+                                    <View style={styles.featureInput}>
+                                        <TextInput placeholder="Biển số" style={styles.input} />
+                                        <Text style={styles.textPrice}>Phí xe: 1.000.000đ</Text>
+                                    </View>
+                                </View>
+                            </ScrollView>
+                        </View>
+                        <View style={styles.wrapBtn}>
+                            <View style={styles.btnConfirm}>
+                                <Button title="Xác nhận" color="#006633" onPress={() => navigation.navigate('ServiceQuote')} />
+                            </View>
+                        </View>
                     </View>
                 </View>
-            </View>
+
+            </ImageBackground>
         </View>
     </View>
 }
@@ -84,42 +92,68 @@ const styles = StyleSheet.create({
         flex: 1
     },
     wrapContent: {
-        flex: 1
+        flex: 1,
+        position: 'relative'
     },
     imageBanner: {
         height: '100%'
     },
-    banner: {
-        position: 'relative',
-        height: 200,
-    },
+
     overlay: {
         position: 'absolute',
         bottom: 0,
         left: 0,
         width: '100%',
-        height: 40,
-        backgroundColor: 'black',
-        opacity: 0.4,
+        height: '100%',
+        backgroundColor: '#161b224d',
+
     },
     textBanner: {
         position: 'absolute',
         left: 15,
-        bottom: 5,
-        width: '100%'
+        bottom: 25,
+        width: '100%',
+        zIndex: 1
+    },
+    image: {
+        resizeMode: "cover",
+        position: 'relative',
+        height: '100%',
     },
     main: {
-        padding: 15
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        zIndex: 3
+    },
+    wrapText: {
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     confirm: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 5
+        marginBottom: 10,
+        height: 100,
+        backgroundColor: '#006633',
+        width: '100%',
+        paddingTop: 30,
+        position: 'relative',
+        borderBottomColor: '#282828',
+        borderBottomWidth: 1,
+        borderStyle: 'solid'
+    },
+    btnBack: {
+        position: 'absolute',
+        left: 15,
+        top: 50
     },
     textConfirm: {
         fontWeight: 'bold',
-        fontSize: 30,
-        marginLeft: 10
+        fontSize: 25,
+        color:'#fff'
     },
     test: {
         fontSize: 30,
@@ -128,29 +162,38 @@ const styles = StyleSheet.create({
     headerText: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: 'black',
-        borderRadius: 30,
+        height:29,
+        marginTop:20,
+        marginLeft:14,
+        marginRight:14
     },
     wrapItem: {
-        borderTopLeftRadius: 28,
-        borderBottomStartRadius: 28,
         width: '33.333%',
-        padding: 10,
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center'
     },
     textItem: {
         textAlign: 'center',
-        fontSize: 18
+        fontSize: 16,
+        fontWeight:'700',
+        color:'#fff'
     },
     active: {
-        backgroundColor: '#9966FF',
+        backgroundColor: '#006633',
     },
     noneBorder: {
         borderTopLeftRadius: 0,
         borderBottomStartRadius: 0,
     },
     features: {
-        height: 180
+        height: 314,
+        backgroundColor:'#fff',
+        marginTop:0,
+        marginLeft:15,
+        marginRight:15
     },
     numberCar: {
         flexDirection: 'row',
@@ -160,7 +203,7 @@ const styles = StyleSheet.create({
     },
     textNumber: {
         marginRight: 15,
-        fontSize: 18
+        fontSize: 14
     },
     featureItem: {
         flexDirection: 'row',
@@ -175,17 +218,19 @@ const styles = StyleSheet.create({
     },
     input: {
         borderWidth: 1,
-        padding: 15,
         width: 150,
-        borderRadius: 15
+        height:40,
+        borderRadius: 15,
+        paddingLeft:8,
     },
     wrapBtn: {
         padding: 10,
-        backgroundColor: '#9966FF',
+      
         marginTop: 15,
         borderRadius: 10
     },
     textPrice: {
-        fontSize: 18
+        fontSize: 15,
+        fontWeight:'700'
     }
 });

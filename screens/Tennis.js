@@ -1,97 +1,178 @@
 import { AntDesign } from '@expo/vector-icons';
-import RNDateTimePicker from '@react-native-community/datetimepicker';
-import React from 'react';
-import { Button, CheckBox, Image, StyleSheet, Text, View } from 'react-native';
-import RNPickerSelect from "react-native-picker-select";
-import BannerImage from '../assets/images/banner1.png';
-import Header from '../components/Header';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Button, ImageBackground,TouchableOpacity } from 'react-native';
+import { Calendar } from 'react-native-calendars';
+import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
+import RNPickerSelect from 'react-native-picker-select';
+import HomeImage from '../assets/images/home.png';
+import moment from 'moment';
+import { TextInput } from 'react-native';
+import { Icon } from 'react-native-elements/dist/icons/Icon';
 
 export default function Tennis({ navigation }) {
-    return <View style={styles.wrapper}>
-        <Header navigation={navigation} />
-        <View style={styles.wrapContent}>
-            <View style={styles.banner}>
-                <Image source={BannerImage} style={styles.imageBanner} />
-                <View style={styles.overlay}></View>
-                <View style={styles.textBanner}>
-                    <Text style={styles.test}>Đăng kí</Text>
+
+    const [dateObj, setDateObj] = useState({
+        selectedDate: moment(new Date(Date.now())).format("DD-MM-YYYY"),
+        markedDates: {}
+    })
+    const getSelectedDayEvents = date => {
+        let markedDates = {};
+        markedDates[date] = { selected: true, color: '#00B0BF', textColor: '#FFFFFF' };
+        let serviceDate = moment(date);
+        serviceDate = serviceDate.format("DD.MM.YYYY");
+        setDateObj({
+            selectedDate: serviceDate,
+            markedDates: markedDates
+        });
+    };
+    const [timeFrom, setTimeFrom] = useState("16")
+    const handleTimeFrom = (hour) => {
+        setTimeFrom(hour)
+    }
+    const [timeTo, setTimeTo] = useState("20")
+    const handleTimeTo = (hour) => {
+        setTimeTo(hour)
+    }
+
+    return (
+        <>
+            <View style={styles.wrapper}>
+                <View style={styles.wrapContent}>
+                    <View style={styles.banner}>
+                        <View style={styles.textBanner}>
+                            <TouchableOpacity style={styles.btnBack} onPress={() => navigation.goBack()}>
+                                <AntDesign name="arrowleft" size={30} color="#FFF" />
+                            </TouchableOpacity>
+                            <View style={styles.wrapperText}>
+                                <Text style={styles.test}>Sân Tennis</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.main}>
+                        <ImageBackground source={HomeImage} style={styles.image}>
+                            <View style={styles.wrapTime}>
+                                <View>
+                                    <Text style={styles.txtTitle}>Ngày đặt</Text>
+                                    <View style={styles.iptSelectDate}>
+                                        <TextInput
+                                            value={dateObj.selectedDate}
+                                        />
+                                    </View>
+                                </View>
+                                <TimeFrom timeFrom={timeFrom} handleTimeFrom={handleTimeFrom} />
+                                <TimeTo timeTo={timeTo} handleTimeTo={handleTimeTo} />
+                            </View>
+                            <SelectDate getSelectedDayEvents={getSelectedDayEvents} dateObj={dateObj} />
+                            <Text style={styles.textRule}>Quy định khi đăng kí thẻ ra vào</Text>
+                            <View style={styles.wrapCommit}>
+                                <CheckBox style={styles.checkbox} />
+                                <Text style={styles.textCommit}>Tôi đã đọc và cam kết</Text>
+                            </View>
+                            <View style={styles.wrapBtn}>
+                                <View style={styles.btnConfirm}>
+                                    <Button title="Đăng kí" color="#006633" onPress={() => navigation.navigate('ServiceQuote')} />
+                                </View>
+                            </View>
+                        </ImageBackground >
+                    </View>
                 </View>
             </View>
-            <View style={styles.main}>
-                <View style={styles.confirm}>
-                    <AntDesign name="arrowleft" size={40} color="#9966FF" />
-                    <Text style={styles.textConfirm}>Sân Tennis</Text>
+        </>
+    )
+}
+
+function TimeFrom({ timeFrom, handleTimeFrom }) {
+    let selectItems = [];
+    for (let i = 0; i < 25; i++) {
+        selectItems.push({
+            label: `${i}h`, value: `${i}`
+        })
+    }
+    return (
+        <View style={styles.widthContent}>
+            <Text style={styles.txtTitle}>Từ</Text>
+            <View style={styles.wrapSelect}>
+                <View style={styles.iptSelect}>
+                    <RNPickerSelect
+                        style={pickerSelectStyles}
+                        onValueChange={(value) => handleTimeFrom(value)}
+                        items={selectItems}
+                        value={timeFrom}
+                        Icon={() => <Icon name="keyboard-arrow-down" size={23} />}
+                    />
                 </View>
 
-                <View style={styles.wrapTime}>
-                    <View>
-                        <Text>Ngày đặt</Text>
-                        <RNDateTimePicker value={new Date()} style={{ width: 100 }} />
-                    </View>
-                    <View style={styles.widthContent}>
-                        <Text>Từ</Text>
-                        <RNPickerSelect
-                            style={pickerSelectStyles}
-                            onValueChange={(value) => console.log(value)}
-                            items={[
-                                { label: "JavaScript", value: "JavaScript" },
-                                { label: "TypeStript", value: "TypeStript" },
-                                { label: "Python", value: "Python" },
-                                { label: "Java", value: "Java" },
-                                { label: "C++", value: "C++" },
-                                { label: "C", value: "C" },
-                            ]}
-                        />
-                    </View>
-                    <View style={styles.widthContent}>
-                        <Text>Đến</Text>
-                        <RNPickerSelect
-                            style={pickerSelectStyles}
-                            onValueChange={(value) => console.log(value)}
-                            items={[
-                                { label: "JavaScript", value: "JavaScript" },
-                                { label: "TypeStript", value: "TypeStript" },
-                                { label: "Python", value: "Python" },
-                                { label: "Java", value: "Java" },
-                                { label: "C++", value: "C++" },
-                                { label: "C", value: "C" },
-                            ]}
-                        />
-                    </View>
-                </View>
-                <Text style={styles.textRule}>Quy định khi đăng kí thẻ ra vào</Text>
-                <View style={styles.wrapCommit}>
-                    <CheckBox style={styles.checkbox} />
-                    <Text style={styles.textCommit}>Tôi đã đọc và cam kết</Text>
-                </View>
-                <View style={styles.wrapBtn}>
-                    <View style={styles.btnConfirm}>
-                        <Button title="Đăng kí" color="white" onPress={() => navigation.navigate('ServiceQuote')} />
-                    </View>
-                </View>
+
             </View>
         </View>
-    </View>
+    )
+}
+
+function TimeTo({ timeTo, handleTimeTo }) {
+    let selectItems = [];
+    for (let i = 0; i < 25; i++) {
+        selectItems.push({
+            label: `${i}h`, value: `${i}`
+        })
+    }
+    return (
+        <View style={styles.widthContent}>
+            <Text style={styles.txtTitle}>Đến</Text>
+            <View style={styles.wrapSelect}>
+
+
+                <View style={styles.iptSelect}>
+                    <RNPickerSelect
+                        style={pickerSelectStyles}
+                        onValueChange={(value) => handleTimeTo(value)}
+                        items={selectItems}
+                        value={timeTo}
+                        Icon={() => <Icon name="keyboard-arrow-down" size={23}  />}
+                    />
+                </View>
+
+
+            </View>
+        </View>
+    )
+}
+function SelectDate({ getSelectedDayEvents, dateObj }) {
+    return (
+        <View style={styles.wrapCalendar}>
+            <Calendar
+                current={new Date(Date.now())}
+                onDayPress={(day) => {
+                    getSelectedDayEvents(day.dateString)
+                }}
+                markedDates={dateObj.markedDates}
+
+
+            />
+        </View>
+    )
 }
 const pickerSelectStyles = StyleSheet.create({
-    inputIOS: {
-        fontSize: 16,
-        borderWidth: 1,
-        borderColor: 'gray',
-        borderRadius: 4,
-        color: 'black',
-        padding: 5
-        // to ensure the text is never behind the icon
-    },
+    // inputIOS: {
+    //     fontSize: 14,
+    //     paddingVertical: 8,
+    //     paddingHorizontal: 10,
+    //     borderWidth: 1,
+    //     borderColor: 'gray',
+    //     borderRadius: 4,
+    //     color: 'black',
+    //     paddingRight: 35, // to ensure the text is never behind the icon
+    //     backgroundColor: 'white'
+    // },
     inputAndroid: {
-        fontSize: 16,
-        paddingHorizontal: 10,
-        paddingVertical: 8,
+        fontSize: 14,
         borderWidth: 0.5,
         borderColor: 'purple',
         borderRadius: 8,
         color: 'black',
-        paddingRight: 30, // to ensure the text is never behind the icon
+        paddingTop:0,
+        paddingRight: 60, // to ensure the text is never behind the icon
+        paddingBottom:20,
+        paddingTop:5
     },
 });
 const styles = StyleSheet.create({
@@ -101,73 +182,130 @@ const styles = StyleSheet.create({
     wrapContent: {
         flex: 1
     },
+    wrapperText: {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     imageBanner: {
         height: '100%'
     },
     banner: {
         position: 'relative',
-        height: 200,
+        height: 100,
+        backgroundColor: '#006633'
     },
-    overlay: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        width: '100%',
-        height: 40,
-        backgroundColor: 'black',
-        opacity: 0.4,
-    },
+
     textBanner: {
         position: 'absolute',
-        left: 15,
-        bottom: 5,
-        width: '100%'
+        top: 50,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
     },
-    main: {
-        padding: 15
-    },
+
     confirm: {
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 5
     },
     textConfirm: {
+
         fontWeight: 'bold',
         fontSize: 30,
         marginLeft: 10
     },
     test: {
         fontSize: 30,
+        fontWeight: '600',
         color: 'white'
     },
     wrapTime: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 30
+        marginBottom: 30,
+        margin: 15
     },
     wrapBtn: {
         padding: 10,
-        backgroundColor: '#9966FF',
         marginTop: 15,
         borderRadius: 10
     },
-    checkbox: {
-        width: 20,
-        height: 20,
-        borderColor: 'black'
-    },
     textRule: {
-        color: '#9966FF',
+        color: '#fff',
         textDecorationLine: 'underline',
-        marginBottom: 10
+        marginBottom: 10,
+        marginLeft: 15,
+        fontSize: 14
     },
     wrapCommit: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 5
+        marginTop: 0
     },
     textCommit: {
-        marginLeft: 10,
-        fontSize: 18
+        marginLeft: 0,
+        fontSize: 12,
+        color: '#FFF'
     },
+    btnBack: {
+        position: 'absolute',
+        left: 20,
+        top: 5
+    },
+    image: {
+        resizeMode: "cover",
+        position: 'relative',
+        height: '100%'
+    },
+    wrapCalendar: {
+        padding: 15
+    },
+    txtTitle: {
+        fontSize: 14,
+        color: '#FFF',
+        marginBottom: 10,
+        fontWeight: '700'
+    },
+    iptSelect: {
+        backgroundColor: '#fff',
+        borderColor: '#333',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+        paddingTop: 10
+    },
+    wrapSelect: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    wrapText: {
+        padding: 7,
+        backgroundColor: '#fff'
+    },
+    iptSelectDate: {
+        backgroundColor: '#fff',
+        borderColor: '#333',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        height: 35,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+        paddingLeft: 5,
+        paddingRight: 5
+    },
+    btnConfirm: {
+        padding: 5,
+        borderRadius: 10
+    }
 });

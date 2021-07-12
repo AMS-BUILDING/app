@@ -24,12 +24,12 @@ const styles = StyleSheet.create({
         color: '#9966FF',
      
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 18,
         marginBottom: 10
     },
     desc: {
        
-        fontSize: 16,
+        fontSize: 14,
         marginBottom: 10
     },
     note: {
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     },
     time: {
         color: '#868686',
-        fontSize: 16,
+        fontSize: 12,
         
     },
 });

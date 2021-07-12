@@ -14,7 +14,7 @@ function HomeTabs() {
                 labelStyle: {
                     fontSize: 12
                 },
-                activeTintColor: '#9966FF',
+                activeTintColor: '#009933',
                 inactiveTintColor: '#6B6B6B'
             }}
         >
@@ -68,7 +68,7 @@ function MyTabsVehicle() {
                 labelStyle: {
                     fontSize: 12
                 },
-                activeTintColor: '#9966FF',
+                activeTintColor: '#009933',
                 inactiveTintColor: '#6B6B6B'
             }}
         >
@@ -122,7 +122,7 @@ function HandleRequestTabs() {
                 labelStyle: {
                     fontSize: 12
                 },
-                activeTintColor: '#9966FF',
+                activeTintColor: '#009933',
                 inactiveTintColor: '#6B6B6B'
             }}
         >
@@ -176,7 +176,7 @@ function ServiceHistoryTabs() {
                 labelStyle: {
                     fontSize: 12
                 },
-                activeTintColor: '#9966FF',
+                activeTintColor: '#009933',
                 inactiveTintColor: '#6B6B6B'
             }}
         >
@@ -230,7 +230,7 @@ function BuildingHandBookTabs() {
                 labelStyle: {
                     fontSize: 12
                 },
-                activeTintColor: '#9966FF',
+                activeTintColor: '#009933',
                 inactiveTintColor: '#6B6B6B'
             }}
         >
@@ -284,7 +284,7 @@ function StayAbsentTabs() {
                 labelStyle: {
                     fontSize: 12
                 },
-                activeTintColor: '#9966FF',
+                activeTintColor: '#009933',
                 inactiveTintColor: '#6B6B6B'
             }}
         >
@@ -338,7 +338,7 @@ function ManagementTabs() {
                 labelStyle: {
                     fontSize: 12
                 },
-                activeTintColor: '#9966FF',
+                activeTintColor: '#009933',
                 inactiveTintColor: '#6B6B6B'
             }}
         >
@@ -392,7 +392,7 @@ function AccountSettingTabs() {
                 labelStyle: {
                     fontSize: 12
                 },
-                activeTintColor: '#9966FF',
+                activeTintColor: '#009933',
                 inactiveTintColor: '#6B6B6B'
             }}
         >

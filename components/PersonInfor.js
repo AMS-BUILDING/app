@@ -15,17 +15,17 @@ const styles = StyleSheet.create({
     wrapper: {
         justifyContent: 'center',
         padding: 20,
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
         borderBottomColor: 'black'
     },
     title: {
         color: '#9966FF',
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 18,
         marginBottom: 10
     },
     desc: {
-        fontSize: 16,
+        fontSize: 14,
         marginBottom: 10
     }
 });

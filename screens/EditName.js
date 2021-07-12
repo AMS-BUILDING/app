@@ -1,16 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import Header from '../components/Header';
 import { Ionicons } from '@expo/vector-icons';
 import { Button } from 'react-native-paper';
 
-export default function EditName() {
+export default function EditName({navigation}) {
     return <View style={styles.wrapper}>
         <Header />
         <View style={styles.wrapContent}>
             <View style={styles.wrapText}>
-                <Text style={{  fontSize: 30, color: 'white', fontWeight: 'bold' }}>Sửa tên</Text>
-                <Ionicons name="caret-back-circle-outline" size={30} color="white" style={styles.backIcon} />
+                <Text style={{  fontSize: 20, color: 'white', fontWeight: 'bold' }}>Sửa tên</Text>
+                <TouchableOpacity
+                onPress={() => navigation.goBack()}
+                activeOpacity={0.8}
+                style={styles.backIcon}
+                ><Ionicons name="caret-back-circle-outline" size={30} color="white"  /></TouchableOpacity>
             </View>
             <View style={{ marginTop: 20 }}>
                 <TextInput placeholder="Nguyễn Văn Mạnh" style={styles.textInput} />
@@ -36,7 +40,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#666666',
         padding: 15,
-        position: 'relative'
+        position: 'relative',
+       
     },
     backIcon: {
         position: 'absolute',

@@ -1,35 +1,43 @@
 import { FontAwesome } from '@expo/vector-icons';
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View,TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, ImageBackground } from 'react-native';
 import Header from '../components/Header';
 import Notifi from '../components/Notifi';
+import BgScreen from '../assets/images/bgscreen.png';
 
 export default function Notification({ navigation }) {
-    const [tab,setTab] = useState("all")
+    const [tab, setTab] = useState("all")
     return <View style={styles.wrapper}>
         <Header navigation={navigation} />
         <View style={styles.wrapContent}>
-            <View style={styles.headerText}>
-                <TouchableOpacity style={[styles.wrapItem, (tab === "all") && styles.active,styles.all]} onPress={() => setTab("all")} activeOpacity={0.8}>
-                    <Text style={styles.textItem}>Tất cả</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.wrapItem,(tab === "private") && styles.active]} onPress={() => setTab("private")} activeOpacity={0.8}>
-                    <Text style={styles.textItem}>Riêng</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.wrapItem,(tab === "public") && styles.active,styles.public]} onPress={() => setTab("public")} activeOpacity={0.8}>
-                    <Text style={styles.textItem}>Chung</Text>
-                </TouchableOpacity>
-            </View>
+
             <View style={styles.wrapSearch}>
                 <FontAwesome name="search" size={18} color="gray" style={{ marginRight: 20 }} />
                 <TextInput placeholder="Tìm kiếm" style={styles.textSearch} />
             </View>
+            <View style={styles.headerText}>
+                <TouchableOpacity style={[styles.wrapItem, (tab === "all") && styles.active, styles.all]} onPress={() => setTab("all")} activeOpacity={0.8}>
+                    <Text style={styles.textItem}>Tất cả</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.wrapItem, (tab === "private") && styles.active]} onPress={() => setTab("private")} activeOpacity={0.8}>
+                    <Text style={styles.textItem}>Riêng</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.wrapItem, (tab === "public") && styles.active, styles.public]} onPress={() => setTab("public")} activeOpacity={0.8}>
+                    <Text style={styles.textItem}>Chung</Text>
+                </TouchableOpacity>
+            </View>
+
             <ScrollView>
                 <Notifi />
                 <Notifi />
                 <Notifi />
             </ScrollView>
+            <View style={styles.overlay}>
+
+            </View>
+
         </View>
+
     </View>
 };
 const styles = StyleSheet.create({
@@ -46,13 +54,13 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: 30,
-        
+        marginTop: 10
     },
-    all:{
+    all: {
         borderTopLeftRadius: 28,
         borderBottomStartRadius: 28,
     },
-    public:{
+    public: {
         borderTopRightRadius: 28,
         borderBottomEndRadius: 28,
     },
@@ -62,10 +70,11 @@ const styles = StyleSheet.create({
     },
     textItem: {
         textAlign: 'center',
-        fontSize: 14
+        fontSize: 14,
+        color: 'black'
     },
     active: {
-        backgroundColor: '#9966FF',
+        backgroundColor: '#006633',
     },
     noneBorder: {
         borderTopLeftRadius: 0,
@@ -81,6 +90,8 @@ const styles = StyleSheet.create({
     },
     textSearch: {
         fontWeight: 'bold',
-        fontSize: 18
-    }
+        fontSize: 18,
+        color: 'white'
+    },
+
 })

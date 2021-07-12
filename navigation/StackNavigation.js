@@ -46,7 +46,7 @@ import ForgetPassword from '../screens/ForgetPassword';
 import Cart from '../screens/Cart';
 import SuccessfulIdentify from '../screens/SuccessfulIdentify';
 
-
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 const Stack = createStackNavigator();
 
 function ProfileStack() {
@@ -55,6 +55,15 @@ function ProfileStack() {
             headerShown: false
         }}>
             <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name="EditName" component={EditName} />
+            <Stack.Screen name="EditDob" component={EditDob} />
+            <Stack.Screen name="EditEmail" component={EditEmail} />
+            <Stack.Screen name="EditPhone" component={EditPhone} />
+            <Stack.Screen name="EditIdentification" component={EditIdentification} />
+            <Stack.Screen name="ChangePassword" component={ChangePassword} />
+            <Stack.Screen name="ResetPassword" component={ResetPassword} />
+            <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
+
         </Stack.Navigator>
     );
 }
@@ -87,7 +96,15 @@ function NotificationStack() {
         </Stack.Navigator>
     );
 }
-function HomeStack() {
+function HomeStack({ navigation, route }) {
+    React.useLayoutEffect(() => {
+        const routeName = getFocusedRouteNameFromRoute(route);
+        if (routeName == "Home") {
+            navigation.setOptions({ tabBarVisible: true });
+        } else {
+            navigation.setOptions({ tabBarVisible: false });
+        }
+    }, [navigation, route]);
     return (
         <Stack.Navigator screenOptions={{
             headerShown: false

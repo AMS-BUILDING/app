@@ -9,7 +9,7 @@ export default function Feedback({ navigation }) {
         <View style={styles.wrapContent}>
             <View style={styles.wrapNav}>
                 <View style={styles.nav}>
-                    <TouchableOpacity onPress={() => navigation.navigate("Home")} activeOpacity={0.8}><AntDesign name="arrowleft" size={35} color="white" /></TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.goBack()} activeOpacity={0.8}><AntDesign name="arrowleft" size={20} color="white" /></TouchableOpacity>
                     <Text style={styles.title}>Feedback</Text>
                 </View>
             </View>

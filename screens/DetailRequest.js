@@ -1,6 +1,6 @@
 import { AntDesign } from '@expo/vector-icons';
 import React from 'react';
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import BannerImage from '../assets/images/banner1.png';
 import Header from '../components/Header';
 export default function DetailRequest({ navigation }) {
@@ -16,7 +16,9 @@ export default function DetailRequest({ navigation }) {
             </View>
             <View style={styles.main}>
                 <View style={styles.confirm}>
-                    <AntDesign name="arrowleft" size={40} color="#9966FF" />
+                    <TouchableOpacity onPress={() => navigation.goBack()} activeOpacity={0.8}>
+                        <AntDesign name="arrowleft" size={25} color="#9966FF" />
+                    </TouchableOpacity>
                     <Text style={styles.textConfirm}>Vui lòng chờ xác nhận</Text>
                 </View>
                 <View style={styles.detail}>
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
     },
     banner: {
         position: 'relative',
-        height: 200,
+        height: 150,
     },
     overlay: {
         position: 'absolute',
@@ -91,12 +93,13 @@ const styles = StyleSheet.create({
     },
     textConfirm: {
         fontWeight: 'bold',
-        fontSize: 30,
+        fontSize: 18,
         marginLeft: 10
     },
     test: {
-        fontSize: 30,
-        color: 'white'
+        fontSize: 18,
+        color: 'white',
+        fontWeight: '700'
     },
     detailList: {
         borderBottomColor: '#666666',
@@ -112,18 +115,18 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: 15
+        marginBottom: 10
     },
     lastItem: {
         marginTop: 20
     },
     detailTotal: {
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 16,
         color: '#9966FF'
     },
     detailText: {
-        fontWeight: 'bold',
-        fontSize: 20,
+        fontWeight: '600',
+        fontSize: 14,
     }
 });
