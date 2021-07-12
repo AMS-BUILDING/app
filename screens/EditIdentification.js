@@ -1,20 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import Header from '../components/Header';
 import { Ionicons } from '@expo/vector-icons';
 import { Button } from 'react-native-paper';
 
-export default function EditIdentification({navigation}) {
+export default function EditIdentification() {
     return <View style={styles.wrapper}>
         <Header />
         <View style={styles.wrapContent}>
             <View style={styles.wrapText}>
-                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>Sửa Số CCCD</Text>
-                <TouchableOpacity
-                    onPress={() => navigation.goBack()}
-                    activeOpacity={0.8}
-                    style={styles.backIcon}
-                ><Ionicons name="caret-back-circle-outline" size={30} color="white" /></TouchableOpacity>
+                <Text style={{  fontSize: 30, color: 'white', fontWeight: 'bold' }}>Sửa Số CCCD</Text>
+                <Ionicons name="caret-back-circle-outline" size={30} color="white" style={styles.backIcon} />
             </View>
             <View style={{ marginTop: 20 }}>
                 <TextInput placeholder="026000099469" style={styles.textInput} />

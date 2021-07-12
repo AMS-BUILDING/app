@@ -1,6 +1,6 @@
 import { AntDesign } from '@expo/vector-icons';
 import React from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Header from '../components/Header';
 import TermItem from '../components/TermItem';
 export default function ApartmentTerm({ navigation }) {
@@ -9,9 +9,7 @@ export default function ApartmentTerm({ navigation }) {
         <View style={styles.wrapContent}>
             <View style={styles.wrapNav}>
                 <View style={styles.nav}>
-                    <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.goBack()}>
-                        <AntDesign name="arrowleft" size={20} color="white" />
-                    </TouchableOpacity>
+                    <AntDesign name="arrowleft" size={35} color="white" />
                     <Text style={styles.title}>Điều khoản chung cư</Text>
                 </View>
             </View>
@@ -40,7 +38,8 @@ const styles = StyleSheet.create({
     },
     title: {
         color: 'white',
-        fontSize: 18,
+      
+        fontSize: 30,
         fontWeight: 'bold',
         marginLeft: 10
     },

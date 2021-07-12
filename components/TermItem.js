@@ -1,5 +1,6 @@
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, Button } from 'react-native';
 
 export default function TermItem() {
     return <View style={styles.wrapper}>
@@ -13,19 +14,18 @@ export default function TermItem() {
 
 const styles = StyleSheet.create({
     wrapper: {
-        borderBottomColor: 'pink',
-        borderBottomWidth: 1
+        borderBottomColor: 'black',
+        borderBottomWidth: 2
     },
     container: {
         flexDirection: 'row',
         padding: 15,
     },
     number: {
-        fontWeight: 'bold',
-        fontSize:16
+        fontWeight: 'bold'
     },
     desc: {
         marginLeft: 10,
-        fontSize: 14
+        fontSize: 18
     }
 })
