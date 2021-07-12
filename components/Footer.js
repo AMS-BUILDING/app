@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         padding: 15,
         height: 150,
         borderTopColor: '#6B6B6B',
-        borderTopWidth: 2
+        borderTopWidth: 2,
     },
     item: {
         alignItems: 'center',

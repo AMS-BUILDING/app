@@ -13,24 +13,24 @@ export default function Home({ navigation }) {
                 <View style={styles.featureList}>
                     <TouchableOpacity style={styles.featureItem} onPress={() => navigation.push('Notification')} activeOpacity={0.8}>
                         <Text style={styles.title}>Thông báo chung</Text>
-                        <AntDesign name="right" size={18} color="white" style={styles.icon}  />
+                        <AntDesign name="right" size={18} color="white" style={styles.icon} />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.featureItem} onPress={() => navigation.push('ServiceRequest')} activeOpacity={0.8}>
                         <Text style={styles.title}>Yêu cầu dịch vụ</Text>
-                        <AntDesign name="right" size={18} color="white" style={styles.icon}  />
+                        <AntDesign name="right" size={18} color="white" style={styles.icon} />
                     </TouchableOpacity >
                     <TouchableOpacity style={styles.featureItem} onPress={() => navigation.push('ProgressTracking')} activeOpacity={0.8}>
                         <Text style={styles.title}>Theo dõi tiến trình</Text>
-                        <AntDesign name="right" size={18} color="white" style={styles.icon}  />
+                        <AntDesign name="right" size={18} color="white" style={styles.icon} />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.featureItem} onPress={() => navigation.push('FeeNotice')} activeOpacity={0.8}>
                         <Text style={styles.title}>Thanh toán hóa đơn</Text>
-                        <AntDesign name="right" size={18} color="white" style={styles.icon}  />
+                        <AntDesign name="right" size={18} color="white" style={styles.icon} />
                     </TouchableOpacity>
                 </View>
-               <View style={styles.overlay}>
+                <View style={styles.overlay}>
 
-               </View>
+                </View>
             </ImageBackground>
             <View style={styles.overlay}></View>
         </View>
@@ -49,15 +49,15 @@ const styles = StyleSheet.create({
         resizeMode: "cover",
         justifyContent: "center",
         height: '100%',
-        position:'relative'
+        position: 'relative'
     },
     featureList: {
         width: 300,
         marginLeft: 'auto',
         marginRight: 'auto',
-        position:'absolute',
-        zIndex:9,
-        left:30
+        position: 'absolute',
+        zIndex: 9,
+        left: 30
     },
     featureItem: {
         flexDirection: 'row',
@@ -73,10 +73,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '600'
     },
-    overlay:{
-        backgroundColor:'#000',
-        opacity: .3,
-        width:'100%',
-        height:'100%'
+    overlay: {
+        backgroundColor: '#000',
+        opacity: .5,
+        width: '100%',
+        height: '100%'
     }
 })

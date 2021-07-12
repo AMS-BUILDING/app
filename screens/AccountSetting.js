@@ -1,6 +1,6 @@
 import { AntDesign } from '@expo/vector-icons';
 import React from 'react';
-import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import { Button, Image, StyleSheet, Text, View,TouchableOpacity } from 'react-native';
 import BannerImage from '../assets/images/banner1.png';
 import Header from '../components/Header';
 
@@ -18,35 +18,35 @@ export default function AccountSetting({ navigation }) {
             <View style={styles.main}>
                 <Text style={styles.title}>Tài khoản của tôi</Text>
                 <View style={styles.wrapGroup}>
-                    <View style={[styles.group, styles.textUnderline]}>
+                    <TouchableOpacity style={[styles.group, styles.textUnderline]} onPress={() => navigation.navigate('Profile')} activeOpacity={0.8}>
                         <Text>Hồ sơ của tôi</Text>
-                        <AntDesign name="right" size={24} color="black" onPress={() => navigation.navigate('Profile')} />
-                    </View>
-                    <View style={styles.group}>
+                        <AntDesign name="right" size={18} color="black" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.group} activeOpacity={0.8} onPress={() => navigation.navigate('FamilyScreen')}>
                         <Text>Gia đình</Text>
-                        <AntDesign name="right" size={24} color="black" onPress={() => navigation.navigate('FamilyScreen')} />
-                    </View>
+                        <AntDesign name="right" size={18} color="black"  />
+                    </TouchableOpacity>
                 </View>
                 <Text style={styles.title}>Hỗ trợ</Text>
                 <View style={styles.wrapGroup}>
-                    <View style={[styles.group, styles.textUnderline]}>
+                    <TouchableOpacity style={[styles.group, styles.textUnderline]} activeOpacity={0.8} onPress={() => navigation.navigate('ApartmentTerm')}>
                         <Text>Điều khoản chung cư</Text>
-                        <AntDesign name="right" size={24} color="black" onPress={() => navigation.navigate('ApartmentTerm')} />
-                    </View>
-                    <View style={styles.group}>
+                        <AntDesign name="right" size={18} color="black"  />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.group} activeOpacity={0.8} onPress={() => navigation.navigate('Feedback')}>
                         <Text>Hài lòng với ABMS? Hãy đánh giá ngay!</Text>
-                        <AntDesign name="right" size={24} color="black" onPress={() => navigation.navigate('Feedback')} />
-                    </View>
+                        <AntDesign name="right" size={18} color="black"  />
+                    </TouchableOpacity>
                 </View>
                 <Text style={styles.title}>Cài đặt</Text>
                 <View style={styles.wrapGroup}>
-                    <View style={styles.group}>
+                    <TouchableOpacity style={styles.group} activeOpacity={0.8} onPress={() => navigation.navigate('Language')}>
                         <Text>Ngôn ngữ</Text>
-                        <AntDesign name="right" size={24} color="black" onPress={() => navigation.navigate('Language')} />
-                    </View>
+                        <AntDesign name="right" size={18} color="black"  />
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.btnLogout}>
-                    <Button title="Đăng xuất" color="white" />
+                    <Button title="Đăng xuất" color="#FF6633" />
                 </View>
 
             </View>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     },
     banner: {
         position: 'relative',
-        height: 200,
+        height: 150,
     },
     overlay: {
         position: 'absolute',
@@ -84,8 +84,8 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     test: {
-      
-        fontSize: 30,
+        fontWeight:'700',
+        fontSize: 18,
         color: 'white'
     },
     main: {
@@ -94,26 +94,24 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#9966FF',
-      
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold'
     },
     wrapGroup: {
-        marginBottom: 10
+        marginBottom: 20
     },
     group: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingBottom: 5,
-        paddingTop: 5
+        paddingBottom: 10,
+        paddingTop: 10
     },
     textUnderline: {
         borderBottomColor: '#cccccc',
-        borderBottomWidth: 2
+        borderBottomWidth: 1
     },
     btnLogout: {
-        backgroundColor: '#FF6633',
         paddingTop: 10,
         paddingBottom: 10,
         borderRadius: 10

@@ -20,8 +20,9 @@ export default function Notifi() {
 
             <View style={styles.image}>
                 <Image source={NotifiImage} />
+                <Text style={styles.text}>Vivamus efficitur vestibulum elit id semper. Donec eleifend metus justo, ac luctus arcu finibus non. Phasellus dignissim diam ac ipsum egestas malesuada</Text>
             </View>
-            <Text style={styles.text}>Vivamus efficitur vestibulum elit id semper. Donec eleifend metus justo, ac luctus arcu finibus non. Phasellus dignissim diam ac ipsum egestas malesuada</Text>
+
         </View>
     </View>
 }
@@ -53,6 +54,8 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 14,
         marginTop: 20,
-        lineHeight:20
+        lineHeight: 20,
+        color: 'black',
+        backgroundColor: 'white'
     }
 })

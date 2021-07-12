@@ -1,27 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Image, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, Button,TouchableOpacity } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import Logo from '../assets/images/logo.png';
 
-export default function ForgetPassword() {
+export default function ForgetPassword({navigation}) {
     return <View style={styles.wrapper}>
         <View style={styles.container}>
             <Image source={Logo} style={styles.imageLogo} />
             <Text style={styles.title}>RESIDENT APP</Text>
             <View style={styles.formGroup}>
-                <FontAwesome name="user" size={30} style={styles.iconForm} />
+                <FontAwesome name="user" size={18} style={styles.iconForm} />
                 <TextInput placeholder="Tên đăng nhập/SĐT" type="text" style={styles.inputText} />
             </View>
             <View style={styles.btnLogin}>
-                <Button title="Gửi" color="white" style={styles.textLogin} />
+                <Button title="Gửi" color="#9966FF" style={styles.textLogin} />
             </View>
         </View>
-        <View style={styles.wrapFooter}>
+        <TouchableOpacity style={styles.wrapFooter} activeOpacity={0.8} onPress={() => navigation.navigate("ResetPassword")}>
             <Text style={styles.textFooter}>Yêu cầu cung cấp tài khoản</Text>
-        </View>
+        </TouchableOpacity>
     </View>
 };
 
@@ -66,12 +66,11 @@ const styles = StyleSheet.create({
     inputText: {
         flex: 1,
         padding: 10,
-        fontSize: 18,
+        fontSize: 16,
       
     },
     btnLogin: {
         width: '100%',
-        backgroundColor: '#9966FF',
         padding: 10,
         borderRadius: 10,
         marginBottom: 20
@@ -85,7 +84,7 @@ const styles = StyleSheet.create({
         padding: 30
     },
     textFooter: {
-        fontSize: 20,
+        fontSize: 16,
        
         fontWeight: 'bold',
         marginTop: 20,
