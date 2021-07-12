@@ -1,20 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput,TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import Header from '../components/Header';
 import { Ionicons } from '@expo/vector-icons';
 import { Button } from 'react-native-paper';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
-export default function EditDob({navigation}) {
+export default function EditDob() {
     return <View style={styles.wrapper}>
         <Header />
         <View style={styles.wrapContent}>
             <View style={styles.wrapText}>
-                <Text style={{  fontSize: 20, color: 'white', fontWeight: 'bold' }}>Sửa Ngày Sinh</Text>
-                <TouchableOpacity
-                onPress={() => navigation.goBack()}
-                activeOpacity={0.8}
-                style={styles.backIcon}
-                ><Ionicons name="caret-back-circle-outline" size={30} color="white"  /></TouchableOpacity>
+                <Text style={{  fontSize: 30, color: 'white', fontWeight: 'bold' }}>Sửa Ngày Sinh</Text>
+                <Ionicons name="caret-back-circle-outline" size={30} color="white" style={styles.backIcon} />
             </View>
             <View style={{ marginTop: 20, flexDirection: 'row', alignItems: 'center' }}>
                 <Text style={{fontSize: 20 }}>Chọn ngày sinh:</Text>

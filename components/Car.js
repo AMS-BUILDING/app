@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     title: {
-        fontSize: 18,
+       
+        fontSize: 25,
         fontWeight: 'bold',
         color: '#9966FF',
         marginBottom: 20
@@ -60,7 +61,8 @@ const styles = StyleSheet.create({
         paddingTop: 15
     },
     text: {
-        fontSize: 14
+       
+        fontSize: 20
     },
     custom: {
         borderBottomWidth: 0

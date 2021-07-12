@@ -55,15 +55,6 @@ function ProfileStack() {
             headerShown: false
         }}>
             <Stack.Screen name="Profile" component={Profile} />
-            <Stack.Screen name="EditName" component={EditName} />
-            <Stack.Screen name="EditDob" component={EditDob} />
-            <Stack.Screen name="EditEmail" component={EditEmail} />
-            <Stack.Screen name="EditPhone" component={EditPhone} />
-            <Stack.Screen name="EditIdentification" component={EditIdentification} />
-            <Stack.Screen name="ChangePassword" component={ChangePassword} />
-            <Stack.Screen name="ResetPassword" component={ResetPassword} />
-            <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
-
         </Stack.Navigator>
     );
 }

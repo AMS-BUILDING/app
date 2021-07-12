@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a62371e0-5911-4b2e-bbd9-32aec9eec083" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.expo-shared/assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo-shared/assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/babel.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/babel.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ArticleHistory.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ArticleHistory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ArticleReq.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ArticleReq.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ArticleTracking.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ArticleTracking.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Car.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Car.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/CartItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/CartItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Footer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/GroupFamily.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/GroupFamily.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/MotorBike.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/MotorBike.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Notifi.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Notifi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/PersonInfor.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/PersonInfor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/TermItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/TermItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Test.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navigation/DrawNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/DrawNavigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navigation/StackNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/StackNavigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navigation/TabNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/TabNavigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/AccessCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/AccessCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/AccountSetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/AccountSetting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ApartmentCleaning.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ApartmentCleaning.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ApartmentTerm.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ApartmentTerm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/BBQ.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/BBQ.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/BuildingHandBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/BuildingHandBook.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Cart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ChangePassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ChangePassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ConfirmPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ConfirmPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Covid.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Covid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/DetailProcess.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/DetailProcess.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/DetailRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/DetailRequest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/DrawContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/DrawContent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/EditDob.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditDob.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/EditEmail.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditEmail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/EditIdentification.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditIdentification.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/EditName.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditName.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/EditPhone.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditPhone.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/FamilyScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/FamilyScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/FeeNotice.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/FeeNotice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Feedback.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Feedback.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/FootballPitche.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/FootballPitche.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ForgetPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ForgetPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/HandleRequets.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HandleRequets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Language.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Language.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Laundry.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Laundry.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Management.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Management.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Market.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Market.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Notification.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Notification.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Parking.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Parking.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Party.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Party.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Payment.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Payment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Pool.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Pool.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ProgressTracking.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ProgressTracking.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Repair.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Repair.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ResetPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ResetPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ServiceHistory.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ServiceHistory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ServicePrice.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ServicePrice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ServiceQuote.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ServiceQuote.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ServiceRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ServiceRequest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/StayAbsent.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/StayAbsent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/SuccessfulIdentify.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/SuccessfulIdentify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/SuccessfulRegistration.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/SuccessfulRegistration.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Tennis.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Tennis.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Vehicle.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Vehicle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/VerificationCode.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/VerificationCode.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1vE1skm5U53xw2G9H8Yo9kKnSp4" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a62371e0-5911-4b2e-bbd9-32aec9eec083" name="Default Changelist" comment="" />
+      <created>1626112643221</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1626112643221</updated>
+      <workItem from="1626112645400" duration="329000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

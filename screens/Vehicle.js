@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     },
     banner: {
         position: 'relative',
-        height: 150,
+        height: 200,
     },
     overlay: {
         position: 'absolute',
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     test: {
-        fontSize: 18,
-        color: 'white',
-        fontWeight:'700'
+       
+        fontSize: 30,
+        color: 'white'
     }
 });

@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     },
     banner: {
         position: 'relative',
-        height: 150,
+        height: 200,
     },
     overlay: {
         position: 'absolute',
@@ -66,16 +66,15 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     test: {
-        fontSize: 18,
-        fontWeight:'700',
+        fontSize: 30,
         color: 'white'
     },
     content: {
         padding: 15,
     },
     contentImage: {
-        width:'100%',
-        margin:15
+        flex: 1,
+        padding: 15
     },
     group: {
         flexDirection: 'row',
@@ -84,17 +83,16 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     text: {
-        fontSize: 16,
+        fontSize: 20,
     },
     building: {
         marginLeft: 20,
         fontWeight: 'bold',
-        fontSize: 14,
+        fontSize: 25,
         color: '#9966FF'
     },
     image: {
         resizeMode: 'cover',
-        width:'90%',
-        height:200
+        height: '100%'
     }
 });

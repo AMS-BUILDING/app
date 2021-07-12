@@ -21,44 +21,45 @@ export default function Profile({ navigation }) {
             <View style={styles.wrapForm}>
                 <View style={styles.formContent}>
                     <Text style={styles.textContent}>Tên chủ hộ:</Text>
-                    <TouchableOpacity style={styles.contentRight}  onPress={() => navigation.navigate('EditName')} activeOpacity={0.8}>
+                    <View style={styles.contentRight}>
                         <Text style={styles.textContent}>Nguyễn Văn A</Text>
-                        <AntDesign name="right" size={18} color="black" style={{ marginLeft: 5 }} />
-                    </TouchableOpacity>
+                        <AntDesign name="right" size={18} color="black" style={{ marginLeft: 5 }} onPress={() => navigation.navigate('EditName')} />
+                    </View>
                 </View>
                 <View style={styles.formContent}>
                     <Text style={styles.textContent}>Căn hộ:</Text>
-                    <View style={styles.contentRight} >
+                    <View style={styles.contentRight}>
                         <Text style={styles.textContent}>A103</Text>
+                        <AntDesign name="right" size={18} color="black" style={{ marginLeft: 5 }} />
                     </View>
                 </View>
                 <View style={styles.formContent}>
                     <Text style={styles.textContent}>Ngày sinh:</Text>
-                    <TouchableOpacity style={styles.contentRight} onPress={() => navigation.navigate('EditDob')} activeOpacity={0.8}>
+                    <View style={styles.contentRight}>
                         <Text style={styles.textContent}>10/8/1999</Text>
-                        <AntDesign name="right" size={18} color="black" style={{ marginLeft: 5 }}  />
-                    </TouchableOpacity>
+                        <AntDesign name="right" size={18} color="black" style={{ marginLeft: 5 }} onPress={() => navigation.navigate('EditDob')} />
+                    </View>
                 </View>
                 <View style={styles.formContent}>
                     <Text style={styles.textContent}>Số CCCD:</Text>
-                    <TouchableOpacity style={styles.contentRight} onPress={() => navigation.navigate('EditIdentification')} activeOpacity={0.8}>
+                    <View style={styles.contentRight}>
                         <Text style={styles.textContent}>026099000469</Text>
-                        <AntDesign name="right" size={18} color="black" style={{ marginLeft: 5 }}  />
-                    </TouchableOpacity>
+                        <AntDesign name="right" size={18} color="black" style={{ marginLeft: 5 }} onPress={() => navigation.navigate('EditIdentification')} />
+                    </View>
                 </View>
                 <View style={styles.formContent}>
                     <Text style={styles.textContent}>Số điện thoại: </Text>
-                    <TouchableOpacity style={styles.contentRight} onPress={() => navigation.navigate('EditPhone')} activeOpacity={0.8}>
+                    <View style={styles.contentRight}>
                         <Text style={styles.textContent}>0964600609</Text>
-                        <AntDesign name="right" size={18} color="black" style={{ marginLeft: 5 }}  />
-                    </TouchableOpacity>
+                        <AntDesign name="right" size={18} color="black" style={{ marginLeft: 5 }} onPress={() => navigation.navigate('EditPhone')} />
+                    </View>
                 </View>
                 <View style={styles.formContent}>
                     <Text style={styles.textContent}>Email:</Text>
-                    <TouchableOpacity style={styles.contentRight} onPress={() => navigation.navigate('EditEmail')} activeOpacity={0.8}>
+                    <View style={styles.contentRight}>
                         <Text style={styles.textContent}>manhnvhe@gmail.com </Text>
-                        <AntDesign name="right" size={18} color="black" style={{ marginLeft: 5 }} />
-                    </TouchableOpacity>
+                        <AntDesign name="right" size={18} color="black" style={{ marginLeft: 5 }} onPress={() => navigation.navigate('EditEmail')} />
+                    </View>
                 </View>
                 <TouchableOpacity style={[styles.formContent, styles.changePass]} onPress={() => navigation.navigate('ChangePassword')}>
                     <Text style={styles.textContent}>Thay đổi mật khẩu:</Text>

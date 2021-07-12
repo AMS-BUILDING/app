@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
     title: {
         color: '#9966FF',
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 20,
         marginBottom: 10
     },
     desc: {
-        fontSize: 14,
+        fontSize: 16,
         marginBottom: 10
     },
     note: {
@@ -41,19 +41,19 @@ const styles = StyleSheet.create({
     },
     time: {
         color: '#868686',
-        fontSize: 12,
+        fontSize: 16,
     },
     more: {
         flexDirection: 'row',
         alignItems: 'center'
     },
     textRead: {
-        color: '#9966FF',
-        fontSize: 12,
+        color: '#868686',
+        fontSize: 16,
         marginRight: 10
     },
     textCancle: {
-        color: '#9966FF',
-        fontSize: 12,
+        color: '#868686',
+        fontSize: 16,
     }
 });
