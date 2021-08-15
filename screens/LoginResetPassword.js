@@ -132,8 +132,8 @@ const styles = StyleSheet.create({
         marginLeft: 'auto',
         marginRight: 'auto',
         alignItems: 'center',
-        position:"absolute",
-        zIndex:5
+        // position:"absolute",
+        zIndex: 5
     },
     image: {
         resizeMode: "cover",
@@ -200,9 +200,9 @@ const styles = StyleSheet.create({
     overlay: {
         backgroundColor: '#000',
         opacity: .5,
-        position:"absolute",
-        zIndex:4,
-        width:'100%',
-        height:'100%'
+        position: "absolute",
+        zIndex: 4,
+        width: '100%',
+        height: '100%'
     }
 })
