@@ -1,15 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons';
 
-export default function ArticleHistory() {
+export default function ArticleHistory({ data }) {
     return <View style={styles.wrapper}>
-        <Text style={styles.title}>Sử dụng dịch vụ bể bơi - 4/6/2021</Text>
-        <Text style={styles.desc}>Đã sử dụng dịch vụ bể bơi lúc 15h ngày 5/6/2021</Text>
-        <View style={styles.note}>
-            <Text style={styles.time}>12 phút trước</Text>
-        </View>
+        <Text style={styles.title}>{data?.serviceName}</Text>
+        <Text style={styles.desc}>{data?.description}</Text>
+        <Text style={styles.desc}>{data?.time}</Text>
     </View>
 };
 
@@ -17,18 +13,18 @@ const styles = StyleSheet.create({
     wrapper: {
         justifyContent: 'center',
         padding: 25,
-        borderBottomWidth: 2,
-        borderBottomColor: 'black'
+        borderBottomWidth: 1,
+        borderBottomColor: '#ececec'
     },
     title: {
         color: '#9966FF',
-     
+
         fontWeight: 'bold',
         fontSize: 18,
         marginBottom: 10
     },
     desc: {
-       
+
         fontSize: 14,
         marginBottom: 10
     },
@@ -40,6 +36,6 @@ const styles = StyleSheet.create({
     time: {
         color: '#868686',
         fontSize: 12,
-        
+
     },
 });

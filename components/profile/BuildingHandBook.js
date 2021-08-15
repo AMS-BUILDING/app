@@ -1,32 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import BannerImage from '../assets/images/banner1.png';
-import BgImage from '../assets/images/bg.png';
-import Header from '../components/Header';
+import { useSelector } from 'react-redux';
+import BgImage from '../../assets/images/bg.png';
+import API from '../lib/API';
 
-export default function BuildingHandBook({ navigation }) {
+export default function BuildingHandBook() {
+    let [data, setData] = useState();
+    const accountIdRedux = useSelector(state => state.user.accountId);
+    const token = useSelector(state => state.user?.token)
+    useEffect(() => {
+        search()
+    }, [])
+    let search = async () => {
+        let path = `/tenant/detail-building/${accountIdRedux}`;
+        let resp = await API.authorizedJSONGET(path, token);
+        if (resp.ok) {
+            let response = await resp.json();
+            setData(response)
+        }
+    }
+   
     return <View style={styles.wrapper}>
-        <Header navigation={navigation} />
         <View style={styles.wrapContent}>
-            <View style={styles.banner}>
-                <Image source={BannerImage} style={styles.imageBanner} />
-                <View style={styles.overlay}></View>
-                <View style={styles.textBanner}>
-                    <Text style={styles.test}>Sổ tay tòa nhà</Text>
-                </View>
-            </View>
             <View style={styles.content}>
                 <View style={styles.group}>
                     <Text style={styles.text}>Tên chung cư:</Text>
-                    <Text style={[styles.text, styles.building]}>ABMS Building</Text>
+                    <Text style={[styles.text, styles.building]}>{data?.buildingName}</Text>
                 </View>
                 <View style={styles.group}>
                     <Text style={styles.text}>Block đang sinh sống:</Text>
-                    <Text style={[styles.text, styles.building]}>A1</Text>
+                    <Text style={[styles.text, styles.building]}>{data?.blockName}</Text>
                 </View>
                 <View style={styles.group}>
                     <Text style={styles.text}>Địa chỉ:</Text>
-                    <Text style={[styles.text, styles.building]}>Vĩnh Yên - VP</Text>
+                    <Text style={[styles.text, styles.building]}>{data?.address}</Text>
                 </View>
             </View>
             <View style={styles.contentImage}>
@@ -67,15 +74,15 @@ const styles = StyleSheet.create({
     },
     test: {
         fontSize: 18,
-        fontWeight:'700',
+        fontWeight: '700',
         color: 'white'
     },
     content: {
         padding: 15,
     },
     contentImage: {
-        width:'100%',
-        margin:15
+        width: '100%',
+        margin: 15
     },
     group: {
         flexDirection: 'row',
@@ -85,6 +92,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
+        color: '#333'
     },
     building: {
         marginLeft: 20,
@@ -93,8 +101,8 @@ const styles = StyleSheet.create({
         color: '#9966FF'
     },
     image: {
-        resizeMode: 'cover',
-        width:'90%',
-        height:200
+        resizeMode: 'contain',
+        width: '90%',
+        height: 200
     }
 });

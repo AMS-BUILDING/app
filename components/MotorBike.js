@@ -3,29 +3,26 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-export default function MotorBike() {
+export default function MotorBike({ data }) {
     return <View style={styles.wrapper}>
-        <Text style={styles.title}>Xe máy (Số lượng : 1)</Text>
+
         <View style={styles.container}>
-            <View style={styles.wrapContent}>
-                <Text style={styles.text}>Dòng xe:</Text>
-                <Text style={styles.text}>Dream</Text>
-            </View>
+
             <View style={styles.wrapContent}>
                 <Text style={styles.text}>Hãng:</Text>
-                <Text style={styles.text}>Honda</Text>
+                <Text style={styles.text}>{data?.vehicleBranch}</Text>
             </View>
             <View style={styles.wrapContent}>
                 <Text style={styles.text}>Biển kiểm soát:</Text>
-                <Text style={styles.text}>88A - 21726</Text>
+                <Text style={styles.text}>{data?.licensePlates}</Text>
             </View>
             <View style={styles.wrapContent}>
                 <Text style={styles.text}>Màu xe:</Text>
-                <Text style={styles.text}>Đen</Text>
+                <Text style={styles.text}>{data?.color}</Text>
             </View>
             <View style={[styles.wrapContent, styles.custom]}>
                 <Text style={styles.text}>Ngày đăng kí:</Text>
-                <Text style={styles.text}>4/6/2021</Text>
+                <Text style={styles.text}>{data?.startDate}</Text>
             </View>
         </View>
     </View>

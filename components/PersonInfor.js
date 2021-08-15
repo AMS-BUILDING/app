@@ -1,13 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons';
 
-export default function PersonInfor() {
+export default function PersonInfor({ data }) {
     return <View style={styles.wrapper}>
-        <Text style={styles.title}>Ban bảo vệ chung cư</Text>
-        <Text style={styles.desc}>Người quản lí: Đỗ Văn Lợi</Text>
-        <Text style={styles.desc}>SĐT: 0913109093</Text>
+        <Text style={styles.title}>{data?.roleName}</Text>
+        <Text style={styles.desc}>Người quản lí: {data?.name}</Text>
+        <Text style={styles.desc}>SĐT: {data?.phoneNumber}</Text>
     </View>
 };
 
