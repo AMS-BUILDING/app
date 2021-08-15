@@ -19,7 +19,7 @@ export default function BuildingHandBook() {
             setData(response)
         }
     }
-   
+
     return <View style={styles.wrapper}>
         <View style={styles.wrapContent}>
             <View style={styles.content}>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         fontWeight: 'bold',
         fontSize: 14,
-        color: '#9966FF'
+        color: 'black'
     },
     image: {
         resizeMode: 'contain',
