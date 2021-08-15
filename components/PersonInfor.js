@@ -14,10 +14,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 20,
         borderBottomWidth: 1,
-        borderBottomColor: 'black'
+        borderBottomColor: 'gray'
     },
     title: {
-        color: '#9966FF',
+        color: 'black',
         fontWeight: 'bold',
         fontSize: 18,
         marginBottom: 10
