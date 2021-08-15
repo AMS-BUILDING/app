@@ -1,27 +1,43 @@
-import React from 'react';
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
-import BannerImage from '../assets/images/banner1.png';
+import React, { useEffect, useState } from 'react';
+import { ImageBackground, ScrollView, StyleSheet, View } from 'react-native';
 import ArticleTracking from '../components/ArticleTracking';
-import Header from '../components/Header';
-
+import homeImage from '../assets/images/home.png'
+import { useSelector } from 'react-redux';
+import API from '../components/lib/API';
 export default function ProgressTracking({ navigation }) {
+    let [data, setData] = useState();
+    const token = useSelector(state => state.user?.token)
+    useEffect(() => {
+        search()
+    }, [])
+    let search = async () => {
+        try {
+            let path = `/landlord/service_request/list`;
+            let resp = await API.authorizedJSONGET(path, token);
+            if (resp.ok) {
+                let response = await resp.json();
+                setData(response?.data)
+            }
+        } catch (error) {
+
+        }
+    }
     return <View style={styles.wrapper}>
-        <Header />
-        <View style={styles.wrapContent}>
-            <View style={styles.banner}>
-                <Image source={BannerImage} style={styles.imageBanner} />
-                <View style={styles.overlay}></View>
-                <View style={styles.textBanner}>
-                    <Text style={styles.test}>Theo dõi tiến trình</Text>
-                </View>
+        <ImageBackground source={homeImage} style={styles.imageBanner} >
+            <View style={styles.overlay}>
+
             </View>
-            <ScrollView>
-                <ArticleTracking navigation={navigation} />
-                <ArticleTracking navigation={navigation} />
-                <ArticleTracking navigation={navigation} />
-                <ArticleTracking navigation={navigation} />
-            </ScrollView>
-        </View>
+            <View style={styles.wrapContent}>
+                <ScrollView>
+                    {data?.map((item, index) => {
+                        return (
+                            <ArticleTracking navigation={navigation} data={item} key={index} search={search} />
+                        )
+                    })}
+
+                </ScrollView>
+            </View>
+        </ImageBackground>
     </View>
 }
 
@@ -33,7 +49,10 @@ const styles = StyleSheet.create({
         flex: 1
     },
     imageBanner: {
-        height: '100%'
+        height: '100%',
+        width: '100%',
+        backgroundColor: '#333',
+
     },
     banner: {
         position: 'relative',
@@ -44,9 +63,9 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         width: '100%',
-        height: 80,
+        height: '100%',
         backgroundColor: 'black',
-        opacity: 0.4,
+        opacity: 0.6,
     },
     textBanner: {
         position: 'absolute',
@@ -57,6 +76,6 @@ const styles = StyleSheet.create({
     test: {
         fontSize: 20,
         color: 'white',
-        fontWeight:'700'
+        fontWeight: '700'
     }
 });

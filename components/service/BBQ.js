@@ -1,20 +1,39 @@
 import { AntDesign } from '@expo/vector-icons';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, ImageBackground,TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Button, ImageBackground, TouchableOpacity } from 'react-native';
 import { Calendar } from 'react-native-calendars';
-import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
 import RNPickerSelect from 'react-native-picker-select';
-import HomeImage from '../assets/images/home.png';
+import HomeImage from '../../assets/images/home.png';
 import moment from 'moment';
 import { TextInput } from 'react-native';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
+import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { CheckBox } from 'react-native-elements'
+import Toast from 'react-native-toast-message';
+import API from '../lib/API';
+import DropDownPicker from 'react-native-dropdown-picker';
+export default function BBQ() {
+    let navigation = useNavigation();
+    const [toggleCheckBox, setToggleCheckBox] = useState(false)
 
-export default function Covid({ navigation }) {
-
+    useEffect(() => {
+        const parent = navigation.dangerouslyGetParent();
+        parent.setOptions({
+            tabBarVisible: false
+        });
+        return () =>
+            parent.setOptions({
+                tabBarVisible: true
+            });
+    }, []);
     const [dateObj, setDateObj] = useState({
         selectedDate: moment(new Date(Date.now())).format("DD-MM-YYYY"),
         markedDates: {}
     })
+    const token = useSelector(state => state.user?.token)
+    const accountIdRedux = useSelector(state => state.user?.accountId)
+
     const getSelectedDayEvents = date => {
         let markedDates = {};
         markedDates[date] = { selected: true, color: '#00B0BF', textColor: '#FFFFFF' };
@@ -25,31 +44,54 @@ export default function Covid({ navigation }) {
             markedDates: markedDates
         });
     };
-    const [timeFrom, setTimeFrom] = useState("16")
+    const [timeFrom, setTimeFrom] = useState("06:00-08:00")
     const handleTimeFrom = (hour) => {
         setTimeFrom(hour)
     }
-    const [timeTo, setTimeTo] = useState("20")
-    const handleTimeTo = (hour) => {
-        setTimeTo(hour)
+
+    let addService = async () => {
+        try {
+            if (toggleCheckBox) {
+
+                let objReq = {
+                    reasonDetailSubServiceId: 1,
+                    accountId: accountIdRedux,
+                    startDate: `${moment(dateObj?.selectedDate, "DD-MM-YYYY").format("YYYY/MM/DD")} ${timeFrom.slice(0, 5)}`,
+                    endDate: `${moment(dateObj?.selectedDate, "DD-MM-YYYY").format("YYYY/MM/DD")} ${timeFrom.slice(6, 11)}`,
+                    name: "BBQ",
+                    description: ""
+                }
+                navigation.navigate('PriceRequest', {
+                    data: objReq
+                })
+                setToggleCheckBox(false)
+                setDateObj({
+                    selectedDate: moment(new Date(Date.now())).format("DD-MM-YYYY"),
+                    markedDates: {}
+                })
+                setTimeFrom("06:00-08:00")
+            } else {
+                Toast.show({
+                    type: 'error',
+                    position: 'bottom',
+                    bottomOffset: 50,
+                    text1: 'Error',
+                    text2: 'Bạn cần đọc và cam kết!.'
+                })
+            }
+        } catch (error) {
+
+        }
     }
 
     return (
         <>
             <View style={styles.wrapper}>
-                <View style={styles.wrapContent}>
-                    <View style={styles.banner}>
-                        <View style={styles.textBanner}>
-                            <TouchableOpacity style={styles.btnBack} onPress={() => navigation.goBack()}>
-                                <AntDesign name="arrowleft" size={30} color="#FFF" />
-                            </TouchableOpacity>
-                            <View style={styles.wrapperText}>
-                                <Text style={styles.test}>Xét nghiệm Covid-19</Text>
-                            </View>
-                        </View>
-                    </View>
-                    <View style={styles.main}>
-                        <ImageBackground source={HomeImage} style={styles.image}>
+                <ImageBackground source={HomeImage} style={styles.image}>
+
+                    <View style={[styles.wrapContent, { position: 'absolute', zIndex: 5, width: '100%', height: '100%' }]}>
+
+                        <View style={styles.main}>
                             <View style={styles.wrapTime}>
                                 <View>
                                     <Text style={styles.txtTitle}>Ngày đặt</Text>
@@ -60,82 +102,79 @@ export default function Covid({ navigation }) {
                                     </View>
                                 </View>
                                 <TimeFrom timeFrom={timeFrom} handleTimeFrom={handleTimeFrom} />
-                                <TimeTo timeTo={timeTo} handleTimeTo={handleTimeTo} />
+
                             </View>
                             <SelectDate getSelectedDayEvents={getSelectedDayEvents} dateObj={dateObj} />
                             <Text style={styles.textRule}>Quy định khi đăng kí thẻ ra vào</Text>
                             <View style={styles.wrapCommit}>
-                                <CheckBox style={styles.checkbox} />
+                                <CheckBox
+                                    title={null}
+                                    checked={toggleCheckBox}
+                                    checkedColor="#fff"
+                                    onPress={() => setToggleCheckBox(!toggleCheckBox)}
+                                />
                                 <Text style={styles.textCommit}>Tôi đã đọc và cam kết</Text>
                             </View>
                             <View style={styles.wrapBtn}>
-                                <View style={styles.btnConfirm}>
-                                    <Button title="Đăng kí" color="#006633" onPress={() => navigation.navigate('ServiceQuote')} />
-                                </View>
+
+                                <TouchableOpacity onPress={() => addService()} style={[styles.btnConfirm, {
+                                    backgroundColor: '#006633',
+                                    height: 50, display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }]}>
+                                    <Text style={{ color: '#fff' }}>ĐĂNG KÝ</Text>
+                                </TouchableOpacity>
                             </View>
-                        </ImageBackground >
+                        </View>
                     </View>
-                </View>
+                    <View style={{
+                        backgroundColor: '#000', opacity: .5,
+                        position: "absolute",
+                        zIndex: 4,
+                        width: '100%',
+                        height: '100%'
+                    }} />
+                </ImageBackground >
+
             </View>
         </>
     )
 }
 
 function TimeFrom({ timeFrom, handleTimeFrom }) {
-    let selectItems = [];
-    for (let i = 0; i < 25; i++) {
-        selectItems.push({
-            label: `${i}h`, value: `${i}`
-        })
-    }
+
+    const [open, setOpen] = useState(false);
+
+    const [items, setItems] = useState([
+        { label: "6h - 8h", value: "06:00-08:00" },
+        { label: "8h - 10h", value: "08:00-10:00" },
+        { label: "10h - 12h", value: "10:00-12:00" },
+        { label: "12h - 14h", value: "12:00-14:00" },
+        { label: "14h - 16h", value: "14:00-16:00" },
+        { label: "16h - 18h", value: "16:00-18:00" },
+        { label: "18h - 20h", value: "18:00-20:00" },
+        { label: "20h - 22h", value: "20:00-22:00" }
+    ]);
     return (
         <View style={styles.widthContent}>
-            <Text style={styles.txtTitle}>Từ</Text>
-            <View style={styles.wrapSelect}>
-                <View style={styles.iptSelect}>
-                    <RNPickerSelect
-                        style={pickerSelectStyles}
-                        onValueChange={(value) => handleTimeFrom(value)}
-                        items={selectItems}
-                        value={timeFrom}
-                        Icon={() => <Icon name="keyboard-arrow-down" size={23} />}
-                    />
-                </View>
+            <Text style={styles.txtTitle}>Khung giờ</Text>
+            <DropDownPicker
+                open={open}
+                value={timeFrom}
+                items={items}
+                setOpen={setOpen}
+                setValue={handleTimeFrom}
+                setItems={setItems}
+                placeholder={items[0]?.label}
+                style={{ height: 30 }}
+                containerStyle={{ width: 150 }}
+            />
 
-
-            </View>
         </View>
     )
 }
 
-function TimeTo({ timeTo, handleTimeTo }) {
-    let selectItems = [];
-    for (let i = 0; i < 25; i++) {
-        selectItems.push({
-            label: `${i}h`, value: `${i}`
-        })
-    }
-    return (
-        <View style={styles.widthContent}>
-            <Text style={styles.txtTitle}>Đến</Text>
-            <View style={styles.wrapSelect}>
-
-
-                <View style={styles.iptSelect}>
-                    <RNPickerSelect
-                        style={pickerSelectStyles}
-                        onValueChange={(value) => handleTimeTo(value)}
-                        items={selectItems}
-                        value={timeTo}
-                        Icon={() => <Icon name="keyboard-arrow-down" size={23}  />}
-                    />
-                </View>
-
-
-            </View>
-        </View>
-    )
-}
 function SelectDate({ getSelectedDayEvents, dateObj }) {
     return (
         <View style={styles.wrapCalendar}>
@@ -151,28 +190,26 @@ function SelectDate({ getSelectedDayEvents, dateObj }) {
         </View>
     )
 }
+
 const pickerSelectStyles = StyleSheet.create({
-    // inputIOS: {
-    //     fontSize: 14,
-    //     paddingVertical: 8,
-    //     paddingHorizontal: 10,
-    //     borderWidth: 1,
-    //     borderColor: 'gray',
-    //     borderRadius: 4,
-    //     color: 'black',
-    //     paddingRight: 35, // to ensure the text is never behind the icon
-    //     backgroundColor: 'white'
-    // },
+    inputIOS: {
+        fontSize: 16,
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderRadius: 4,
+        color: '#fff',
+        paddingRight: 30, // to ensure the text is never behind the icon
+    },
     inputAndroid: {
-        fontSize: 14,
+        fontSize: 16,
+        paddingHorizontal: 10,
+        paddingVertical: 8,
         borderWidth: 0.5,
         borderColor: 'purple',
         borderRadius: 8,
-        color: 'black',
-        paddingTop:0,
-        paddingRight: 60, // to ensure the text is never behind the icon
-        paddingBottom:20,
-        paddingTop:5
+        color: '#fff',
+        paddingRight: 30, // to ensure the text is never behind the icon
+        backgroundColor: '#fff'
     },
 });
 const styles = StyleSheet.create({
@@ -181,6 +218,17 @@ const styles = StyleSheet.create({
     },
     wrapContent: {
         flex: 1
+    },
+    separator: {
+        height: 1, backgroundColor: '#fff', width: 80,
+        marginTop: 5,
+        marginLeft: 0
+    },
+    widthContent: {
+        width: 150,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     wrapperText: {
         flex: 1,
@@ -218,7 +266,7 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     test: {
-        fontSize: 25,
+        fontSize: 30,
         fontWeight: '600',
         color: 'white'
     },

@@ -11,11 +11,11 @@ export default function Home({ navigation }) {
         <View style={styles.wrapContent}>
             <ImageBackground source={HomeImage} style={styles.image}>
                 <View style={styles.featureList}>
-                    <TouchableOpacity style={styles.featureItem} onPress={() => navigation.push('Notification')} activeOpacity={0.8}>
+                    <TouchableOpacity style={styles.featureItem} onPress={() => navigation.navigate('NotificationHome')} activeOpacity={0.8}>
                         <Text style={styles.title}>Thông báo chung</Text>
                         <AntDesign name="right" size={18} color="white" style={styles.icon} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.featureItem} onPress={() => navigation.push('ServiceRequest')} activeOpacity={0.8}>
+                    <TouchableOpacity style={styles.featureItem} onPress={() => navigation.navigate('ServiceRequest')} activeOpacity={0.8}>
                         <Text style={styles.title}>Yêu cầu dịch vụ</Text>
                         <AntDesign name="right" size={18} color="white" style={styles.icon} />
                     </TouchableOpacity >
@@ -32,7 +32,7 @@ export default function Home({ navigation }) {
 
                 </View>
             </ImageBackground>
-            <View style={styles.overlay}></View>
+            {/* <View style={styles.overlay}></View> */}
         </View>
     </View>
 }

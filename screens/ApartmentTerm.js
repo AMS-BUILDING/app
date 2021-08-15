@@ -5,16 +5,8 @@ import Header from '../components/Header';
 import TermItem from '../components/TermItem';
 export default function ApartmentTerm({ navigation }) {
     return <View style={styles.wrapper}>
-        <Header navigation={navigation} />
         <View style={styles.wrapContent}>
-            <View style={styles.wrapNav}>
-                <View style={styles.nav}>
-                    <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.goBack()}>
-                        <AntDesign name="arrowleft" size={20} color="white" />
-                    </TouchableOpacity>
-                    <Text style={styles.title}>Điều khoản chung cư</Text>
-                </View>
-            </View>
+            
             <ScrollView>
                 <TermItem />
                 <TermItem />

@@ -1,340 +1,389 @@
-import { AntDesign } from '@expo/vector-icons';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
-import { Alert, Button, ImageBackground, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import HomeImage from '../assets/images/home.png';
-import { TextInputMask } from 'react-native-masked-text'
-import { doGet, doPost } from '../components/lib/DataSource';
+import React, { useState } from 'react';
+import { Controller, useForm } from "react-hook-form";
+import { Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import Toast from 'react-native-toast-message';
+import Feather from 'react-native-vector-icons/Feather';
+import { useSelector } from 'react-redux';
+import API from '../components/lib/API';
+import LoadingProgressBar from '../components/LoadingProgressBar';
+
+const Tab = createMaterialTopTabNavigator();
+
 export default function StayAbsent({ navigation }) {
 
+    return <View style={styles.container}>
 
-    const [data, setData] = useState()
-    const [absentType, setAbsent] = useState(1);
-    const [message, setMessge] = useState();
-   
-    const addAbsent = async () => {
+        <TabHeader />
 
-        const path = "/absent/add";
-        const headers = {
-            "Content-Type": "application/json"
-        }
-        let bodyRequest = {
-            name: data.name,
-            dob: moment(data?.dob,'DD-MM-YYYY').format('YYYY-MM-DD'),
-            identifyCard: data.identifyCard,
-            homeTown: data.homeTown,
-            reason: data.reason,
-            startDate: moment(data.startDate,'DD-MM-YYYY').format('YYYY-MM-DD'),
-            endDate: moment(data.endDate,'DD-MM-YYYY').format('YYYY-MM-DD'),
-            absentType: 1,
-            accountDetailId: 1
-        }
-        console.log(bodyRequest)
-        try {
-            let res = await doPost(path, headers, JSON.stringify(bodyRequest))
-            console.log(res.status)
-            if (res.status === 201) {
-                alert("Đăng ký thành công")
-                setData(null)
-            }
-
-        } catch (error) {
-            alert("Vui lòng kiểm tra lại thông tin!")
-            
-        }
-    }
-
-    
-    return <View style={styles.wrapper}>
-        <View style={styles.wrapContent}>
-            <ImageBackground source={HomeImage} style={styles.image}>
-                <View style={styles.overlay}>
-                    <View style={styles.main}>
-                        <View style={styles.confirm}>
-                            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.btnBack}>
-                                <AntDesign name="arrowleft" size={30} color="#fff" />
-                            </TouchableOpacity>
-                            <View style={styles.wrapText}>
-                                <Text style={styles.textConfirm}>Gửi xe</Text>
-                            </View>
-                        </View>
-                        <View style={styles.headerText}>
-                            <TouchableOpacity style={[styles.wrapItem, (absentType === 1) && styles.active]} onPress={() => setAbsent(1)}>
-                                <Text style={styles.textItem}>Tạm trú</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={[styles.wrapItem, styles.noneBorder, (absentType === 2) && styles.active]} onPress={() => setAbsent(2)}>
-                                <Text style={styles.textItem}>Tạm vắng</Text>
-                            </TouchableOpacity>
-
-                        </View>
-                        <View style={styles.features}>
-
-                            <View style={styles.numberCar}>
-                                <Text style={styles.textNumber}>Họ tên:</Text>
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder="Nguyen Van A"
-                                    onChangeText={(text) => {
-                                        setData({
-                                            ...data,
-                                            name: text
-                                        })
-                                    }}
-                                    value={data?.name}
-                                />
-                            </View>
-                            <View style={styles.numberCar}>
-                                <Text style={styles.textNumber}>Ngày sinh:</Text>
-                                <TextInputMask
-                                    type={'datetime'}
-                                    options={{
-                                        format: 'DD-MM-YYYY'
-                                    }}
-                                    style={styles.input}
-                                    value={data?.dob}
-                                    onChangeText={(text) => {
-                                        
-                                        setData({
-                                            ...data,
-                                            dob: text
-                                        })
-                                    }}
-                                />
-                            </View>
-                            <View style={styles.numberCar}>
-                                <Text style={styles.textNumber}>Số CMND:</Text>
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder="0361xxxxx"
-                                    onChangeText={(text) => {
-                                        setData({
-                                            ...data,
-                                            identifyCard: text
-                                        })
-                                    }}
-                                    value={data?.identifyCard}
-                                />
-                            </View>
-                            <View style={styles.numberCar}>
-                                <Text style={styles.textNumber}>Địa chỉ:</Text>
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder=""
-                                    onChangeText={(text) => {
-                                        setData({
-                                            ...data,
-                                            homeTown: text
-                                        })
-                                    }}
-                                    value={data?.homeTown}
-                                />
-                            </View>
-                            <View style={styles.numberCar}>
-                                <Text style={styles.textNumber}>Lý do:</Text>
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder=""
-                                    onChangeText={(text) => {
-                                        setData({
-                                            ...data,
-                                            reason: text
-                                        })
-                                    }}
-                                    value={data?.reason}
-                                />
-                            </View>
-                            <View style={styles.numberCar}>
-                                <Text style={styles.textNumber}>Ngày đến:</Text>
-                                <TextInputMask
-                                    type={'datetime'}
-                                    options={{
-                                        format: 'DD-MM-YYYY'
-                                    }}
-                                    style={styles.input}
-                                    value={data?.startDate}
-                                    onChangeText={(text) => {
-                                        setData({
-                                            ...data,
-                                            startDate: text
-                                        })
-                                    }}
-                                />
-                            </View>
-                            <View style={styles.numberCar}>
-                                <Text style={styles.textNumber}>Ngày đi:</Text>
-                                <TextInputMask
-                                    type={'datetime'}
-                                    options={{
-                                        format: 'DD-MM-YYYY'
-                                    }}
-                                    style={styles.input}
-                                    value={data?.endDate}
-                                    onChangeText={(text) => {
-                                        setData({
-                                            ...data,
-                                            endDate: text
-                                        })
-                                    }}
-                                />
-                            </View>
-                        </View>
-                        <View style={styles.wrapBtn}>
-                            <View style={styles.btnConfirm}>
-                                <Button title="Xác nhận" color="#006633" onPress={() => addAbsent()} />
-                            </View>
-                        </View>
-                    </View>
-                </View>
-
-            </ImageBackground>
-        </View>
     </View>
 }
 
+function TabHeader() {
+
+    return <View style={{ flex: 1 }}>
+        <Tab.Navigator tabBarOptions={{
+            scrollEnabled: false,
+        }}>
+            <Tab.Screen name="Stay" children={() => <StayAbsentItem absentType={1} />} options={{
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Tạm trú</Text>
+            }} />
+            <Tab.Screen name="Absent" children={() => <StayAbsentItem absentType={2} />} options={{
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Tạm vắng</Text>
+            }} />
+        </Tab.Navigator>
+    </View>
+}
+
+
+function StayAbsentItem({ absentType }) {
+    const { control, reset, handleSubmit, formState: { errors } } = useForm();
+    const [loading, setLoading] = useState(false);
+    const [date, setDate] = useState(new Date());
+    const [message, setMessage] = useState()
+    const [show, setShow] = useState(false);
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+    };
+    const [dateStart, setDateStart] = useState(new Date());
+    const [showStart, setShowStart] = useState(false);
+    const onChangeStart = (event, selectedDate) => {
+        const currentDate = selectedDate || dateStart;
+        setShowStart(Platform.OS === 'ios');
+        setDateStart(currentDate);
+    };
+    const [dateEnd, setDateEnd] = useState(new Date());
+
+    const [showEnd, setShowEnd] = useState(false);
+
+    const onChangeEnd = (event, selectedDate) => {
+        const currentDate = selectedDate || dateEnd;
+        setShowEnd(Platform.OS === 'ios');
+        setDateEnd(currentDate);
+    };
+    const accountIdRedux = useSelector(state => state.user.accountId);
+    const token = useSelector(state => state.user?.token)
+    let addAbsent = async (data) => {
+        let path = '/landlord/absent/add'
+        setLoading(true);
+        let objReq = {
+            name: data?.name,
+            dob: moment(date).format("YYYY-MM-DD"),
+            identifyCard: data?.identifyCard,
+            homeTown: data?.homeTown,
+            reason: data?.reason,
+            startDate: moment(dateStart).format("YYYY-MM-DD"),
+            endDate: moment(dateEnd).format("YYYY-MM-DD"),
+            absentType: absentType,
+            accountId: accountIdRedux
+        };
+        console.log(objReq)
+        let resp = await API.authorizedJSONPost(path, objReq, token);
+        if (resp.ok) {
+            setLoading(false)
+            reset()
+            Toast.show({
+                type: 'success',
+                position: 'bottom',
+                bottomOffset: 50,
+                text1: 'OK',
+                text2: 'Bạn đã đăng ký thành công!.'
+            })
+        } else {
+            let response = await resp.json();
+            console.log(response)
+            setLoading(false)
+            setMessage(response?.message)
+            Toast.show({
+                type: 'error',
+                position: 'bottom',
+                bottomOffset: 50,
+                text1: 'Error',
+                text2: message
+            })
+        }
+    }
+    return (
+     <>
+                <View style={styles.separator} />
+                <View style={{ margin: 10 }}>
+                    <View style={styles.item}>
+                        <Controller
+                            control={control}
+                            render={({ field: { onChange, onBlur, value } }) => (
+                                <View >
+                                    <Text style={styles.label}>Họ tên</Text>
+                                    <TextInput
+                                        onBlur={onBlur}
+                                        onChangeText={value => {
+                                            onChange(value)
+
+                                        }}
+                                        placeholderTextColor="#888"
+                                        style={[styles.textInputComment, errors.name ? styles.errorInput : undefined]}
+                                        underlineColorAndroid="transparent"
+                                    />
+                                </View>
+                            )}
+                            name="name"
+                            rules={{ required: true }}
+                            defaultValue=""
+                        />
+                    </View>
+
+                    {show && <DateTimePicker
+                        testID="dateTimePicker"
+                        value={date}
+                        mode={"date"}
+                        is24Hour={true}
+                        display="spinner"
+                        onChange={onChange}
+                        maximumDate={new Date()}
+
+                    />}
+                    {showStart && <DateTimePicker
+                        testID="dateTimePicker"
+                        value={dateStart}
+                        mode={"date"}
+                        is24Hour={true}
+                        display="spinner"
+                        onChange={onChangeStart}
+                    />}
+                    {showEnd && <DateTimePicker
+                        testID="dateTimePicker"
+                        value={dateEnd}
+                        mode={"date"}
+                        is24Hour={true}
+                        display="spinner"
+                        onChange={onChangeEnd}
+                        minimumDate={dateStart}
+                    />}
+                    <View style={styles.separator} />
+
+                    <View style={styles.item}>
+                        <Text style={styles.label}>Ngày sinh</Text>
+                        <TouchableOpacity onPress={() => setShow(true)}>
+                            <Text>{moment(date).format("DD/MM/YYYY")} <Feather name="calendar" size={25} color={"#333"} /></Text>
+                        </TouchableOpacity>
+                    </View>
+
+
+
+                    <View style={styles.separator} />
+                    <View style={styles.item}>
+                        <Controller
+                            control={control}
+                            render={({ field: { onChange, onBlur, value } }) => (
+                                <View >
+                                    <Text style={styles.label}>Số căn cước công dân</Text>
+                                    <TextInput
+                                        onBlur={onBlur}
+                                        onChangeText={value => {
+                                            onChange(value)
+
+                                        }}
+
+
+                                        placeholderTextColor="#999"
+                                        style={[styles.textInputComment, errors.address ? styles.errorInput : undefined]}
+                                        underlineColorAndroid="transparent"
+                                    />
+                                </View>
+                            )}
+                            name="identifyCard"
+                            // rules={{ required: true}}
+                            defaultValue=""
+                        />
+                    </View>
+                    <View style={styles.separator} />
+                    <View style={styles.item}>
+                        <Controller
+                            control={control}
+                            render={({ field: { onChange, onBlur, value } }) => (
+                                <View >
+                                    <Text style={styles.label}>Địa chỉ thường trú</Text>
+                                    <TextInput
+                                        onBlur={onBlur}
+                                        onChangeText={value => {
+                                            onChange(value)
+
+                                        }}
+
+
+                                        placeholderTextColor="#999"
+                                        style={[styles.textInputComment, errors.address ? styles.errorInput : undefined]}
+                                        underlineColorAndroid="transparent"
+                                    />
+                                </View>
+                            )}
+                            name="homeTown"
+                            // rules={{ required: true}}
+                            defaultValue=""
+                        />
+                    </View>
+                    <View style={styles.separator} />
+                    <View style={styles.item}>
+                        <Controller
+                            control={control}
+                            render={({ field: { onChange, onBlur, value } }) => (
+                                <View >
+                                    <Text style={styles.label}>Lý do</Text>
+                                    <TextInput
+                                        onBlur={onBlur}
+                                        onChangeText={value => {
+                                            onChange(value)
+
+                                        }}
+
+
+                                        placeholderTextColor="#999"
+                                        style={[styles.textInputComment, errors.address ? styles.errorInput : undefined]}
+                                        underlineColorAndroid="transparent"
+                                    />
+                                </View>
+                            )}
+                            name="reason"
+                            // rules={{ required: true}}
+                            defaultValue=""
+                        />
+                    </View>
+                    <View style={styles.separator} />
+                    <View style={styles.item}>
+                        <Text style={styles.label}>Ngày đến</Text>
+                        <TouchableOpacity onPress={() => setShowStart(true)}>
+                            <Text>{moment(dateStart).format("DD/MM/YYYY")} <Feather name="calendar" size={25} color={"#333"} /></Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.separator} />
+                    <View style={styles.item}>
+                        <Text style={styles.label}>Ngày đi</Text>
+                        <TouchableOpacity onPress={() => setShowEnd(true)}>
+                            <Text>{moment(dateEnd).format("DD/MM/YYYY")} <Feather name="calendar" size={25} color={"#333"} /></Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.separator} />
+                </View>
+                <View style={styles.footerBottom}>
+                    <TouchableOpacity style={styles.shareNow} disabled={loading} onPress={handleSubmit(addAbsent)}>
+                        <Text style={styles.shareNowText}>ĐĂNG KÝ {loading && <LoadingProgressBar />}</Text>
+                    </TouchableOpacity>
+                </View>
+
+        </>
+
+
+    )
+}
+
+
+
 const styles = StyleSheet.create({
-    wrapper: {
-        flex: 1
-    },
-    wrapContent: {
+    container: {
         flex: 1,
-        position: 'relative'
-    },
-    imageBanner: {
-        height: '100%'
-    },
-
-    overlay: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#161b224d',
-
-    },
-    textBanner: {
-        position: 'absolute',
-        left: 15,
-        bottom: 25,
-        width: '100%',
-        zIndex: 1
-    },
-    image: {
-        resizeMode: "cover",
-        position: 'relative',
-        height: '100%',
-    },
-    main: {
-        width: '100%',
-        height: '100%',
-        position: 'absolute',
-        zIndex: 3
-    },
-    wrapText: {
-        flex: 1,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    confirm: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 10,
-        height: 100,
-        backgroundColor: '#006633',
-        width: '100%',
-        paddingTop: 30,
-        position: 'relative',
-        borderBottomColor: '#282828',
-        borderBottomWidth: 1,
-        borderStyle: 'solid'
-    },
-    btnBack: {
-        position: 'absolute',
-        left: 15,
-        top: 50
-    },
-    textConfirm: {
-        fontWeight: 'bold',
-        fontSize: 25,
-        color: '#fff'
-    },
-    test: {
-        fontSize: 30,
-        color: 'white'
-    },
-    headerText: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        borderWidth: 1,
-        borderColor: 'black',
-        height: 29,
-        marginTop: 20,
-        marginLeft: 14,
-        marginRight: 14
-    },
-    wrapItem: {
-        width: '50%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    textItem: {
-        textAlign: 'center',
-        fontSize: 16,
-        fontWeight: '700',
-        color: '#fff'
-    },
-    active: {
-        backgroundColor: '#006633',
-    },
-    noneBorder: {
-        borderTopLeftRadius: 0,
-        borderBottomStartRadius: 0,
-    },
-    features: {
-        height: 420,
         backgroundColor: '#fff',
-        marginTop: 0,
-        marginLeft: 15,
-        marginRight: 15
     },
-    numberCar: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 10
+    separator: {
+        height: 1, backgroundColor: '#ddd', width: '100%'
     },
-    textNumber: {
-        marginRight: 15,
-        fontSize: 14
-    },
-    featureItem: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 10
-    },
-    featureInput: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 10
-    },
-    input: {
-        borderWidth: 1,
-        width: 230,
-        height: 40,
-        borderRadius: 5,
-        paddingLeft: 8,
-    },
-    wrapBtn: {
+    header: {
         padding: 10,
-
-        marginTop: 15,
-        borderRadius: 10
+        flexDirection: "row",
+        alignItems: "flex-start"
     },
-    textPrice: {
+    item: {
+        marginTop: 5,
+        marginBottom: 5
+    },
+    avatar: {
+        height: 40,
+        width: 40,
+        borderRadius: 5,
+        marginRight: 10,
+        borderWidth: 1,
+        borderColor: '#f0f0f0'
+    },
+    name: {
+        color: "#2999f5",
         fontSize: 15,
-        fontWeight: '700'
+        fontWeight: "bold"
+    },
+    time: {
+        color: "#555",
+        fontSize: 12,
+        fontWeight: "300"
+    },
+    userInfo: {
+        flex: 1, display: 'flex', flexDirection: 'column'
+    },
+    footerBottom: {
+        padding: 10,
+        flexDirection: 'row',
+        display: "flex",
+        justifyContent: 'flex-end',
+        marginTop: 10,
+        marginBottom: 10,
+        alignItems: 'center'
+    },
+    method: {
+        flex: 1,
+        alignItems: 'flex-start'
+    },
+    methodText: {
+        fontSize: 14,
+        fontWeight: 'normal',
+        color: '#888',
+    },
+    textInputComment: {
+        color: '#333',
+        fontSize: 15,
+    },
+    shareNow: { alignItems: 'flex-end', backgroundColor: '#82c714', padding: 10, borderRadius: 10, alignItems: 'center' },
+    shareNowText: { color: '#fff', fontSize: 14, fontWeight: "bold", textTransform: 'uppercase' },
+    errorInput: {
+        borderColor: 'red',
+        borderWidth: 1
+    },
+    uploadImage: {
+        height: 150,
+        flex: 1,
+        borderRadius: 5,
+        marginRight: 10,
+        borderWidth: 1,
+        borderColor: '#f0f0f0',
+        resizeMode: 'cover',
+    },
+    deleteButton: { position: 'absolute', right: 0, top: -5, backgroundColor: '#fff', borderRadius: 10, width: 20, height: 20 },
+    footerImageBottom: {
+        padding: 10,
+        flexDirection: 'row',
+        display: "flex",
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
+    row: {
+        margin: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    label: {
+        color: '#999', fontStyle: 'italic', fontSize: 12
+    },
+    autocompleteContainer: {
+        flex: 1,
+        left: 0,
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        zIndex: 1,
+    },
+    errorInput: {
+        borderColor: 'red',
+        borderWidth: 1
     }
 });
