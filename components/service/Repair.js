@@ -274,13 +274,12 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderColor: '#eaeaea'
     },
-    shareNow: { backgroundColor: '#006633', width: '80%', height: 50, borderRadius: 10, alignItems: 'center', display: 'flex', justifyContent: 'center' },
+    shareNow: { backgroundColor: '#006633', width: '100%', height: 50, borderRadius: 10, alignItems: 'center', display: 'flex', justifyContent: 'center' },
     shareNowText: { color: '#fff', fontSize: 14, fontWeight: "bold", textTransform: 'uppercase' },
     wrapContent: {
         flex: 1
     },
     footerBottom: {
-
         flexDirection: 'row',
         display: "flex",
         justifyContent: 'center',
@@ -288,6 +287,8 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         alignItems: 'center',
         width: '100%',
+        paddingLeft: 15,
+        paddingRight: 15
     },
     separator: {
         height: 1, backgroundColor: '#fff', width: 150,

@@ -141,11 +141,12 @@ const styles = StyleSheet.create({
     },
     btnLogin: {
         backgroundColor: '#006633',
-        width: '95%',
-        height: 30,
+        width: '100%',
+        height: 50,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderRadius: 10
     },
     shareNowText: {
         color: '#fff'
@@ -275,12 +276,12 @@ const styles = StyleSheet.create({
         paddingLeft: 8,
     },
     wrapBtn: {
-        padding: 10,
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'row',
-        marginTop: 15,
-        borderRadius: 10
+        marginTop: 30,
+        borderRadius: 10,
+        width: '100%'
     },
     textPrice: {
         fontSize: 15,
