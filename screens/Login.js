@@ -136,15 +136,15 @@ const styles = StyleSheet.create({
         resizeMode: "cover",
         justifyContent: "center",
         height: '100%',
-    
+        position: 'relative'
     },
     container: {
         width: 350,
         marginLeft: 'auto',
         marginRight: 'auto',
         alignItems: 'center',
-        position:"absolute",
-        zIndex:5
+        // position: "absolute",
+        zIndex: 5
     },
     title: {
         color: 'white',
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft:10
+        marginLeft: 10
 
     },
     textLogin: {
@@ -198,9 +198,9 @@ const styles = StyleSheet.create({
     overlay: {
         backgroundColor: '#000',
         opacity: .5,
-        position:"absolute",
-        zIndex:4,
-        width:'100%',
-        height:'100%'
+        position: "absolute",
+        zIndex: 4,
+        width: '100%',
+        height: '100%'
     }
 })
