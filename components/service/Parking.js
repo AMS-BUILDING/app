@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { Button, ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, ImageBackground } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
-import HomeImage from '../../assets/images/home.png';
+import HomeImage from '../../assets/images/bgscreen.png';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import ParkCar from './park/ParkCar';
 import ParkMotobike from './park/ParkMotobike';
@@ -31,7 +31,7 @@ export default function Parking() {
                 <TabHeader />
 
             </View>
-            
+
         </ImageBackground>
     </View >
 }
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         left: 0,
         width: '100%',
         height: '100%',
-      
+
 
     },
     textBanner: {

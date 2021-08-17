@@ -8,7 +8,7 @@ import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 import RNPickerSelect from 'react-native-picker-select';
 import Feather from 'react-native-vector-icons/Feather';
-import HomeImage from '../../assets/images/home.png';
+import HomeImage from '../../assets/images/bgscreen.png';
 
 export default function PoolSuccess() {
 

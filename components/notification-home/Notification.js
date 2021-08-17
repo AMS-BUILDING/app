@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ImageBackground } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import homeImage from '../../assets/images/home.png'
+import homeImage from '../../assets/images/bgscreen.png'
 import NotiItem from './NotiItem';
 const Tab = createMaterialTopTabNavigator();
 

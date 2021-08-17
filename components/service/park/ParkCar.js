@@ -3,7 +3,7 @@ import { ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } 
 import DropDownPicker from 'react-native-dropdown-picker';
 import Toast from 'react-native-toast-message';
 import { useSelector } from 'react-redux';
-import HomeImage from '../../../assets/images/home.png';
+import HomeImage from '../../../assets/images/bgscreen.png';
 import API from '../../lib/API';
 import LoadingProgressBar from '../../LoadingProgressBar';
 
@@ -75,7 +75,7 @@ export default function ParkCar() {
                                 setValue={setId}
                                 setItems={setItems}
                                 placeholder={items[0]?.label}
-                                style={{ height: 30 }}
+                                style={{ height: 30, borderColor: 'white' }}
                                 containerStyle={{ width: 150 }}
                             />
 
@@ -89,6 +89,7 @@ export default function ParkCar() {
                                     })
                                 }}
                                 value={data?.vehicleBranch}
+                                placeholderTextColor={'white'}
                             />
                             <TextInput placeholder="Màu xe" style={[styles.input, { marginLeft: 10 }]}
                                 onChangeText={text => {
@@ -98,6 +99,7 @@ export default function ParkCar() {
                                     })
                                 }}
                                 value={data?.vehicleColor}
+                                placeholderTextColor={'white'}
                             />
                         </View>
                         <View style={styles.featureInput}>
@@ -109,6 +111,7 @@ export default function ParkCar() {
                                     })
                                 }}
                                 value={data?.licensePlate}
+                                placeholderTextColor={'white'}
                             />
                         </View>
                         <View>
@@ -116,7 +119,6 @@ export default function ParkCar() {
 
                         </View>
                     </View>
-                    <View style={{ width: '100%', height: 0.5, backgroundColor: '#eaeaea' }} />
                     <View style={[styles.wrapBtn]}>
                         <TouchableOpacity style={styles.btnLogin} onPress={() => addPark()} disabled={loading}>
                             <Text style={styles.shareNowText}>XÁC NHẬN {loading && <LoadingProgressBar />}</Text>
@@ -125,7 +127,7 @@ export default function ParkCar() {
                     </View>
                 </View>
                 <View style={{
-                    backgroundColor: '#000', opacity: .5,
+                    backgroundColor: '#000', opacity: .7,
                     position: "absolute",
                     zIndex: 4,
                     width: '100%',
@@ -152,16 +154,19 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     btnLogin: {
-        backgroundColor: '#006633',
+        backgroundColor: 'transparent',
         width: '100%',
         height: 50,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10
+        borderRadius: 10,
+        borderColor: 'orange',
+        borderWidth: 2
     },
     shareNowText: {
-        color: '#fff',
+        color: 'orange',
+        fontWeight: 'bold'
     },
     overlay: {
         position: 'absolute',
@@ -169,8 +174,7 @@ const styles = StyleSheet.create({
         left: 0,
         width: '100%',
         height: '100%',
-        backgroundColor: '#161b224d',
-
+        backgroundColor: '#161b224d'
     },
     textBanner: {
         position: 'absolute',
@@ -254,7 +258,7 @@ const styles = StyleSheet.create({
     },
     features: {
         height: 200,
-        backgroundColor: '#fff',
+        // backgroundColor: '#fff',
         marginTop: 50,
         marginLeft: 15,
         marginRight: 15
@@ -267,21 +271,25 @@ const styles = StyleSheet.create({
     },
     textNumber: {
         marginRight: 15,
-        fontSize: 14
+        fontSize: 14,
+        color: 'white'
     },
     featureItem: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 10
+        padding: 10,
+        paddingLeft: 0,
+        marginBottom: 10
     },
     featureInput: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 10
+        marginBottom: 20
     },
     input: {
         borderWidth: 1,
+        borderColor: 'white',
         width: 150,
         height: 40,
         borderRadius: 15,
@@ -297,6 +305,7 @@ const styles = StyleSheet.create({
     },
     textPrice: {
         fontSize: 15,
+        color: 'white',
         fontWeight: '700'
     }
 });

@@ -1,7 +1,7 @@
 import { Entypo, FontAwesome5, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import HomeImage from '../assets/images/home.png';
+import HomeImage from '../assets/images/bgscreen.png';
 
 export default function ServiceRequest({ navigation }) {
     // const token = useSelector(state => state.user?.token)
@@ -28,77 +28,78 @@ export default function ServiceRequest({ navigation }) {
                                 <View style={{ width: 90, marginRight: 45 }}>
                                     <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Repair')} activeOpacity={0.8}>
                                         <MaterialIcons name="home-repair-service" size={35} color="white" />
+                                        <Text style={{ marginTop: 15, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Sửa chữa</Text>
                                     </TouchableOpacity>
-                                    <Text style={{ marginTop: 5, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Sửa chữa</Text>
+
                                 </View>
                                 <View style={{ width: 90, marginRight: 45 }}>
                                     <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Parking')} activeOpacity={0.8}>
                                         <FontAwesome5 name="parking" size={35} color="white" />
+                                        <Text style={{ marginTop: 15, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Gửi xe</Text>
                                     </TouchableOpacity>
-                                    <Text style={{ marginTop: 5, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Gửi xe</Text>
                                 </View>
                                 <View style={{ width: 90, marginRight: 45 }}>
                                     <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('ApartmentCleaning')} activeOpacity={0.8}>
                                         <MaterialIcons name="cleaning-services" size={35} color="white" />
+                                        <Text style={{ marginTop: 15, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Vệ sinh</Text>
 
                                     </TouchableOpacity>
-                                    <Text style={{ marginTop: 5, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Vệ sinh</Text>
                                 </View>
                                 <View style={{ width: 90, marginRight: 45 }}>
                                     <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Laundry')} activeOpacity={0.8}>
                                         <MaterialIcons name="local-laundry-service" size={35} color="white" />
+                                        <Text style={{ marginTop: 15, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Giặt là</Text>
 
                                     </TouchableOpacity>
-                                    <Text style={{ marginTop: 5, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Giặt là</Text>
                                 </View>
                                 <View style={{ width: 90, marginRight: 45 }}>
                                     <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Party')} activeOpacity={0.8}>
                                         <MaterialCommunityIcons name="silverware-clean" size={35} color="white" />
 
+                                        <Text style={{ marginTop: 15, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Đặt tiệc</Text>
                                     </TouchableOpacity>
-                                    <Text style={{ marginTop: 5, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Đặt tiệc</Text>
                                 </View>
                                 <View style={{ width: 90, marginRight: 45 }}>
                                     <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Covid')} activeOpacity={0.8}>
                                         <FontAwesome5 name="briefcase-medical" size={35} color="white" />
 
+                                        <Text style={{ marginTop: 15, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Covid-19</Text>
                                     </TouchableOpacity>
-                                    <Text style={{ marginTop: 5, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Covid-19</Text>
                                 </View>
                                 <View style={{ width: 90, marginRight: 45 }}>
                                     <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('AccessCard')} activeOpacity={0.8}>
                                         <Entypo name="credit-card" size={35} color="white" />
 
+                                        <Text style={{ marginTop: 15, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Thẻ ra vào</Text>
                                     </TouchableOpacity>
-                                    <Text style={{ marginTop: 5, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Thẻ ra vào</Text>
                                 </View>
                                 <View style={{ width: 90, marginRight: 45 }}>
                                     <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('BBQ')} activeOpacity={0.8}>
                                         <MaterialCommunityIcons name="food-fork-drink" size={35} color="white" />
 
+                                        <Text style={{ marginTop: 15, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >BBQ</Text>
                                     </TouchableOpacity>
-                                    <Text style={{ marginTop: 5, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >BBQ</Text>
                                 </View>
                                 <View style={{ width: 90, marginRight: 45 }}>
                                     <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Tennis')} activeOpacity={0.8}>
                                         <Ionicons name="tennisball" size={35} color="white" />
 
+                                        <Text style={{ marginTop: 15, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Tennis</Text>
                                     </TouchableOpacity>
-                                    <Text style={{ marginTop: 5, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Tennis</Text>
                                 </View>
                                 <View style={{ width: 90, marginRight: 45 }}>
                                     <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Pool')} activeOpacity={0.8}>
                                         <FontAwesome5 name="swimming-pool" size={35} color="white" />
 
+                                        <Text style={{ marginTop: 15, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Hồ bơi</Text>
                                     </TouchableOpacity>
-                                    <Text style={{ marginTop: 5, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Hồ bơi</Text>
                                 </View>
                                 <View style={{ width: 90, marginRight: 45 }}>
                                     <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('FootballPitche')} activeOpacity={0.8}>
                                         <Ionicons name="football" size={35} color="white" />
+                                        <Text style={{ marginTop: 15, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Sân bóng</Text>
 
                                     </TouchableOpacity>
-                                    <Text style={{ marginTop: 5, fontSize: 14, color: '#fff', textAlign: 'center', marginLeft: 14, marginRight: 14, width: '100%' }} >Sân bóng</Text>
                                 </View>
                             </View>
                         </View>
@@ -181,6 +182,6 @@ const styles = StyleSheet.create({
         marginLeft: 14,
         marginRight: 14,
         marginTop: 20,
-        backgroundColor: '#006633',
+        backgroundColor: 'transparent',
     }
 });

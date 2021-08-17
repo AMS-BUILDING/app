@@ -66,7 +66,7 @@ export default function FeeNotice({ navigation }) {
                     <Text style={styles.date}>Hạn chót thanh toán phải trả 6/6/2021</Text>
                     <View style={styles.wrapBtn}>
                         <View style={styles.btnConfirm}>
-                            <Button title="Thanh toán" color="#006633" onPress={() => navigation.navigate('Payment')} />
+                            <Button title="Thanh toán" color="orange" onPress={() => navigation.navigate('Payment')} />
                         </View>
                     </View>
                 </View>

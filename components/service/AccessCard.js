@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Button, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
-import HomeImage from '../../assets/images/home.png';
+import HomeImage from '../../assets/images/bgscreen.png';
 import { CheckBox } from 'react-native-elements'
 import { useSelector } from 'react-redux';
 import LoadingProgressBar from '../LoadingProgressBar';
@@ -31,7 +31,7 @@ export default function AccessCard() {
     }, []);
     console.log(token)
     let addService = async () => {
-  
+
 
         if (toggleCheckBox) {
             setLoading(true)
@@ -43,7 +43,7 @@ export default function AccessCard() {
             let resp = await API.authorizedJSONPost(path, objReq, token);
             if (resp.ok) {
                 setLoading(false);
-                
+
                 Toast.show({
                     type: 'error',
                     position: 'bottom',
@@ -59,7 +59,7 @@ export default function AccessCard() {
                     position: 'bottom',
                     bottomOffset: 50,
                     text1: 'Error',
-                    text2:response?.message
+                    text2: response?.message
                 })
             }
         } else {
@@ -115,7 +115,7 @@ export default function AccessCard() {
                         </View>
                     </View>
                 </View>
-                
+
             </ImageBackground>
 
         </View>
@@ -142,8 +142,8 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         alignItems: 'center'
     },
-    shareNow: { alignItems: 'flex-end', backgroundColor: '#82c714', padding: 10, borderRadius: 10, alignItems: 'center' },
-    shareNowText: { color: '#fff', fontSize: 14, fontWeight: "bold", textTransform: 'uppercase' },
+    shareNow: { alignItems: 'flex-end', backgroundColor: 'transparent', padding: 10, borderRadius: 10, alignItems: 'center', borderWidth: 2, borderColor: 'orange' },
+    shareNowText: { color: 'orange', fontSize: 14, fontWeight: "bold", textTransform: 'uppercase' },
     overlay: {
         position: 'absolute',
         bottom: 0,

@@ -7,7 +7,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import Toast from 'react-native-toast-message';
 import Feather from 'react-native-vector-icons/Feather';
 import { useSelector } from 'react-redux';
-import HomeImage from '../../assets/images/home.png';
+import HomeImage from '../../assets/images/bgscreen.png';
 import API from '../lib/API';
 import LoadingProgressBar from '../LoadingProgressBar';
 import SearchRepair from './SearchRepair';
@@ -145,6 +145,7 @@ export default function Repair() {
                                     <Text style={styles.shareNowText}>GỬI YÊU CẦU {loading && <LoadingProgressBar />}</Text>
                                 </TouchableOpacity>
                             </View>
+
                         </ImageBackground >
                     </View>
                 </View>
@@ -274,8 +275,8 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderColor: '#eaeaea'
     },
-    shareNow: { backgroundColor: '#006633', width: '100%', height: 50, borderRadius: 10, alignItems: 'center', display: 'flex', justifyContent: 'center' },
-    shareNowText: { color: '#fff', fontSize: 14, fontWeight: "bold", textTransform: 'uppercase' },
+    shareNow: { backgroundColor: 'transparent', width: '100%', height: 50, borderRadius: 10, alignItems: 'center', display: 'flex', justifyContent: 'center', borderWidth: 2, borderColor: 'orange' },
+    shareNowText: { color: 'orange', fontSize: 14, fontWeight: "bold", textTransform: 'uppercase' },
     wrapContent: {
         flex: 1
     },

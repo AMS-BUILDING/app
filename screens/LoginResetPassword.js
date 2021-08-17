@@ -174,14 +174,16 @@ const styles = StyleSheet.create({
     },
     btnLogin: {
         width: '100%',
-        backgroundColor: '#006633',
+        backgroundColor: 'transparent',
         padding: 10,
         borderRadius: 10,
         marginBottom: 20,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 50
+        marginTop: 50,
+        borderColor: 'orange',
+        borderWidth: 2
     },
     textLogin: {
 
@@ -195,11 +197,11 @@ const styles = StyleSheet.create({
     },
     shareNowText: {
         fontSize: 16,
-        color: '#fff'
+        color: 'orange'
     },
     overlay: {
         backgroundColor: '#000',
-        opacity: .5,
+        opacity: .7,
         position: "absolute",
         zIndex: 4,
         width: '100%',

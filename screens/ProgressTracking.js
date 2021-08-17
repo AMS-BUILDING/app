@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ImageBackground, ScrollView, StyleSheet, View } from 'react-native';
 import ArticleTracking from '../components/ArticleTracking';
-import homeImage from '../assets/images/home.png'
+import homeImage from '../assets/images/bgscreen.png'
 import { useSelector } from 'react-redux';
 import API from '../components/lib/API';
 export default function ProgressTracking({ navigation }) {

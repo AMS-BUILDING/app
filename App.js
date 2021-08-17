@@ -111,7 +111,7 @@ function AnonymousUser({ handleLogin }) {
             options={{
               title: 'Xác nhận email',
               headerStyle: {
-                backgroundColor: '#006633'
+                backgroundColor: '#333333'
               },
               headerTintColor: '#fff'
             }}
@@ -120,7 +120,7 @@ function AnonymousUser({ handleLogin }) {
             options={{
               title: 'Quên mật khẩu',
               headerStyle: {
-                backgroundColor: '#006633'
+                backgroundColor: '#333333'
               },
               headerTintColor: '#fff'
             }}
@@ -205,7 +205,7 @@ function HomeStackScreen() {
         options={{
           title: 'Thông báo',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -213,22 +213,22 @@ function HomeStackScreen() {
       <Stack.Screen name="FeeNotice" component={FeeNotice} options={{
         title: 'Thông báo phí',
         headerStyle: {
-          backgroundColor: '#006633'
+          backgroundColor: '#333333'
         },
         headerTintColor: '#fff'
       }} />
       <Stack.Screen name="Payment" component={Payment} options={{
-          title: 'Thanh toán',
-          headerStyle: {
-            backgroundColor: '#006633'
-          },
-          headerTintColor: '#fff'
-        }} />
+        title: 'Thanh toán',
+        headerStyle: {
+          backgroundColor: '#333333'
+        },
+        headerTintColor: '#fff'
+      }} />
       <Stack.Screen name="ServiceRequest" component={ServiceRequest}
         options={{
           title: 'Yêu cầu dịch vụ',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
 
@@ -238,7 +238,7 @@ function HomeStackScreen() {
         options={{
           title: 'Báo giá dịch vụ',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
 
@@ -248,7 +248,7 @@ function HomeStackScreen() {
         options={{
           title: 'BBQ',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -257,7 +257,7 @@ function HomeStackScreen() {
         options={{
           title: 'Sửa chữa',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -266,7 +266,7 @@ function HomeStackScreen() {
         options={{
           title: 'Gửi xe',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -275,7 +275,7 @@ function HomeStackScreen() {
         options={{
           title: 'Vệ sinh',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -284,7 +284,7 @@ function HomeStackScreen() {
         options={{
           title: 'Giặt là',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -293,7 +293,7 @@ function HomeStackScreen() {
         options={{
           title: 'Đặt tiệc',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -302,7 +302,7 @@ function HomeStackScreen() {
         options={{
           title: 'Covid-19',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -311,7 +311,7 @@ function HomeStackScreen() {
         options={{
           title: 'Thẻ ra vào',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -320,7 +320,7 @@ function HomeStackScreen() {
         options={{
           title: 'Tennis',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -329,7 +329,7 @@ function HomeStackScreen() {
         options={{
           title: 'Hồ bơi',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -338,7 +338,7 @@ function HomeStackScreen() {
         options={{
           title: 'Hồ bơi',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -347,7 +347,7 @@ function HomeStackScreen() {
         options={{
           title: 'Sân bóng',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -356,7 +356,7 @@ function HomeStackScreen() {
         options={{
           title: 'Theo dõi tiến trình',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -365,7 +365,7 @@ function HomeStackScreen() {
         options={{
           title: 'Chi tiết tiến trình',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -405,7 +405,7 @@ function ProfileStackScreen({ handleLogin }) {
         options={{
           title: 'Menu',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -414,7 +414,7 @@ function ProfileStackScreen({ handleLogin }) {
         options={{
           title: 'Cài đặt',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -423,7 +423,7 @@ function ProfileStackScreen({ handleLogin }) {
         options={{
           title: 'Thông tin',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -432,7 +432,7 @@ function ProfileStackScreen({ handleLogin }) {
         options={{
           title: 'Tạm trú - Tạm vắng',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -441,7 +441,7 @@ function ProfileStackScreen({ handleLogin }) {
         options={{
           title: 'Giới thiệu chung cư',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -450,7 +450,7 @@ function ProfileStackScreen({ handleLogin }) {
         options={{
           title: 'Đánh giá',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}
@@ -459,7 +459,7 @@ function ProfileStackScreen({ handleLogin }) {
         options={{
           title: 'Thay đổi mật khẩu',
           headerStyle: {
-            backgroundColor: '#006633'
+            backgroundColor: '#333333'
           },
           headerTintColor: '#fff'
         }}

@@ -2,7 +2,7 @@ import { AntDesign } from '@expo/vector-icons';
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import HomeImage from '../assets/images/home.png';
+import HomeImage from '../assets/images/bgscreen.png';
 import Header from '../components/Header';
 
 export default function Home({ navigation }) {

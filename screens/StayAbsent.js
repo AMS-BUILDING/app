@@ -108,171 +108,171 @@ function StayAbsentItem({ absentType }) {
         }
     }
     return (
-     <>
-                <View style={styles.separator} />
-                <View style={{ margin: 10 }}>
-                    <View style={styles.item}>
-                        <Controller
-                            control={control}
-                            render={({ field: { onChange, onBlur, value } }) => (
-                                <View >
-                                    <Text style={styles.label}>Họ tên</Text>
-                                    <TextInput
-                                        onBlur={onBlur}
-                                        onChangeText={value => {
-                                            onChange(value)
+        <>
+            <View style={styles.separator} />
+            <View style={{ margin: 10 }}>
+                <View style={styles.item}>
+                    <Controller
+                        control={control}
+                        render={({ field: { onChange, onBlur, value } }) => (
+                            <View >
+                                <Text style={styles.label}>Họ tên</Text>
+                                <TextInput
+                                    onBlur={onBlur}
+                                    onChangeText={value => {
+                                        onChange(value)
 
-                                        }}
-                                        placeholderTextColor="#888"
-                                        style={[styles.textInputComment, errors.name ? styles.errorInput : undefined]}
-                                        underlineColorAndroid="transparent"
-                                    />
-                                </View>
-                            )}
-                            name="name"
-                            rules={{ required: true }}
-                            defaultValue=""
-                        />
-                    </View>
-
-                    {show && <DateTimePicker
-                        testID="dateTimePicker"
-                        value={date}
-                        mode={"date"}
-                        is24Hour={true}
-                        display="spinner"
-                        onChange={onChange}
-                        maximumDate={new Date()}
-
-                    />}
-                    {showStart && <DateTimePicker
-                        testID="dateTimePicker"
-                        value={dateStart}
-                        mode={"date"}
-                        is24Hour={true}
-                        display="spinner"
-                        onChange={onChangeStart}
-                    />}
-                    {showEnd && <DateTimePicker
-                        testID="dateTimePicker"
-                        value={dateEnd}
-                        mode={"date"}
-                        is24Hour={true}
-                        display="spinner"
-                        onChange={onChangeEnd}
-                        minimumDate={dateStart}
-                    />}
-                    <View style={styles.separator} />
-
-                    <View style={styles.item}>
-                        <Text style={styles.label}>Ngày sinh</Text>
-                        <TouchableOpacity onPress={() => setShow(true)}>
-                            <Text>{moment(date).format("DD/MM/YYYY")} <Feather name="calendar" size={25} color={"#333"} /></Text>
-                        </TouchableOpacity>
-                    </View>
-
-
-
-                    <View style={styles.separator} />
-                    <View style={styles.item}>
-                        <Controller
-                            control={control}
-                            render={({ field: { onChange, onBlur, value } }) => (
-                                <View >
-                                    <Text style={styles.label}>Số căn cước công dân</Text>
-                                    <TextInput
-                                        onBlur={onBlur}
-                                        onChangeText={value => {
-                                            onChange(value)
-
-                                        }}
-
-
-                                        placeholderTextColor="#999"
-                                        style={[styles.textInputComment, errors.address ? styles.errorInput : undefined]}
-                                        underlineColorAndroid="transparent"
-                                    />
-                                </View>
-                            )}
-                            name="identifyCard"
-                            // rules={{ required: true}}
-                            defaultValue=""
-                        />
-                    </View>
-                    <View style={styles.separator} />
-                    <View style={styles.item}>
-                        <Controller
-                            control={control}
-                            render={({ field: { onChange, onBlur, value } }) => (
-                                <View >
-                                    <Text style={styles.label}>Địa chỉ thường trú</Text>
-                                    <TextInput
-                                        onBlur={onBlur}
-                                        onChangeText={value => {
-                                            onChange(value)
-
-                                        }}
-
-
-                                        placeholderTextColor="#999"
-                                        style={[styles.textInputComment, errors.address ? styles.errorInput : undefined]}
-                                        underlineColorAndroid="transparent"
-                                    />
-                                </View>
-                            )}
-                            name="homeTown"
-                            // rules={{ required: true}}
-                            defaultValue=""
-                        />
-                    </View>
-                    <View style={styles.separator} />
-                    <View style={styles.item}>
-                        <Controller
-                            control={control}
-                            render={({ field: { onChange, onBlur, value } }) => (
-                                <View >
-                                    <Text style={styles.label}>Lý do</Text>
-                                    <TextInput
-                                        onBlur={onBlur}
-                                        onChangeText={value => {
-                                            onChange(value)
-
-                                        }}
-
-
-                                        placeholderTextColor="#999"
-                                        style={[styles.textInputComment, errors.address ? styles.errorInput : undefined]}
-                                        underlineColorAndroid="transparent"
-                                    />
-                                </View>
-                            )}
-                            name="reason"
-                            // rules={{ required: true}}
-                            defaultValue=""
-                        />
-                    </View>
-                    <View style={styles.separator} />
-                    <View style={styles.item}>
-                        <Text style={styles.label}>Ngày đến</Text>
-                        <TouchableOpacity onPress={() => setShowStart(true)}>
-                            <Text>{moment(dateStart).format("DD/MM/YYYY")} <Feather name="calendar" size={25} color={"#333"} /></Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={styles.separator} />
-                    <View style={styles.item}>
-                        <Text style={styles.label}>Ngày đi</Text>
-                        <TouchableOpacity onPress={() => setShowEnd(true)}>
-                            <Text>{moment(dateEnd).format("DD/MM/YYYY")} <Feather name="calendar" size={25} color={"#333"} /></Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.separator} />
+                                    }}
+                                    placeholderTextColor="#888"
+                                    style={[styles.textInputComment, errors.name ? styles.errorInput : undefined]}
+                                    underlineColorAndroid="transparent"
+                                />
+                            </View>
+                        )}
+                        name="name"
+                        rules={{ required: true }}
+                        defaultValue=""
+                    />
                 </View>
-                <View style={styles.footerBottom}>
-                    <TouchableOpacity style={styles.shareNow} disabled={loading} onPress={handleSubmit(addAbsent)}>
-                        <Text style={styles.shareNowText}>ĐĂNG KÝ {loading && <LoadingProgressBar />}</Text>
+
+                {show && <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode={"date"}
+                    is24Hour={true}
+                    display="spinner"
+                    onChange={onChange}
+                    maximumDate={new Date()}
+
+                />}
+                {showStart && <DateTimePicker
+                    testID="dateTimePicker"
+                    value={dateStart}
+                    mode={"date"}
+                    is24Hour={true}
+                    display="spinner"
+                    onChange={onChangeStart}
+                />}
+                {showEnd && <DateTimePicker
+                    testID="dateTimePicker"
+                    value={dateEnd}
+                    mode={"date"}
+                    is24Hour={true}
+                    display="spinner"
+                    onChange={onChangeEnd}
+                    minimumDate={dateStart}
+                />}
+                <View style={styles.separator} />
+
+                <View style={styles.item}>
+                    <Text style={styles.label}>Ngày sinh</Text>
+                    <TouchableOpacity onPress={() => setShow(true)}>
+                        <Text>{moment(date).format("DD/MM/YYYY")} <Feather name="calendar" size={25} color={"#333"} /></Text>
                     </TouchableOpacity>
                 </View>
+
+
+
+                <View style={styles.separator} />
+                <View style={styles.item}>
+                    <Controller
+                        control={control}
+                        render={({ field: { onChange, onBlur, value } }) => (
+                            <View >
+                                <Text style={styles.label}>Số căn cước công dân</Text>
+                                <TextInput
+                                    onBlur={onBlur}
+                                    onChangeText={value => {
+                                        onChange(value)
+
+                                    }}
+
+
+                                    placeholderTextColor="#999"
+                                    style={[styles.textInputComment, errors.address ? styles.errorInput : undefined]}
+                                    underlineColorAndroid="transparent"
+                                />
+                            </View>
+                        )}
+                        name="identifyCard"
+                        // rules={{ required: true}}
+                        defaultValue=""
+                    />
+                </View>
+                <View style={styles.separator} />
+                <View style={styles.item}>
+                    <Controller
+                        control={control}
+                        render={({ field: { onChange, onBlur, value } }) => (
+                            <View >
+                                <Text style={styles.label}>Địa chỉ thường trú</Text>
+                                <TextInput
+                                    onBlur={onBlur}
+                                    onChangeText={value => {
+                                        onChange(value)
+
+                                    }}
+
+
+                                    placeholderTextColor="#999"
+                                    style={[styles.textInputComment, errors.address ? styles.errorInput : undefined]}
+                                    underlineColorAndroid="transparent"
+                                />
+                            </View>
+                        )}
+                        name="homeTown"
+                        // rules={{ required: true}}
+                        defaultValue=""
+                    />
+                </View>
+                <View style={styles.separator} />
+                <View style={styles.item}>
+                    <Controller
+                        control={control}
+                        render={({ field: { onChange, onBlur, value } }) => (
+                            <View >
+                                <Text style={styles.label}>Lý do</Text>
+                                <TextInput
+                                    onBlur={onBlur}
+                                    onChangeText={value => {
+                                        onChange(value)
+
+                                    }}
+
+
+                                    placeholderTextColor="#999"
+                                    style={[styles.textInputComment, errors.address ? styles.errorInput : undefined]}
+                                    underlineColorAndroid="transparent"
+                                />
+                            </View>
+                        )}
+                        name="reason"
+                        // rules={{ required: true}}
+                        defaultValue=""
+                    />
+                </View>
+                <View style={styles.separator} />
+                <View style={styles.item}>
+                    <Text style={styles.label}>Ngày đến</Text>
+                    <TouchableOpacity onPress={() => setShowStart(true)}>
+                        <Text>{moment(dateStart).format("DD/MM/YYYY")} <Feather name="calendar" size={25} color={"#333"} /></Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View style={styles.separator} />
+                <View style={styles.item}>
+                    <Text style={styles.label}>Ngày đi</Text>
+                    <TouchableOpacity onPress={() => setShowEnd(true)}>
+                        <Text>{moment(dateEnd).format("DD/MM/YYYY")} <Feather name="calendar" size={25} color={"#333"} /></Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.separator} />
+            </View>
+            <View style={styles.footerBottom}>
+                <TouchableOpacity style={styles.shareNow} disabled={loading} onPress={handleSubmit(addAbsent)}>
+                    <Text style={styles.shareNowText}>ĐĂNG KÝ {loading && <LoadingProgressBar />}</Text>
+                </TouchableOpacity>
+            </View>
 
         </>
 
@@ -342,8 +342,11 @@ const styles = StyleSheet.create({
         color: '#333',
         fontSize: 15,
     },
-    shareNow: { alignItems: 'flex-end', backgroundColor: '#82c714', padding: 10, borderRadius: 10, alignItems: 'center' },
-    shareNowText: { color: '#fff', fontSize: 14, fontWeight: "bold", textTransform: 'uppercase' },
+    shareNow: {
+        alignItems: 'flex-end', backgroundColor: 'transparent', padding: 10, borderRadius: 10, alignItems: 'center', borderColor: 'orange',
+        borderWidth: 2
+    },
+    shareNowText: { color: 'orange', fontSize: 14, fontWeight: "bold", textTransform: 'uppercase' },
     errorInput: {
         borderColor: 'red',
         borderWidth: 1

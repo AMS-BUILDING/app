@@ -7,7 +7,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { CheckBox } from 'react-native-elements';
 import Toast from 'react-native-toast-message';
 import { useSelector } from 'react-redux';
-import HomeImage from '../../assets/images/home.png';
+import HomeImage from '../../assets/images/bgscreen.png';
 
 export default function Tennis() {
     let navigation = useNavigation();
@@ -116,19 +116,21 @@ export default function Tennis() {
                             </View>
                             <View style={styles.wrapBtn}>
                                 <TouchableOpacity onPress={() => addService()} style={[styles.btnConfirm, {
-                                    backgroundColor: '#006633',
+                                    backgroundColor: 'transparent',
                                     height: 50, display: 'flex',
                                     justifyContent: 'center',
-                                    alignItems: 'center'
+                                    alignItems: 'center',
+                                    borderColor: 'orange',
+                                    borderWidth: 2
                                 }]}>
-                                    <Text style={{ color: '#fff' }}>ĐĂNG KÝ</Text>
+                                    <Text style={{ color: 'orange' }}>ĐĂNG KÝ</Text>
                                 </TouchableOpacity>
                             </View>
 
                         </View>
                     </View>
                     <View style={{
-                        backgroundColor: '#000', opacity: .5,
+                        backgroundColor: '#000', opacity: .7,
                         position: "absolute",
                         zIndex: 4,
                         width: '100%',
