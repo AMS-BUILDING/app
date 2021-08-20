@@ -10,38 +10,24 @@ import Feather from 'react-native-vector-icons/Feather';
 import moment from 'moment';
 import { useIsFocused } from '@react-navigation/native';
 
-export default function ChangeProfile() {
+export default function ChangeProfile(props) {
     const { control, reset, handleSubmit, formState: { errors } } = useForm();
     const token = useSelector(state => state.user.token);
     const [loading, setLoading] = useState(false)
-    const [user, setUser] = useState();
+    let user = props?.route?.params?.user;
     const [isSelect, setIsSelect] = useState(false)
     const isFocused = useIsFocused();
     const [account, setAccount] = useState(account)
-    useEffect(() => {
+    // useEffect(() => {
 
-        search()
+    //     search()
 
-    }, [])
+    // }, [])
 
-    useEffect(() => {
-        search()
-    }, [isFocused])
-    const search = async () => {
-        setIsSelect(false)
-        try {
-            let path = `/member/account/profile`;
-            let resp = await API.authorizedJSONGET(path, token);
-            if (resp.ok) {
-                let response = await resp.json();
-                setLoading(false)
-                setUser(response)
-                setAccount(account)
-            }
-        } catch (error) {
+    // useEffect(() => {
+    //     search()
+    // }, [isFocused])
 
-        }
-    }
 
     const [date, setDate] = useState(new Date());
 
@@ -54,45 +40,48 @@ export default function ChangeProfile() {
         setDate(currentDate);
     };
 
-    console.log("account", account)
-    let updateProfile = async (data) => {
-        setIsSelect(true)
-        setLoading(true)
-        console.log(data)
-        let formData = new FormData();
-        formData.append("name", data.name ? date?.name : account?.name);
-        formData.append("phone", data?.phone ? date?.phone : account?.phone);
-        formData.append("identifyCard", data?.identifyCard ? date?.identifyCard : account?.identifyCard);
-        formData.append("currentAddress", data?.currentAddress ? date?.currentAddress : account?.currentAddress);
-        formData.append("homeTown", data?.homeTown ? date?.homeTown : account?.homeTown);
-        formData.append("dob", !isSelect ? moment(date).format("YYYY/MM/DD") : account?.dob);
-        formData.append("gender", account?.gender);
-        let path = '/tenant/update/profile';
-        let resp = await API.authorizedFilePost(path, formData, token);
-        if (resp.ok) {
-            setLoading(false)
-            console.log("ok")
-            search()
-            Toast.show({
-                type: 'success',
-                position: 'bottom',
-                bottomOffset: 50,
-                text1: 'OK',
-                text2: 'Bạn đã cập nhật tài khoản thành công!',
-            });
-        } else {
-            setLoading(false)
+    const updateProfile = async (form) => {
 
-            Toast.show({
-                type: 'error',
-                position: 'bottom',
-                bottomOffset: 50,
-                text1: 'Failed',
-                text2: 'Vui lòng kiểm tra lại thông tin!',
-            });
+        try {
+            setLoading(true)
+            let path = `/tenant/update/profile`;
+            let data = new FormData();
+            data.append("name", form?.name);
+            data.append("phone", form?.phone);
+            // data.append("multipartFile", filepath);
+            data.append("identifyCard", form?.identifyCard);
+            data.append("currentAddress", form?.currentAddress);
+            data.append("homeTown", form?.homeTown);
+            !isSelect ? data.append("dob", user?.dob) : data.append("dob", moment(date).format("DD/MM/YYYY"));
+
+            data.append("gender", user?.gender);
+            let resp = await API.authorizedFilePost(path, data, token);
+            if (resp.ok) {
+                setLoading(false)
+                Toast.show({
+                    type: 'success',
+                    position: 'bottom',
+                    bottomOffset: 50,
+                    text1: 'OK',
+                    text2: 'Bạn đã cập nhập thông tin thành công!.'
+                })
+            } else {
+                setLoading(false)
+                let response = await resp.json();
+                console.log(response)
+                Toast.show({
+                    type: 'error',
+                    position: 'bottom',
+                    bottomOffset: 50,
+                    text1: 'Error',
+                    text2: 'Vui lòng kiểm tra lại thông tin.'
+                })
+            }
+        } catch (error) {
+            console.log(error)
         }
-    }
 
+    }
     return (
         <>
             <View style={styles.separator} />
@@ -104,15 +93,8 @@ export default function ChangeProfile() {
                             <Text style={styles.label}>Tên chủ hộ</Text>
                             <TextInput
                                 onBlur={onBlur}
-                                onChangeText={value => {
-                                    onChange(value)
-                                    setUser({
-                                        ...user,
-                                        name: value
-                                    })
-                                }}
-                                value={user?.name}
-
+                                onChangeText={value => onChange(value)}
+                                value={value}
                                 placeholderTextColor="#888"
                                 style={[styles.textInputComment]}
                                 underlineColorAndroid="transparent"
@@ -131,6 +113,7 @@ export default function ChangeProfile() {
                     is24Hour={true}
                     display="spinner"
                     onChange={onChange}
+                    maximumDate={new Date()}
                 />}
 
                 <View style={styles.separator} />
@@ -151,14 +134,8 @@ export default function ChangeProfile() {
                             <Text style={styles.label}>Số căn cước công dân</Text>
                             <TextInput
                                 onBlur={onBlur}
-                                onChangeText={value => {
-                                    onChange(value)
-                                    setUser({
-                                        ...user,
-                                        identifyCard: value
-                                    })
-                                }}
-                                value={user?.identifyCard}
+                                onChangeText={value => onChange(value)}
+                                value={value}
 
                                 placeholderTextColor="#999"
                                 style={[styles.textInputComment, errors.address ? styles.errorInput : undefined]}
@@ -168,7 +145,7 @@ export default function ChangeProfile() {
                     )}
                     name="identifyCard"
                     // rules={{ required: true}}
-                    defaultValue={user?.indentifyCard}
+                    defaultValue={user?.identifyCard}
                 />
                 <View style={styles.separator} />
                 <Controller
@@ -178,14 +155,8 @@ export default function ChangeProfile() {
                             <Text style={styles.label}>Số điện thoại</Text>
                             <TextInput
                                 onBlur={onBlur}
-                                onChangeText={value => {
-                                    onChange(value)
-                                    setUser({
-                                        ...user,
-                                        phone: value
-                                    })
-                                }}
-                                value={user?.phone}
+                                onChangeText={value => onChange(value)}
+                                value={value}
 
                                 placeholderTextColor="#999"
                                 style={[styles.textInputComment, errors.address ? styles.errorInput : undefined]}
@@ -206,14 +177,9 @@ export default function ChangeProfile() {
                             <Text style={styles.label}>Quê quán</Text>
                             <TextInput
                                 onBlur={onBlur}
-                                onChangeText={value => {
-                                    onChange(value)
-                                    setUser({
-                                        ...user,
-                                        homeTown: value
-                                    })
-                                }}
-                                value={user?.homeTown}
+                                onChangeText={value => onChange(value)}
+                                value={value}
+
 
                                 placeholderTextColor="#999"
                                 style={[styles.textInputComment, errors.address ? styles.errorInput : undefined]}
@@ -233,14 +199,10 @@ export default function ChangeProfile() {
                             <Text style={styles.label}>Địa chỉ hiện tại</Text>
                             <TextInput
                                 onBlur={onBlur}
-                                onChangeText={value => {
-                                    onChange(value)
-                                    setUser({
-                                        ...user,
-                                        currentAddress: value
-                                    })
-                                }}
-                                value={user?.currentAddress}
+
+                                onChangeText={value => onChange(value)}
+                                value={value}
+
 
                                 placeholderTextColor="#999"
                                 style={[styles.textInputComment, errors.address ? styles.errorInput : undefined]}
@@ -257,7 +219,9 @@ export default function ChangeProfile() {
 
 
             <View style={styles.footerBottom}>
-                <TouchableOpacity style={styles.shareNow} onPress={handleSubmit(updateProfile)} disabled={loading} >
+                <TouchableOpacity style={styles.shareNow}
+                    onPress={handleSubmit(updateProfile)}
+                    disabled={loading} >
                     <Text style={styles.shareNowText}>Xác nhận {loading && <LoadingProgressBar />}</Text>
                 </TouchableOpacity>
             </View>
@@ -324,8 +288,8 @@ const styles = StyleSheet.create({
         color: '#333',
         fontSize: 15,
     },
-    shareNow: { alignItems: 'flex-end', backgroundColor: '#82c714', padding: 10, borderRadius: 10, alignItems: 'center' },
-    shareNowText: { color: '#fff', fontSize: 14, fontWeight: "bold", textTransform: 'uppercase' },
+    shareNow: { alignItems: 'flex-end', backgroundColor: 'transparent', padding: 10, borderRadius: 10, alignItems: 'center', borderWidth: 2, borderColor: 'orange' },
+    shareNowText: { color: 'orange', fontSize: 14, fontWeight: "bold", textTransform: 'uppercase' },
     errorInput: {
         borderColor: 'red',
         borderWidth: 1

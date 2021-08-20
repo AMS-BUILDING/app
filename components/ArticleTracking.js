@@ -6,29 +6,46 @@ import API from './lib/API';
 
 export default function ArticleTracking({ navigation, data, search }) {
     const token = useSelector(state => state.user?.token);
+    console.log(data)
     let cancel = () => {
-        Toast.show({
-            type: 'info',
-            position: 'bottom',
-            bottomOffset: 50,
-            text1: 'Thông báo',
-            text2: 'Bạn chắc chắn muốn hủy dịch vụ?',
-            onPress: async () => {
-                let path = `/landlord/request-service/update/${data?.id}?statusId=${4}`;
-
-                let resp = await API.authorizedJSONPost(path, null, token);
-                if (resp.ok) {
-                    search()
-                    Toast.show({
-                        type: 'success',
-                        position: 'bottom',
-                        bottomOffset: 50,
-                        text1: 'Thành công',
-                        text2: 'Bạn đã hủy dịch vụ thành công!.'
-                    })
-                }
+        try {
+            if (data?.statusId == 1) {
+                Toast.show({
+                    type: 'info',
+                    position: 'bottom',
+                    autoHide: false,
+                    bottomOffset: 50,
+                    text1: 'Thông báo',
+                    text2: 'Bạn chắc chắn muốn hủy dịch vụ?',
+                    onPress: async () => {
+                        let path = `/landlord/request-service/update/${data?.id}?statusId=${4}`;
+                        Toast.hide()
+                        let resp = await API.authorizedJSONPost(path, null, token);
+                        if (resp.ok) {
+                            search()
+                            Toast.show({
+                                type: 'success',
+                                position: 'bottom',
+                                bottomOffset: 50,
+                                text1: 'Thành công',
+                                text2: 'Bạn đã hủy dịch vụ thành công!.'
+                            })
+                        }
+                    }
+                })
+            } else {
+                Toast.show({
+                    type: 'info',
+                    position: 'bottom',
+                    bottomOffset: 50,
+                    text1: 'Thông báo',
+                    text2: 'Bạn không thể hủy dịch vụ này!.'
+                })
             }
-        })
+        } catch (error) {
+
+        }
+
 
 
     }

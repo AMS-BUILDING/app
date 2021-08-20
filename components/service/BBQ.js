@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button, ImageBackground, TouchableOpacity } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import RNPickerSelect from 'react-native-picker-select';
-import HomeImage from '../../assets/images/home.png';
+import HomeImage from '../../assets/images/bgscreen.png';
 import moment from 'moment';
 import { TextInput } from 'react-native';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
@@ -32,6 +32,7 @@ export default function BBQ() {
         markedDates: {}
     })
     const token = useSelector(state => state.user?.token)
+    console.log(token)
     const accountIdRedux = useSelector(state => state.user?.accountId)
 
     const getSelectedDayEvents = date => {
@@ -105,7 +106,11 @@ export default function BBQ() {
 
                             </View>
                             <SelectDate getSelectedDayEvents={getSelectedDayEvents} dateObj={dateObj} />
-                            <Text style={styles.textRule}>Quy định khi đăng kí thẻ ra vào</Text>
+                            <TouchableOpacity
+
+                            >
+                                <Text style={styles.textRule}>Cam kết sử dụng dịch vụ</Text>
+                            </TouchableOpacity>
                             <View style={styles.wrapCommit}>
                                 <CheckBox
                                     title={null}
@@ -118,18 +123,20 @@ export default function BBQ() {
                             <View style={styles.wrapBtn}>
 
                                 <TouchableOpacity onPress={() => addService()} style={[styles.btnConfirm, {
-                                    backgroundColor: '#006633',
+                                    backgroundColor: 'transparent',
                                     height: 50, display: 'flex',
                                     justifyContent: 'center',
-                                    alignItems: 'center'
+                                    alignItems: 'center',
+                                    borderWidth: 2,
+                                    borderColor: 'orange'
                                 }]}>
-                                    <Text style={{ color: '#fff' }}>ĐĂNG KÝ</Text>
+                                    <Text style={{ color: 'orange' }}>ĐĂNG KÝ</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
                     </View>
                     <View style={{
-                        backgroundColor: '#000', opacity: .5,
+                        backgroundColor: '#000', opacity: .7,
                         position: "absolute",
                         zIndex: 4,
                         width: '100%',
@@ -169,6 +176,7 @@ function TimeFrom({ timeFrom, handleTimeFrom }) {
                 placeholder={items[0]?.label}
                 style={{ height: 30 }}
                 containerStyle={{ width: 150 }}
+
             />
 
         </View>
@@ -184,7 +192,7 @@ function SelectDate({ getSelectedDayEvents, dateObj }) {
                     getSelectedDayEvents(day.dateString)
                 }}
                 markedDates={dateObj.markedDates}
-
+                minDate={new Date()}
 
             />
         </View>

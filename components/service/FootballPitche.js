@@ -8,7 +8,7 @@ import { Icon } from 'react-native-elements/dist/icons/Icon';
 import RNPickerSelect from 'react-native-picker-select';
 import Toast from 'react-native-toast-message';
 import { useSelector } from 'react-redux';
-import HomeImage from '../../assets/images/home.png';
+import HomeImage from '../../assets/images/bgscreen.png';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 export default function FootballPitche() {
@@ -105,7 +105,7 @@ export default function FootballPitche() {
 
                             </View>
                             <SelectDate getSelectedDayEvents={getSelectedDayEvents} dateObj={dateObj} />
-                            <Text style={styles.textRule}>Quy định khi đăng kí thẻ ra vào</Text>
+                            <Text style={styles.textRule}>Cam kết sử dụng dịch vụ</Text>
                             <View style={styles.wrapCommit}>
                                 <CheckBox
                                     title={null}
@@ -117,18 +117,20 @@ export default function FootballPitche() {
                             </View>
                             <View style={styles.wrapBtn}>
                                 <TouchableOpacity onPress={() => addService()} style={[styles.btnConfirm, {
-                                    backgroundColor: '#006633',
+                                    backgroundColor: 'transparent',
                                     height: 50, display: 'flex',
                                     justifyContent: 'center',
-                                    alignItems: 'center'
+                                    alignItems: 'center',
+                                    borderColor: 'orange',
+                                    borderWidth: 2
                                 }]}>
-                                    <Text style={{ color: '#fff' }}>ĐĂNG KÝ</Text>
+                                    <Text style={{ color: 'orange' }}>ĐĂNG KÝ</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
                     </View>
                     <View style={{
-                        backgroundColor: '#000', opacity: .5,
+                        backgroundColor: '#000', opacity: .7,
                         position: "absolute",
                         zIndex: 4,
                         width: '100%',
@@ -182,6 +184,7 @@ function SelectDate({ getSelectedDayEvents, dateObj }) {
                     getSelectedDayEvents(day.dateString)
                 }}
                 markedDates={dateObj.markedDates}
+                minDate={new Date()}
 
 
             />

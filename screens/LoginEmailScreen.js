@@ -51,7 +51,7 @@ export default function LoginEmailScreen() {
                         <Controller
                             control={control}
                             render={({ field: { onChange, onBlur, value } }) => (
-                                <View style={{ width: '90%' }}>
+                                <View style={{ width: '80%' }}>
                                     <TextInput
                                         onBlur={onBlur}
                                         onChangeText={value => onChange(value)}
@@ -88,12 +88,13 @@ const styles = StyleSheet.create({
         flex: 1
     },
     container: {
-        width: 350,
+        width: '100%',
         marginLeft: 'auto',
         marginRight: 'auto',
         alignItems: 'center',
-        // position: "absolute",
-        zIndex: 5
+        position: "absolute",
+        zIndex: 5,
+        justifyContent: 'center'
 
     },
     image: {
@@ -127,15 +128,17 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     btnLogin: {
-        width: '100%',
-        backgroundColor: '#006633',
+        width: '90%',
+        backgroundColor: 'transparent',
         padding: 10,
         borderRadius: 10,
         marginBottom: 20,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 50
+        marginTop: 50,
+        borderColor: 'orange',
+        borderWidth: 2
 
     },
     textLogin: {
@@ -150,11 +153,11 @@ const styles = StyleSheet.create({
     },
     shareNowText: {
         fontSize: 16,
-        color: '#fff'
+        color: 'orange'
     },
     overlay: {
         backgroundColor: '#000',
-        opacity: .5,
+        opacity: .7,
         position: "absolute",
         zIndex: 4,
         width: '100%',

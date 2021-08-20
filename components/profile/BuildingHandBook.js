@@ -11,6 +11,7 @@ export default function BuildingHandBook() {
     useEffect(() => {
         search()
     }, [])
+    console.log(accountIdRedux)
     let search = async () => {
         let path = `/tenant/detail-building/${accountIdRedux}`;
         let resp = await API.authorizedJSONGET(path, token);

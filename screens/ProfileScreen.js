@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View, Platform } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { useSelector } from 'react-redux';
-import homeImage from '../assets/images/home.png';
+import homeImage from '../assets/images/banner.jpg';
 import API, { BASE_DOWNLOAD_URL } from '../components/lib/API';
 import BuildingHandBook from '../components/profile/BuildingHandBook';
 import HandleRequest from '../components/profile/HandleRequets';
@@ -13,13 +13,14 @@ import * as ImagePicker from 'expo-image-picker';
 import Toast from 'react-native-toast-message';
 import LoadingProgressBar from '../components/LoadingProgressBar';
 import Vehicle from './Vehicle';
+import { FontAwesome5 } from '@expo/vector-icons';
 const Tab = createMaterialTopTabNavigator();
 
 export default function ProfileScreen() {
     let navigation = useNavigation();
     const token = useSelector(state => state.user.token);
     const [user, setUser] = useState();
-   
+
     const isFocused = useIsFocused();
     useEffect(() => {
         search()
@@ -32,7 +33,7 @@ export default function ProfileScreen() {
         let resp = await API.authorizedJSONGET(path, token);
         if (resp.ok) {
             let response = await resp.json();
-            
+
             setUser(response)
         }
     }
@@ -40,8 +41,8 @@ export default function ProfileScreen() {
     return (
         <View style={{ flex: 1 }}>
             <View style={[styles.container]}>
-                <View style={{ height: 180, backgroundColor: '#000', width: '100%' }}>
-                    <Image source={homeImage} resizeMode="cover" style={{ height: 120, opacity: 0.6 }} />
+                <View style={{ height: 180, backgroundColor: 'transparent', width: '100%' }}>
+                    <Image source={homeImage} resizeMode="cover" style={{ height: '100%', opacity: 0.6 }} />
                 </View>
                 <View style={{ position: 'absolute', zIndex: 1, bottom: 10, left: 10, alignItems: 'center', height: 80, width: 80 }} >
                     <Image source={{ uri: user?.image ? `${BASE_DOWNLOAD_URL}${user?.image}` : `https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cuc-dep-cho-dien-thoai-5.jpg` }} style={styles.logo} />
@@ -69,13 +70,13 @@ function TabHeader() {
             scrollEnabled: true,
         }}>
             <Tab.Screen name="BuildingHandBook" component={BuildingHandBook} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Sổ tay</Text>
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><FontAwesome5 name="book" size={14} color={color} /> Sổ tay</Text>
             }} />
             <Tab.Screen name="Vehicle" component={Vehicle} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Phương tiện</Text>
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><FontAwesome5 name="truck" size={14} color={color} /> Phương tiện</Text>
             }} />
             <Tab.Screen name="ServiceHistory" component={ServiceHistory} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Dịch vụ</Text>
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><FontAwesome5 name="money-check" size={14} color={color} /> Lịch sử</Text>
             }} />
             {/* <Tab.Screen name="HandleRequest" component={HandleRequest} options={{
                 tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Yêu cầu</Text>

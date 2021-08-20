@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
 import ArticleTracking from '../components/ArticleTracking';
-import homeImage from '../assets/images/home.png'
+import homeImage from '../assets/images/bgscreen.png'
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import { useNavigation } from '@react-navigation/native';
 import API from '../components/lib/API';
@@ -53,7 +53,6 @@ export default function DetailProcess(props) {
                     activeStepIconColor={"#fff"}
                     disabledStepIconColor={"#333"}
                     activeStep={data?.statusId}
-
                 >
                     <ProgressStep label="Đã nhận"
                         nextBtnDisabled={true}
@@ -68,7 +67,7 @@ export default function DetailProcess(props) {
                         nextBtnText=""
                         previousBtnText=""
                         previousBtnDisabled={true}
-                    > 
+                    >
                         <View style={{ alignItems: 'center' }}>
                             <Text>Kiểm tra</Text>
                         </View>
@@ -125,7 +124,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         backgroundColor: 'black',
-        opacity: 0.6,
+        opacity: 0.7,
     },
     textBanner: {
         position: 'absolute',

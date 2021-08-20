@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button, ImageBackground, TouchableOpacity } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import RNPickerSelect from 'react-native-picker-select';
-import HomeImage from '../../assets/images/home.png';
+import HomeImage from '../../assets/images/bgscreen.png';
 import moment from 'moment';
 import { TextInput } from 'react-native';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
@@ -104,7 +104,7 @@ export default function Covid() {
 
                             </View>
                             <SelectDate getSelectedDayEvents={getSelectedDayEvents} dateObj={dateObj} />
-                            <Text style={styles.textRule}>Quy định khi đăng kí thẻ ra vào</Text>
+                            <Text style={styles.textRule}>Cam kết sử dụng dịch vụ</Text>
                             <View style={styles.wrapCommit}>
                                 <CheckBox
                                     title={null}
@@ -116,19 +116,21 @@ export default function Covid() {
                             </View>
                             <View style={styles.wrapBtn}>
                                 <TouchableOpacity onPress={() => addService()} style={[styles.btnConfirm, {
-                                    backgroundColor: '#006633',
+                                    backgroundColor: 'transparent',
                                     height: 50, display: 'flex',
                                     justifyContent: 'center',
-                                    alignItems: 'center'
+                                    alignItems: 'center',
+                                    borderWidth: 2,
+                                    borderColor: 'orange'
                                 }]}>
-                                    <Text style={{ color: '#fff' }}>ĐĂNG KÝ</Text>
+                                    <Text style={{ color: 'orange' }}>ĐĂNG KÝ</Text>
                                 </TouchableOpacity>
                             </View>
 
                         </View>
                     </View>
                     <View style={{
-                        backgroundColor: '#000', opacity: .5,
+                        backgroundColor: '#000', opacity: .7,
                         position: "absolute",
                         zIndex: 4,
                         width: '100%',
@@ -182,6 +184,7 @@ function SelectDate({ getSelectedDayEvents, dateObj }) {
                     getSelectedDayEvents(day.dateString)
                 }}
                 markedDates={dateObj.markedDates}
+                minDate={new Date()}
 
 
             />

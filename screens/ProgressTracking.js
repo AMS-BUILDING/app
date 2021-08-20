@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ImageBackground, ScrollView, StyleSheet, View } from 'react-native';
 import ArticleTracking from '../components/ArticleTracking';
-import homeImage from '../assets/images/home.png'
+import homeImage from '../assets/images/bgscreen.png'
 import { useSelector } from 'react-redux';
 import API from '../components/lib/API';
 export default function ProgressTracking({ navigation }) {
@@ -16,12 +16,13 @@ export default function ProgressTracking({ navigation }) {
             let resp = await API.authorizedJSONGET(path, token);
             if (resp.ok) {
                 let response = await resp.json();
-                setData(response?.data)
+                setData(response)
             }
         } catch (error) {
 
         }
     }
+    console.log(data)
     return <View style={styles.wrapper}>
         <ImageBackground source={homeImage} style={styles.imageBanner} >
             <View style={styles.overlay}>
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         backgroundColor: 'black',
-        opacity: 0.6,
+        opacity: 0.7,
     },
     textBanner: {
         position: 'absolute',

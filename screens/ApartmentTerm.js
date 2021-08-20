@@ -6,7 +6,7 @@ import TermItem from '../components/TermItem';
 export default function ApartmentTerm({ navigation }) {
     return <View style={styles.wrapper}>
         <View style={styles.wrapContent}>
-            
+
             <ScrollView>
                 <TermItem />
                 <TermItem />
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     wrapContent: {
-        flex: 1
+        flex: 1,
+        paddingRight: 15
     },
 });
