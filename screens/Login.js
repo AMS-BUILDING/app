@@ -130,21 +130,26 @@ const styles = StyleSheet.create({
         flex: 1
     },
     wrapContent: {
-        flex: 1
+        flex: 1,
+
     },
     image: {
         resizeMode: "cover",
         justifyContent: "center",
         height: '100%',
-        position: 'relative'
+
     },
     container: {
-        width: 350,
+        width: '100%',
         marginLeft: 'auto',
         marginRight: 'auto',
         alignItems: 'center',
-        // position: "absolute",
-        zIndex: 5
+        position: "absolute",
+        zIndex: 5,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: 10
     },
     title: {
         color: 'white',
@@ -155,7 +160,8 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        display: 'flex',
+        justifyContent: 'center',
         alignItems: 'center',
         borderBottomColor: 'white',
         borderBottomWidth: 2,
@@ -178,14 +184,16 @@ const styles = StyleSheet.create({
     },
     btnLogin: {
         width: '100%',
-        backgroundColor: '#006633',
+        backgroundColor: 'transparent',
         padding: 10,
         borderRadius: 10,
         marginBottom: 20,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 10
+        borderColor: 'orange',
+        borderWidth: 2
+        // marginLeft:10
 
     },
     textLogin: {
@@ -193,11 +201,11 @@ const styles = StyleSheet.create({
     },
     shareNowText: {
         fontSize: 16,
-        color: '#fff',
+        color: 'orange',
     },
     overlay: {
         backgroundColor: '#000',
-        opacity: .5,
+        opacity: .7,
         position: "absolute",
         zIndex: 4,
         width: '100%',

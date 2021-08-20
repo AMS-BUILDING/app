@@ -20,31 +20,45 @@ export default function LoginResetPassword() {
 
 
     let login = async (data) => {
-        setLoading(true)
-        let path = "/reset-password";
-        let resp = await API.anonymousJSONPost(path, data);
-        console.log(data)
-        if (resp.ok) {
-            setLoading(false)
-            Toast.show({
-                type: 'success',
-                position: 'bottom',
-                bottomOffset: 20,
-                text1: 'Bạn đã cập nhập mật khẩu thành cônng',
-                text2: 'Nhấn vào đây để quay lại trang đăng nhập',
-                onPress: () => navigation.navigate("Login")
-            })
-
-        } else {
-            setLoading(false)
+        if (data?.password !== data?.ps) {
             Toast.show({
                 type: 'error',
                 position: 'bottom',
                 bottomOffset: 20,
                 text1: 'Error',
-                text2: 'Mã xác minh chưa đúng!.',
+                text2: 'Mật khẩu bạn nhập lại chưa đúng!.',
 
             })
+        } else {
+            setLoading(true)
+            let path = "/reset-password";
+            let resp = await API.anonymousJSONPost(path, {
+                token: data?.token,
+                password: data?.password
+            });
+            console.log(data)
+            if (resp.ok) {
+                setLoading(false)
+                Toast.show({
+                    type: 'success',
+                    position: 'bottom',
+                    bottomOffset: 20,
+                    text1: 'Bạn đã cập nhập mật khẩu thành cônng',
+                    text2: 'Nhấn vào đây để quay lại trang đăng nhập',
+                    onPress: () => navigation.navigate("Login")
+                })
+
+            } else {
+                setLoading(false)
+                Toast.show({
+                    type: 'error',
+                    position: 'bottom',
+                    bottomOffset: 20,
+                    text1: 'Error',
+                    text2: 'Mã xác minh chưa đúng!.',
+
+                })
+            }
         }
     }
 
@@ -59,7 +73,7 @@ export default function LoginResetPassword() {
                         <Controller
                             control={control}
                             render={({ field: { onChange, onBlur, value } }) => (
-                                <View style={{ width: '90%' }}>
+                                <View style={{ width: '80%' }}>
                                     <TextInput
                                         onBlur={onBlur}
                                         onChangeText={value => onChange(value)}
@@ -78,13 +92,12 @@ export default function LoginResetPassword() {
                         />
                     </View>
 
-                    <View style={styles.formGroup}>
+                    <View style={[styles.formGroup]}>
                         <FontAwesome name="lock" size={30} color="white" />
-
                         <Controller
                             control={control}
                             render={({ field: { onChange, onBlur, value } }) => (
-                                <View style={{ width: '90%' }}>
+                                <View style={{ width: '80%' }}>
                                     <TextInput
                                         onBlur={onBlur}
                                         onChangeText={value => onChange(value)}
@@ -101,6 +114,34 @@ export default function LoginResetPassword() {
                                 </View>
                             )}
                             name="password"
+                            rules={{ required: true }}
+                            defaultValue=""
+                        />
+                        {/* <Ionicons name="eye-off" size={30} color="#6B6B6B" style={styles.iconEyes} /> */}
+                    </View>
+                    <View style={styles.formGroup}>
+                        <FontAwesome name="lock" size={30} color="white" />
+
+                        <Controller
+                            control={control}
+                            render={({ field: { onChange, onBlur, value } }) => (
+                                <View style={{ width: '80%' }}>
+                                    <TextInput
+                                        onBlur={onBlur}
+                                        onChangeText={value => onChange(value)}
+                                        value={value}
+                                        placeholder={"Nhập lại mật khẩu"}
+                                        placeholderTextColor="white"
+                                        style={[styles.inputText]}
+                                        underlineColorAndroid="transparent"
+                                        keyboardType="default"
+                                        secureTextEntry={true}
+                                        autoCorrect={false}
+                                        color='white'
+                                    />
+                                </View>
+                            )}
+                            name="ps"
                             rules={{ required: true }}
                             defaultValue=""
                         />
@@ -127,12 +168,15 @@ const styles = StyleSheet.create({
     wrapContent: {
         flex: 1
     },
+    errorInput: {
+        borderColor: 'red'
+    },
     container: {
-        width: 350,
+        width: '100%',
         marginLeft: 'auto',
         marginRight: 'auto',
         alignItems: 'center',
-        // position:"absolute",
+        position: "absolute",
         zIndex: 5
     },
     image: {
@@ -153,7 +197,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         borderBottomColor: 'white',
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
         height: 50,
         marginTop: 10,
         marginBottom: 30
@@ -173,15 +217,17 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     btnLogin: {
-        width: '100%',
-        backgroundColor: '#006633',
+        width: '85%',
+        backgroundColor: 'transparent',
         padding: 10,
         borderRadius: 10,
         marginBottom: 20,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 50
+        marginTop: 50,
+        borderColor: 'orange',
+        borderWidth: 2
     },
     textLogin: {
 
@@ -195,11 +241,11 @@ const styles = StyleSheet.create({
     },
     shareNowText: {
         fontSize: 16,
-        color: '#fff'
+        color: 'orange'
     },
     overlay: {
         backgroundColor: '#000',
-        opacity: .5,
+        opacity: .7,
         position: "absolute",
         zIndex: 4,
         width: '100%',

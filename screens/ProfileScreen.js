@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View, Platform } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { useSelector } from 'react-redux';
-import homeImage from '../assets/images/home.png';
+import homeImage from '../assets/images/banner.jpg';
 import API, { BASE_DOWNLOAD_URL } from '../components/lib/API';
 import BuildingHandBook from '../components/profile/BuildingHandBook';
 import HandleRequest from '../components/profile/HandleRequets';

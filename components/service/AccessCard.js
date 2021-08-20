@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Button, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
-import HomeImage from '../../assets/images/home.png';
+import HomeImage from '../../assets/images/bgscreen.png';
 import { CheckBox } from 'react-native-elements'
 import { useSelector } from 'react-redux';
 import LoadingProgressBar from '../LoadingProgressBar';
@@ -29,26 +29,24 @@ export default function AccessCard() {
                 tabBarVisible: true
             });
     }, []);
-    console.log(token)
+
     let addService = async () => {
-  
+
 
         if (toggleCheckBox) {
             setLoading(true)
-            let path = '/landlord/resident_card/add'
-            let objReq = {
-                accountId: accountIdRedux,
-                amount: number
-            }
-            let resp = await API.authorizedJSONPost(path, objReq, token);
+            let path = `/landlord/resident_card/add?amount=${number}`
+
+
+            let resp = await API.authorizedJSONPost(path, null, token);
             if (resp.ok) {
                 setLoading(false);
-                
+
                 Toast.show({
-                    type: 'error',
+                    type: 'success',
                     position: 'bottom',
                     bottomOffset: 50,
-                    text1: 'Error',
+                    text1: 'OK',
                     text2: 'Đã đăng ký dịch vụ thành công!.'
                 })
             } else {
@@ -59,7 +57,7 @@ export default function AccessCard() {
                     position: 'bottom',
                     bottomOffset: 50,
                     text1: 'Error',
-                    text2:response?.message
+                    text2: response?.message
                 })
             }
         } else {
@@ -74,8 +72,10 @@ export default function AccessCard() {
 
     }
     return <View style={styles.wrapper}>
-        <View style={styles.wrapContent}>
-            <ImageBackground source={HomeImage} style={styles.image}>
+        <ImageBackground source={HomeImage} style={styles.image}>
+
+            <View style={[styles.wrapContent, { position: 'absolute', zIndex: 5, width: '100%', height: '100%' }]}>
+
                 <View style={styles.overlay}>
                     <View style={styles.main}>
                         <View style={styles.wrapCard}>
@@ -85,6 +85,7 @@ export default function AccessCard() {
                                 <NumericInput type='up-down' totalWidth={80}
                                     value={number}
                                     onChange={value => setNumber(value)}
+                                    minValue={1}
 
                                 />
                             </View>
@@ -97,7 +98,7 @@ export default function AccessCard() {
                                 <Text style={styles.textCard}>{number * price}đ</Text>
                             </View>
                         </View>
-                        <Text style={styles.textRule}>Quy định khi đăng kí thẻ ra vào</Text>
+                        <Text style={styles.textRule}>Cam kết sử dụng dịch vụ</Text>
                         <View style={styles.wrapCommit}>
                             <CheckBox
                                 title={null}
@@ -115,10 +116,18 @@ export default function AccessCard() {
                         </View>
                     </View>
                 </View>
-                
-            </ImageBackground>
 
-        </View>
+
+
+            </View>
+            <View style={{
+                backgroundColor: '#000', opacity: .7,
+                position: "absolute",
+                zIndex: 4,
+                width: '100%',
+                height: '100%'
+            }} />
+        </ImageBackground>
     </View>
 }
 
@@ -142,8 +151,8 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         alignItems: 'center'
     },
-    shareNow: { alignItems: 'flex-end', backgroundColor: '#82c714', padding: 10, borderRadius: 10, alignItems: 'center' },
-    shareNowText: { color: '#fff', fontSize: 14, fontWeight: "bold", textTransform: 'uppercase' },
+    shareNow: { alignItems: 'flex-end', backgroundColor: 'transparent', padding: 10, borderRadius: 10, alignItems: 'center', borderColor: 'orange', borderWidth: 2 },
+    shareNowText: { color: 'orange', fontSize: 14, fontWeight: "bold", textTransform: 'uppercase' },
     overlay: {
         position: 'absolute',
         bottom: 0,

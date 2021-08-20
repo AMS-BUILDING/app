@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     },
     wrapContent: {
         flex: 1,
-        backgroundColor: '#D3D3D3',
+        backgroundColor: '#fff',
     },
     imageBanner: {
         height: '100%'

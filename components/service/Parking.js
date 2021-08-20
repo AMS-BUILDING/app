@@ -3,12 +3,13 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { Button, ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, ImageBackground } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
-import HomeImage from '../../assets/images/home.png';
+import HomeImage from '../../assets/images/bgscreen.png';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import ParkCar from './park/ParkCar';
 import ParkMotobike from './park/ParkMotobike';
 import ParkElectric from './park/ParkElectric';
 import Feather from 'react-native-vector-icons/Feather';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -31,7 +32,7 @@ export default function Parking() {
                 <TabHeader />
 
             </View>
-            
+
         </ImageBackground>
     </View >
 }
@@ -43,13 +44,13 @@ function TabHeader() {
             scrollEnabled: false,
         }}>
             <Tab.Screen name="ParkCar" component={ParkCar} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Ô tô</Text>
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><FontAwesome5 name="car" size={14} color={color} /> Ô tô</Text>
             }} />
             <Tab.Screen name="ParkMotobike" component={ParkMotobike} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Xe máy</Text>
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><FontAwesome5 name="motorcycle" size={14} color={color} /> Xe máy</Text>
             }} />
             <Tab.Screen name="ParkElectric" component={ParkElectric} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Xe điện</Text>
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><FontAwesome5 name="biking" size={14} color={color} /> Xe điện</Text>
             }} />
         </Tab.Navigator>
     </View>
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
         left: 0,
         width: '100%',
         height: '100%',
-      
+
 
     },
     textBanner: {

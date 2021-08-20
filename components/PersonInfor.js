@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 20,
         borderBottomWidth: 1,
-        borderBottomColor: 'gray'
+        borderBottomColor: 'black'
     },
     title: {
         color: 'black',
