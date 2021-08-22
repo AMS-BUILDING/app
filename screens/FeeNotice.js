@@ -32,10 +32,10 @@ export default function FeeNotice({ navigation }) {
     useEffect(() => {
         search()
     }, [isFocus, monthFrom, yearFrom])
-  
+
     const search = async () => {
         let path = `/tenant/notification-fee-apartment?billingMonth=${monthFrom}/${yearFrom}`;
-       
+
         let resp = await API.authorizedJSONGET(path, token);
         if (resp.ok) {
             let response = await resp.json();
@@ -99,12 +99,12 @@ export default function FeeNotice({ navigation }) {
                             {data?.status !== "Đã thanh toán"
                                 && <View style={styles.wrapBtn}>
                                     <View style={styles.btnConfirm}>
-                                        <Button title="Thanh toán" color="#006633" onPress={() => navigation.navigate('Payment', {
+                                        <Text style={{ color: 'orange', textAlign: 'center' }} onPress={() => navigation.navigate('Payment', {
                                             data: {
                                                 day: data?.billingMonth,
                                                 total: currencyFormat(data?.total?.toString())
                                             }
-                                        })} />
+                                        })} >THANH TOÁN</Text>
                                     </View>
                                 </View>
                             }
@@ -115,7 +115,7 @@ export default function FeeNotice({ navigation }) {
 
             </View>
             <View style={{
-                backgroundColor: '#000', opacity: .5,
+                backgroundColor: '#000', opacity: .7,
                 position: "absolute",
                 zIndex: 4,
                 width: '100%',
@@ -281,14 +281,21 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     wrapBtn: {
-        paddingTop: 10,
         marginTop: 15,
-        borderRadius: 10
+
     },
     date: {
         fontSize: 14,
         marginTop: 10,
         color: 'white'
+    },
+    btnConfirm: {
+        borderRadius: 10,
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        borderColor: 'orange',
+        paddingBottom: 15,
+        paddingTop: 15
     }
 
 });
