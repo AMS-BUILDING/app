@@ -1,61 +1,89 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, TextInput, View, Image } from 'react-native';
-import NotifiImage from '../../assets/images/notifi.png'
-import { AntDesign } from '@expo/vector-icons';
-
-export default function NotiItem() {
-    return <View style={styles.wrapper}>
-        <View style={styles.container}>
-            <View style={styles.wrapTime}>
-                <View style={styles.wrapDay}>
-                    <Text style={styles.day}>30/5/2021</Text>
-                </View>
-
-                <View style={styles.time}>
-                    <AntDesign name="check" size={18} color="black" />
-                    <Text>&nbsp; 19:08</Text>
-                </View>
-            </View>
-
-            <View style={styles.image}>
-                <Image source={NotifiImage} />
-                <Text style={styles.text}>Vivamus efficitur vestibulum elit id semper. Donec eleifend metus justo, ac luctus arcu finibus non. Phasellus dignissim diam ac ipsum egestas malesuada</Text>
-            </View>
-
+import { useIsFocused } from '@react-navigation/core';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import API from '../lib/API';
+import homeImage from '../../assets/images/home.png'
+import { TouchableOpacity } from 'react-native';
+export default function NotiItem({ data, search }) {
+    const token = useSelector(state => state.user?.token);
+    let upRead = async () => {
+        if (!data?.isRead) {
+            let path = `/landlord/update-status/${data?.id}`;
+            let resp = await API.authorizedJSONPost(path, null, token);
+            if (resp.ok) {
+                search()
+            }
+        }
+    }
+    return <TouchableOpacity style={styles.wrapper}
+        onPress={upRead} activeOpacity={.8}
+    >
+        {/* <Text style={[styles.title,{color: data?.isRead ? "#fff" :"red"}]}>{data?.title}</Text> */}
+        <Text style={[styles.title]}>{data?.title}</Text>
+        <Text style={styles.desc}>{data?.description}</Text>
+        <View style={styles.note}>
+            <Text style={styles.time}>{data?.time}</Text>
+            <Text style={styles.time}>{data?.date}</Text>
+            {/* <View style={styles.more}>
+                <TouchableOpacity onPress={() => navigation.navigate('DetailProcess', { id: data?.id })}>
+                    <Text style={styles.textRead}>Xem tiến trình</Text>
+                </TouchableOpacity>
+                <TouchableOpacity >
+                    <Text style={styles.textCancle}>Hủy</Text>
+                </TouchableOpacity>
+            </View> */}
         </View>
-    </View>
+    </TouchableOpacity>
 }
+
 
 const styles = StyleSheet.create({
     wrapper: {
-        padding: 15
+        justifyContent: 'center',
+        padding: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: '#f0f0f0'
     },
-    wrapTime: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 20
+    image: {
+        resizeMode: "cover",
+        position: 'relative',
+        height: '100%'
     },
-    time: {
-        flexDirection: 'row',
+    title: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 18,
+        marginBottom: 10
+    },
+    desc: {
+        fontSize: 14,
+        marginBottom: 10,
+        color: '#fff'
+    },
+    note: {
         justifyContent: 'space-between',
+        flexDirection: 'row',
         alignItems: 'center'
     },
-    wrapDay: {
-        padding: 10,
-        backgroundColor: 'white',
-        borderRadius: 10
+    time: {
+        color: '#f0f0f0',
+        fontSize: 13,
+        opacity: .7
     },
-    day: {
-        color: '#9966FF',
-        fontWeight: 'bold',
+    more: {
+        flexDirection: 'row',
+        alignItems: 'center'
     },
-    text: {
-        fontSize: 14,
-        marginTop: 20,
-        lineHeight: 20,
-        color: 'black',
-        backgroundColor: 'white'
+    textRead: {
+
+        color: '#fff',
+        fontSize: 13,
+        marginRight: 10
+    },
+    textCancle: {
+
+        color: '#fff',
+        fontSize: 13,
     }
-})
+});

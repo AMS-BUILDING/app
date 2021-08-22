@@ -27,10 +27,10 @@ function TabHeader() {
             scrollEnabled: false,
         }}>
             <Tab.Screen name="Management" component={Management} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Ban quản lý</Text>
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="users" size={14} color={color} /> Ban quản lý</Text>
             }} />
             <Tab.Screen name="ApartmentTerm" component={ApartmentTerm} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Điều khoản chung cư</Text>
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="bookmark" size={14} color={color} /> Điều khoản chung cư</Text>
             }} />
 
         </Tab.Navigator>

@@ -41,6 +41,7 @@ export default function MenuProfile({ handleLogin }) {
         }
     }
     let dispatch = useDispatch()
+
     const updateProfile = async (filepath) => {
         console.log(filepath)
         try {
@@ -54,7 +55,7 @@ export default function MenuProfile({ handleLogin }) {
             data.append("currentAddress", user?.currentAddress);
             data.append("homeTown", user?.homeTown);
             data.append("dob", user?.dob);
-            data.append("gender", user?.gender);
+            // data.append("gender", user?.gender);
             let resp = await API.authorizedFilePost(path, data, token);
             if (resp.ok) {
                 search()
@@ -105,8 +106,10 @@ export default function MenuProfile({ handleLogin }) {
             });
     }, []);
     let logout = () => {
+        handleLogin()
         dispatch(clearState())
     }
+
     return (
         <View style={{ flex: 1 }}>
             <ScrollView style={{ flex: 1 }}>
@@ -128,8 +131,11 @@ export default function MenuProfile({ handleLogin }) {
                         <TouchableOpacity style={[styles.button, { backgroundColor: '#fff' }]} onPress={() => navigation.navigate("SettingProfile")}>
                             <Text style={[styles.loginButton, { color: '#333' }]}><FontAwesome5 name={"settings"} size={16} color={'#333'} /> Cài đặt</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.button, { backgroundColor: '#fff' }]} onPress={() => navigation.navigate("ChangeProfile")}>
+                        <TouchableOpacity style={[styles.button, { backgroundColor: '#fff' }]} onPress={() => navigation.navigate("ChangeProfile", { user: user })}>
                             <Text style={[styles.loginButton, { color: '#333' }]}><FontAwesome5 name={"user"} size={16} color={'#333'} /> Thông tin cá nhân</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.button, { backgroundColor: '#fff' }]} onPress={() => navigation.navigate("FamilyScreen", { user: user })}>
+                            <Text style={[styles.loginButton, { color: '#333' }]}><FontAwesome5 name={"users"} size={16} color={'#333'} /> Gia đình</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={[styles.button, { backgroundColor: '#fff' }]} onPress={() => navigation.navigate("StayAbsent")}>
                             <Text style={[styles.loginButton, { color: '#333' }]}><FontAwesome5 name={"user"} size={16} color={'#333'} /> Tạm trú - Tạm vắng</Text>

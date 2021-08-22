@@ -10,7 +10,9 @@ import { useSelector } from 'react-redux';
 import HomeImage from '../../assets/images/home.png';
 import API from '../lib/API';
 import LoadingProgressBar from '../LoadingProgressBar';
-export default function SearchRepair({ timeFrom, timeTo, handleTimeFrom, handleTimeTo }) {
+export default function SearchRepair({ timeFrom, timeTo, handleTimeFrom, handleTimeTo, time, handleTime,
+    date, onChange, show, handleShow
+}) {
 
 
     const token = useSelector(state => state.user?.token)
@@ -19,10 +21,10 @@ export default function SearchRepair({ timeFrom, timeTo, handleTimeFrom, handleT
     let [problems, setProblems] = useState([]);
     useEffect(() => {
         searchEquipemt()
-    },[])
+    }, [])
     useEffect(() => {
         searchProblems()
-    },[timeFrom])
+    }, [timeFrom])
     let searchEquipemt = async () => {
         try {
             let path = '/landlord/detail_sub_service/search?subServiceId=9';
@@ -52,10 +54,19 @@ export default function SearchRepair({ timeFrom, timeTo, handleTimeFrom, handleT
 
 
     return (
-        <>
-            <TimeFrom timeFrom={timeFrom} handleTimeFrom={handleTimeFrom} equipments={equipments} />
-            <Count timeTo={timeTo} handleTimeTo={handleTimeTo} problems={problems} />
-        </>
+        <View>
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                <TimeFrom timeFrom={timeFrom} handleTimeFrom={handleTimeFrom} equipments={equipments} />
+                <Count timeTo={timeTo} handleTimeTo={handleTimeTo} problems={problems} />
+            </View>
+            <View style={{ marginTop: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Time time={time} handleTime={handleTime} />
+                <SelectDate
+                    date={date} onChange={onChange}
+                    show={show} handleShow={handleShow}
+                />
+            </View>
+        </View>
     )
 }
 
@@ -91,6 +102,10 @@ function TimeFrom({ timeFrom, handleTimeFrom, equipments }) {
                 placeholder={items[0]?.label}
                 style={{ height: 30 }}
                 containerStyle={{ width: 160 }}
+                dropDownContainerStyle={{
+                    height: 200,
+                    zIndex: 7000
+                }}
             />
         </View>
     )
@@ -132,11 +147,97 @@ function Count({ timeTo, handleTimeTo, problems }) {
                 placeholder={items[0]?.label}
                 style={{ height: 30 }}
                 containerStyle={{ width: 160 }}
+
+
             />
         </View>
     )
 }
 
+
+function Time({ time, handleTime }) {
+    const [open, setOpen] = useState(false);
+    const [items, setItems] = useState([
+        { label: '1h', value: "01:00" },
+        { label: '2h', value: "02:00" },
+        { label: '3h', value: "03:00" },
+        { label: '4h', value: "04:00" },
+        { label: '5h', value: "05:00" },
+        { label: '6h', value: "06:00" },
+        { label: '7h', value: "07:00" },
+        { label: '8h', value: "08:00" },
+        { label: '9h', value: "09:00" },
+        { label: '10h', value: "10:00" },
+        { label: '11h', value: "11:00" },
+        { label: '12h', value: "12:00" },
+        { label: '13h', value: "13:00" },
+        { label: '14h', value: "14:00" },
+        { label: '15h', value: "15:00" },
+        { label: '16h', value: "16:00" },
+        { label: '17h', value: "17:00" },
+        { label: '18h', value: "18:00" },
+        { label: '19h', value: "19:00" },
+        { label: '20h', value: "20:00" },
+        { label: '21h', value: "21:00" },
+        { label: '22h', value: "22:00" },
+        { label: '23h', value: "23:00" },
+        { label: '24h', value: "24:00" }
+
+    ]);
+
+
+
+    return (
+        <View style={styles.widthContent}>
+            <Text style={styles.txtTitle}>Giờ</Text>
+            <DropDownPicker
+                open={open}
+                value={time}
+                items={items}
+                setOpen={setOpen}
+                setValue={handleTime}
+                setItems={setItems}
+                placeholder={items[0]?.label}
+                style={{ height: 30 }}
+                containerStyle={{ width: 160 }}
+            />
+        </View>
+    )
+}
+
+function SelectDate({ date, onChange, show, handleShow }) {
+
+
+
+    return (
+        <View>
+            {show && <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode={"date"}
+                is24Hour={true}
+                display="spinner"
+                onChange={onChange}
+                minimumDate={new Date()}
+            />}
+            <TouchableOpacity onPress={() => handleShow()} style={[styles.selectDate]} >
+
+                <View style={styles.widthContent}>
+                    <Text style={styles.txtTitle}>Ngày</Text>
+                    <View style={styles.inputDate}>
+                        <Text style={{ color: '#333' }}>{moment(date).format("DD/MM/YYYY")} </Text>
+                        <View>
+                            <Text><Feather name="calendar" size={20} color={"#333"} /></Text>
+                        </View>
+                    </View>
+                </View>
+
+
+            </TouchableOpacity>
+        </View>
+
+    )
+}
 
 
 
@@ -182,30 +283,27 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     selectDate: {
-        paddingTop: 30,
-        paddingLeft: 15,
+
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 15,
         justifyContent: 'space-between',
-        marginRight: 15
     },
     inputDate: {
 
-        marginRight: 15,
-        height: 40,
+        height: 30,
         backgroundColor: '#fff',
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: '#333',
         display: 'flex',
-        width: 200,
-        paddingLeft: 15,
+        width: 160,
+
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingRight: 30
+
+        borderRadius: 10
     },
     wrapperText: {
         flex: 1,
