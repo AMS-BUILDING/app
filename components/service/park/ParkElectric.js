@@ -95,6 +95,7 @@ export default function ParkElectric() {
                                                 placeholderTextColor="#888"
                                                 style={[styles.textInputComment, errors.vehicleBranch ? styles.errorInput : undefined]}
                                                 underlineColorAndroid="transparent"
+                                                color="white"
                                             />
                                         </View>
                                     )}
@@ -117,6 +118,7 @@ export default function ParkElectric() {
                                                 placeholderTextColor="#888"
                                                 style={[styles.textInputComment, errors.vehicleColor ? styles.errorInput : undefined]}
                                                 underlineColorAndroid="transparent"
+                                                color="white"
                                             />
                                         </View>
                                     )}
@@ -139,6 +141,7 @@ export default function ParkElectric() {
                                                 placeholderTextColor="#888"
                                                 style={[styles.textInputComment, errors.licensePlate ? styles.errorInput : undefined]}
                                                 underlineColorAndroid="transparent"
+                                                color="white"
                                             />
                                         </View>
                                     )}

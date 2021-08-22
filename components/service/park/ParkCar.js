@@ -28,7 +28,7 @@ export default function ParkCar() {
     const accountIdRedux = useSelector(state => state.user?.accountId)
     let navigation = useNavigation()
     let addPark = async (form) => {
-     
+
         try {
             if (toggleCheckBox) {
                 setLoading(true);
@@ -118,6 +118,7 @@ export default function ParkCar() {
                                                 placeholderTextColor="#888"
                                                 style={[styles.textInputComment, errors.vehicleBranch ? styles.errorInput : undefined]}
                                                 underlineColorAndroid="transparent"
+                                                color="white"
                                             />
                                         </View>
                                     )}
@@ -140,6 +141,7 @@ export default function ParkCar() {
                                                 placeholderTextColor="#888"
                                                 style={[styles.textInputComment, errors.vehicleColor ? styles.errorInput : undefined]}
                                                 underlineColorAndroid="transparent"
+                                                color="white"
                                             />
                                         </View>
                                     )}
@@ -163,6 +165,7 @@ export default function ParkCar() {
                                                 placeholderTextColor="#888"
                                                 style={[styles.textInputComment, errors.licensePlate ? styles.errorInput : undefined]}
                                                 underlineColorAndroid="transparent"
+                                                color="white"
                                             />
                                         </View>
                                     )}

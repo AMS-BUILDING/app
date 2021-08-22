@@ -76,7 +76,7 @@ function TabHeader() {
                 tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><FontAwesome5 name="truck" size={14} color={color} /> Phương tiện</Text>
             }} />
             <Tab.Screen name="ServiceHistory" component={ServiceHistory} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><FontAwesome5 name="money-check" size={14} color={color} />Lịch sử</Text>
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><FontAwesome5 name="money-check" size={14} color={color} /> Lịch sử</Text>
             }} />
             {/* <Tab.Screen name="HandleRequest" component={HandleRequest} options={{
                 tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Yêu cầu</Text>
