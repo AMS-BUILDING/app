@@ -66,7 +66,7 @@ export default function Login({ handleLogin }) {
                                         onBlur={onBlur}
                                         onChangeText={value => onChange(value)}
                                         value={value}
-                                        placeholder={"Tên đăng nhập/SĐT"}
+                                        placeholder={"Email"}
                                         placeholderTextColor="white"
                                         style={[styles.inputText, errors.username ? styles.errorsInput : undefined]}
                                         underlineColorAndroid="transparent"
