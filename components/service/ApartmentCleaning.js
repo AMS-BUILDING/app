@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button, ImageBackground, TouchableOpacity } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import RNPickerSelect from 'react-native-picker-select';
-import HomeImage from '../../assets/images/home.png';
+import HomeImage from '../../assets/images/bgscreen.png';
 import moment from 'moment';
 import { TextInput } from 'react-native';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
@@ -49,34 +49,51 @@ export default function ApartmentCleaning() {
     const handleTimeFrom = (hour) => {
         setTimeFrom(hour)
     }
-    const [timeTo, setTimeTo] = useState("1")
+    const [timeTo, setTimeTo] = useState("16")
     const handleTimeTo = (hour) => {
         setTimeTo(hour)
     }
     let addService = async () => {
         try {
             if (toggleCheckBox) {
-
-                let objReq = {
+                let path = '/landlord/service_request/add';
+                let resp = await API.authorizedJSONPost(path, {
                     reasonDetailSubServiceId: timeTo,
                     accountId: accountIdRedux,
                     startDate: `${moment(dateObj?.selectedDate, "DD-MM-YYYY").format("YYYY/MM/DD")} ${timeFrom.slice(0, 5)}`,
                     endDate: `${moment(dateObj?.selectedDate, "DD-MM-YYYY").format("YYYY/MM/DD")} ${timeFrom.slice(6, 11)}`,
-                    name: "Vệ sinh căn hộ",
-                    description: ""
-
-
+                    endDate: ""
+                }, token);
+                if (resp.ok) {
+                    let response = await resp.json();
+                    Toast.show({
+                        type: 'success',
+                        position: 'bottom',
+                        bottomOffset: 50,
+                        text1: 'Bạn đã gửi yêu cầu thành công',
+                        text2: "Ấn vào đây để theo dõi tiến trình nhé!",
+                        onPress: () => {
+                            setToggleCheckBox(false)
+                            setDateObj({
+                                selectedDate: moment(new Date(Date.now())).format("DD-MM-YYYY"),
+                                markedDates: {}
+                            })
+                            setTimeFrom("06:00-08:00")
+                            setTimeTo("16")
+                            navigation.navigate("DetailProcess", { id: response?.serviceId, typeRequest: response?.typeService })
+                        }
+                    })
+                } else {
+                    setLoading(false)
+                    let response = await resp.json();
+                    Toast.show({
+                        type: 'error',
+                        position: 'bottom',
+                        bottomOffset: 50,
+                        text1: 'Error',
+                        text2: response?.message
+                    })
                 }
-                navigation.navigate('PriceRequest', {
-                    data: objReq
-                })
-                setToggleCheckBox(false)
-                setDateObj({
-                    selectedDate: moment(new Date(Date.now())).format("DD-MM-YYYY"),
-                    markedDates: {}
-                })
-                setTimeFrom("06:00-08:00")
-                setTimeTo("16")
             } else {
                 Toast.show({
                     type: 'error',
@@ -114,7 +131,7 @@ export default function ApartmentCleaning() {
                                     <Count timeTo={timeTo} handleTimeTo={handleTimeTo} />
                                 </View>
                                 <SelectDate getSelectedDayEvents={getSelectedDayEvents} dateObj={dateObj} />
-                                <Text style={styles.textRule}>Quy định khi đăng kí thẻ ra vào</Text>
+                                <Text style={styles.textRule}>Cam kết sử dụng dịch vụ</Text>
                                 <View style={styles.wrapCommit}>
                                     <CheckBox
                                         title={null}
@@ -126,17 +143,19 @@ export default function ApartmentCleaning() {
                                 </View>
                                 <View style={styles.wrapBtn}>
                                     <TouchableOpacity onPress={() => addService()} style={[styles.btnConfirm, {
-                                        backgroundColor: '#006633',
+                                        backgroundColor: 'transparent',
                                         height: 50, display: 'flex',
                                         justifyContent: 'center',
-                                        alignItems: 'center'
+                                        alignItems: 'center',
+                                        borderColor: 'orange',
+                                        borderWidth: 2
                                     }]}>
-                                        <Text style={{ color: '#fff' }}>ĐĂNG KÝ</Text>
+                                        <Text style={{ color: 'orange' }}>ĐĂNG KÝ</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
                             <View style={{
-                                backgroundColor: '#000', opacity: .5,
+                                backgroundColor: '#000', opacity: .7,
                                 position: "absolute",
                                 zIndex: 4,
                                 width: '100%',
@@ -162,7 +181,7 @@ function Count({ timeTo, handleTimeTo }) {
 
 
     return (
-        <View style={[styles.widthContent,{alignItems:'flex-start'}]}>
+        <View style={[styles.widthContent, { alignItems: 'flex-start' }]}>
             <Text style={styles.txtTitle}>Loại căn hộ</Text>
             <DropDownPicker
                 open={open}
@@ -223,7 +242,7 @@ function SelectDate({ getSelectedDayEvents, dateObj }) {
                     getSelectedDayEvents(day.dateString)
                 }}
                 markedDates={dateObj.markedDates}
-
+                minDate={new Date()}
 
             />
         </View>
@@ -317,7 +336,7 @@ const styles = StyleSheet.create({
     },
     wrapBtn: {
         padding: 10,
-       
+
         borderRadius: 10
     },
     textRule: {

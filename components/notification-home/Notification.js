@@ -3,10 +3,12 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ImageBackground } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import homeImage from '../../assets/images/home.png'
+import homeImage from '../../assets/images/bgscreen.png'
 import NotiItem from './NotiItem';
 const Tab = createMaterialTopTabNavigator();
-
+import NotificationAll from './NotificationAll';
+import NotificationPrivate from './NotificationPrivate';
+import NotificationGeneral from './NotificationGeneral'
 export default function Notification() {
     let navigation = useNavigation();
     useEffect(() => {
@@ -38,52 +40,38 @@ function TabHeader() {
             scrollEnabled: false,
         }}>
             <Tab.Screen name="NotificationAll" component={NotificationAll} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Tất cả</Text>
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="bell" size={14} color={color} /> Tất cả</Text>
             }} />
             <Tab.Screen name="NotificationPrivate" component={NotificationPrivate} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Riêng</Text>
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="user" size={14} color={color} /> Riêng</Text>
             }} />
-            <Tab.Screen name="NotificationProfile" component={NotificationProfile} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Cá nhân</Text>
+            <Tab.Screen name="NotificationProfile" component={NotificationGeneral} options={{
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="users" size={14} color={color} /> Chung</Text>
             }} />
 
         </Tab.Navigator>
     </View>
 }
 
-function NotificationAll() {
-    return (
-        <>
-            <ImageBackground source={homeImage} style={{ width: '100%', height: '100%' }}>
-                <View style={[styles.navigation, { backgroundColor: 'transparent' }]}>
-                    <TextInput autoCorrect={true} placeholder="Tìm kiếm ..."
-                        style={[styles.inputText, { backgroundColor: 'transparent' }]}
-                        placeholderTextColor="#eaeaea"
-                    />
-                    <TouchableOpacity style={styles.search}>
-                        <Feather name="search" size={19} color="#fff" />
-                    </TouchableOpacity>
-                </View>
-                <NotiItem />
-            </ImageBackground>
-        </>
-    )
-}
+// function NotificationAll() {
+//     return (
+//         <>
+//             <ImageBackground source={homeImage} style={{ width: '100%', height: '100%' }}>
+//                 <View style={[styles.wrapContent, { position: 'absolute', zIndex: 5, width: '100%', height: '100%' }]}>
+//                     <NotiItem />
+//                 </View>
+//                 <View style={{
+//                     backgroundColor: '#000', opacity: .5,
+//                     position: "absolute",
+//                     zIndex: 4,
+//                     width: '100%',
+//                     height: '100%'
+//                 }} />
+//             </ImageBackground>
+//         </>
+//     )
+// }
 
-function NotificationPrivate() {
-    return (
-        <>
-            <Text>Chung</Text>
-        </>
-    )
-}
-function NotificationProfile() {
-    return (
-        <>
-            <Text>Chung</Text>
-        </>
-    )
-}
 
 const styles = StyleSheet.create({
     container: {

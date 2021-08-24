@@ -61,11 +61,11 @@ export default function Feedback() {
             </View>
             <View style={styles.wrapBtn}>
                 <View style={styles.btnFeedback}>
-                    <Button title="Gửi" color="#006633" onPress={() => addFeedBack()} />
+                    <Text onPress={() => addFeedBack()} style={{ textAlign: 'center', color: 'orange' }}>Gửi</Text>
                 </View>
             </View>
         </View>
-    </View>
+    </View >
 }
 
 const styles = StyleSheet.create({
@@ -91,10 +91,10 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         fontSize: 18,
         height: 200,
-        paddingLeft:5,
-        backgroundColor:'#fff',
-        borderStyle:'solid',
-        borderColor:'#eaeaea'
+        paddingLeft: 5,
+        backgroundColor: '#fff',
+        borderStyle: 'solid',
+        borderColor: '#eaeaea'
     },
     wrapContent: {
         flex: 1,
@@ -122,13 +122,16 @@ const styles = StyleSheet.create({
         fontSize: 30
     },
     wrapBtn: {
-        padding: 15
+        padding: 15,
+
     },
     btnFeedback: {
         padding: 10,
         width: 100,
         marginLeft: 'auto',
         borderRadius: 10,
-        marginTop: 10
+        marginTop: 10,
+        borderColor: 'orange',
+        borderWidth: 2
     }
 });

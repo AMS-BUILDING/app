@@ -13,92 +13,131 @@ export default function ChangePassword() {
     const { control, reset, handleSubmit, formState: { errors } } = useForm();
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState()
-    const token = useSelector(state => state.user?.token)
+    const token = useSelector(state => state.user?.token);
+
     let changePassword = async (data) => {
         setLoading(true)
-        console.log(data)
-        let path = `/tenant/change-password-web`;
-        let resp = await API.authorizedJSONPost(path, data, token);
-        if (resp.ok) {
+        if (data?.newPassword !== data?.secondPassword) {
             setLoading(false)
-            reset()
-            Toast.show({
-                type: 'success',
-                position: 'bottom',
-                bottomOffset: 50,
-                text1: 'OK',
-                text2: 'Bạn đã thay đổi mật khẩu thành công!.'
-            })
-        } else {
-            let response = await resp.json();
-            setLoading(false)
-            setMessage(response?.message)
             Toast.show({
                 type: 'error',
                 position: 'bottom',
                 bottomOffset: 50,
                 text1: 'Error',
-                text2: "Mật khẩu bạn nhập chưa đúng!"
+                text2: "Mật khẩu bạn nhập lại chưa đúng!"
             })
+        } else {
+            let path = `/tenant/change-password`;
+            let resp = await API.authorizedJSONPost(path, {
+                oldPassword: data?.oldPassword,
+                newPassword: data?.newPassword
+            }, token);
+            if (resp.ok) {
+                setLoading(false)
+                reset()
+                Toast.show({
+                    type: 'success',
+                    position: 'bottom',
+                    bottomOffset: 50,
+                    text1: 'OK',
+                    text2: 'Bạn đã thay đổi mật khẩu thành công!.'
+                })
+            } else {
+                let response = await resp.json();
+
+                setLoading(false)
+
+                Toast.show({
+                    type: 'error',
+                    position: 'bottom',
+                    bottomOffset: 50,
+                    text1: 'Error',
+                    text2: response?.message
+                })
+            }
         }
+
 
     }
     return <View style={styles.wrapper}>
 
         <View style={styles.wrapContent}>
-
-            <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <View style={styles.formGroup}>
-                        <FontAwesome name="lock" size={18} color="#6B6B6B" />
-                        <TextInput
-                            onBlur={onBlur}
-                            onChangeText={value => onChange(value)}
-                            value={value}
-                            placeholder={"Mật khẩu cũ"}
-                            placeholderTextColor="#999"
-                            style={[styles.inputText]}
-                            underlineColorAndroid="transparent"
-                            keyboardType="default"
-                            secureTextEntry={true}
-                            autoCorrect={false}
-                        />
-                    </View>
-                )}
-                name="password"
-                rules={{ required: true }}
-                defaultValue=""
-            />
-            <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <View style={styles.formGroup}>
-                        <FontAwesome name="lock" size={18} color="#6B6B6B" />
-                        <TextInput
-                            onBlur={onBlur}
-                            onChangeText={value => onChange(value)}
-                            value={value}
-                            placeholder={"Mật khẩu mới"}
-                            placeholderTextColor="#999"
-                            style={[styles.inputText]}
-                            underlineColorAndroid="transparent"
-                            keyboardType="default"
-                            secureTextEntry={true}
-                            autoCorrect={false}
-                        />
-                    </View>
-                )}
-                name="newPassword"
-                rules={{ required: true }}
-                defaultValue=""
-            />
-            <View style={{ display: 'flex', justifyContent: 'center', flexDirection: 'row' }}>
-                <TouchableOpacity style={styles.btnLogin} disabled={loading} onPress={handleSubmit(changePassword)}>
-                    <Text style={styles.shareNowText}>XÁC NHẬN {loading && <LoadingProgressBar />}</Text>
-                </TouchableOpacity>
+            <View style={styles.container}>
+                <Controller
+                    control={control}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <View style={styles.formGroup}>
+                            <FontAwesome name="lock" size={18} color="#6B6B6B" />
+                            <TextInput
+                                onBlur={onBlur}
+                                onChangeText={value => onChange(value)}
+                                value={value}
+                                placeholder={"Mật khẩu cũ "}
+                                placeholderTextColor="#999"
+                                style={[styles.inputText]}
+                                underlineColorAndroid="transparent"
+                                keyboardType="default"
+                                secureTextEntry={true}
+                                autoCorrect={false}
+                            />
+                        </View>
+                    )}
+                    name="oldPassword"
+                    rules={{ required: true }}
+                    defaultValue=""
+                />
+                <Controller
+                    control={control}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <View style={styles.formGroup}>
+                            <FontAwesome name="lock" size={18} color="#6B6B6B" />
+                            <TextInput
+                                onBlur={onBlur}
+                                onChangeText={value => onChange(value)}
+                                value={value}
+                                placeholder={"Mật khẩu mới"}
+                                placeholderTextColor="#999"
+                                style={[styles.inputText]}
+                                underlineColorAndroid="transparent"
+                                keyboardType="default"
+                                secureTextEntry={true}
+                                autoCorrect={false}
+                            />
+                        </View>
+                    )}
+                    name="newPassword"
+                    rules={{ required: true }}
+                    defaultValue=""
+                />
+                <Controller
+                    control={control}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <View style={styles.formGroup}>
+                            <FontAwesome name="lock" size={18} color="#6B6B6B" />
+                            <TextInput
+                                onBlur={onBlur}
+                                onChangeText={value => onChange(value)}
+                                value={value}
+                                placeholder={"Nhập lại mật khẩu mới"}
+                                placeholderTextColor="#999"
+                                style={[styles.inputText]}
+                                underlineColorAndroid="transparent"
+                                keyboardType="default"
+                                secureTextEntry={true}
+                                autoCorrect={false}
+                            />
+                        </View>
+                    )}
+                    name="secondPassword"
+                    rules={{ required: true }}
+                    defaultValue=""
+                />
+                <View style={{ display: 'flex', justifyContent: 'center', flexDirection: 'row' }}>
+                    <TouchableOpacity style={styles.btnLogin} disabled={loading} onPress={handleSubmit(changePassword)}>
+                        <Text style={styles.shareNowText}>XÁC NHẬN {loading && <LoadingProgressBar />}</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-
         </View>
     </View>
 }
@@ -107,12 +146,15 @@ const styles = StyleSheet.create({
     wrapper: {
         flex: 1
     },
+    wrapContent: {
+        flex: 1
+    },
     wrapNav: {
         backgroundColor: '#666666'
     },
     shareNowText: {
         fontSize: 16,
-        color: '#fff'
+        color: 'orange'
     },
     nav: {
         flexDirection: 'row',
@@ -144,7 +186,7 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         marginTop: 20,
         borderColor: '#333',
-        borderWidth: 1,
+        borderBottomWidth: 1,
         borderStyle: 'solid',
         marginLeft: 10,
         marginRight: 10
@@ -155,14 +197,16 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     btnLogin: {
-        width: '50%',
-        backgroundColor: '#006633',
+        width: '95%',
+        backgroundColor: 'transparent',
         padding: 15,
         borderRadius: 10,
         marginBottom: 20,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderWidth: 2,
+        borderColor: 'orange'
 
     }
 });

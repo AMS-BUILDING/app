@@ -6,7 +6,7 @@ import VehicleCarBig from '../components/profile/vehicle/VehicleCarBig';
 import VehicleEletric from '../components/profile/vehicle/VehicleEletric';
 import VehicleMotorbike from '../components/profile/vehicle/VehicleMotorbike';
 import Feather from 'react-native-vector-icons/Feather';
-
+import { FontAwesome5 } from '@expo/vector-icons';
 const Tab = createMaterialTopTabNavigator();
 
 export default function Vehicle({ navigation }) {
@@ -25,16 +25,16 @@ function TabHeader() {
             scrollEnabled: true,
         }}>
             <Tab.Screen name="VehicleCar" component={VehicleCar} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Xe ô tô 5 chỗ</Text>
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}> Xe ô tô 5 chỗ</Text>
             }} />
             <Tab.Screen name="VehicleCarBig" component={VehicleCarBig} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Xe ô tô 7 chỗ</Text>
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}> Xe ô tô 7 chỗ</Text>
             }} />
             <Tab.Screen name="VehicleMotorbike" component={VehicleMotorbike} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Xe máy</Text>
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}> Xe máy</Text>
             }} />
             <Tab.Screen name="VehicleEletric" component={VehicleEletric} options={{
-                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}><Feather name="message-circle" size={14} color={color} /> Xe điện</Text>
+                tabBarLabel: ({ focused, color }) => <Text style={[styles.tabText, { color: color }]}> Xe điện</Text>
             }} />
 
         </Tab.Navigator>

@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     wrapContent: {
         justifyContent: 'space-between',
         flexDirection: 'row',
-        borderBottomWidth: 2,
+        borderBottomWidth: 0.5,
         borderBottomColor: 'black',
         paddingBottom: 15,
         paddingTop: 15

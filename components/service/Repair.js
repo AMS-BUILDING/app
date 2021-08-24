@@ -7,7 +7,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import Toast from 'react-native-toast-message';
 import Feather from 'react-native-vector-icons/Feather';
 import { useSelector } from 'react-redux';
-import HomeImage from '../../assets/images/home.png';
+import HomeImage from '../../assets/images/bgscreen.png';
 import API from '../lib/API';
 import LoadingProgressBar from '../LoadingProgressBar';
 import SearchRepair from './SearchRepair';
@@ -46,6 +46,9 @@ export default function Repair() {
     const [date, setDate] = useState(new Date());
 
     const [show, setShow] = useState(false);
+    let handleShow = () => {
+        setShow(true)
+    }
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
@@ -53,7 +56,10 @@ export default function Repair() {
     };
 
     const accountIdRedux = useSelector(state => state.user?.accountId)
-
+    const [time, setTime] = useState("01:00");
+    let handleTime = value => {
+        setTime(value)
+    }
     let addService = async () => {
         setLoading(true)
         try {
@@ -61,12 +67,13 @@ export default function Repair() {
             let resp = await API.authorizedJSONPost(path, {
                 reasonDetailSubServiceId: timeTo,
                 accountId: accountIdRedux,
-                startDate: moment(date).format("YYYY/MM/DD"),
-                description: text,
+                startDate: `${moment(date, "DD-MM-YYYY").format("YYYY/MM/DD")} ${time}`,
                 endDate: ""
             }, token);
             if (resp.ok) {
-                setLoading(false)
+                setLoading(false);
+                let response = await resp.json();
+              
                 Toast.show({
                     type: 'success',
                     position: 'bottom',
@@ -76,9 +83,9 @@ export default function Repair() {
                     onPress: () => {
                         setTimeFrom("21")
                         setTimeTo("21")
-                        setText("")
+                        setTime("01:00")
                         setDate(new Date())
-                        navigation.navigate("DetailProcess")
+                        navigation.navigate("DetailProcess", { id: response?.serviceId, typeRequest: response?.typeService })
                     }
                 })
 
@@ -104,91 +111,40 @@ export default function Repair() {
     return (
         <>
             <View style={styles.wrapper}>
-                <View style={styles.wrapContent}>
-
-                    <View style={styles.main}>
-                        <ImageBackground source={HomeImage} style={styles.image}>
+                <ImageBackground source={HomeImage} style={styles.image}>
+                    <View style={[styles.wrapContent, { position: 'absolute', zIndex: 5, width: '100%', height: '100%' }]}>
+                        <View style={styles.main}>
                             <View style={styles.wrapTime}>
-                                <SearchRepair timeFrom={timeFrom} timeTo={timeTo} handleTimeFrom={handleTimeFrom} handleTimeTo={handleTimeTo} />
-                            </View>
-                            <Description text={text} handleText={handleText} />
-                            <View>
-                                {show && <DateTimePicker
-                                    testID="dateTimePicker"
-                                    value={date}
-                                    mode={"date"}
-                                    is24Hour={true}
-                                    display="spinner"
+                                <SearchRepair timeFrom={timeFrom} timeTo={timeTo} handleTimeFrom={handleTimeFrom} handleTimeTo={handleTimeTo}
+                                    time={time} handleTime={handleTime}
+                                    date={date}
                                     onChange={onChange}
-                                />}
-                                <TouchableOpacity onPress={() => setShow(true)} >
-                                    <View style={styles.selectDate}>
-                                        <View>
-                                            <Text style={{ color: '#fff' }}>Ngày</Text>
-                                            <View style={styles.inputDate}>
-                                                <Text style={{ color: '#333' }}>{moment(date).format("DD/MM/YYYY")} </Text>
-                                                <View>
-                                                    <Text><Feather name="calendar" size={25} color={"#333"} /></Text>
-                                                </View>
-                                            </View>
-                                        </View>
-                                        {/* <View>
-                                            <TimeTo timeTo={timeTo} handleTimeTo={handleTimeTo} />
-                                        </View> */}
-                                    </View>
-                                </TouchableOpacity>
+                                    show={show}
+                                    handleShow={handleShow}
+                                />
                             </View>
-
 
                             <View style={styles.footerBottom}>
                                 <TouchableOpacity style={styles.shareNow} disabled={loading} onPress={addService}>
                                     <Text style={styles.shareNowText}>GỬI YÊU CẦU {loading && <LoadingProgressBar />}</Text>
                                 </TouchableOpacity>
                             </View>
-                        </ImageBackground >
+
+                        </View>
                     </View>
-                </View>
+                    <View style={{
+                        backgroundColor: '#000', opacity: .7,
+                        position: "absolute",
+                        zIndex: 4,
+                        width: '100%',
+                        height: '100%'
+                    }} />
+                </ImageBackground >
             </View>
         </>
     )
 }
 
-function TimeFrom({ timeFrom, handleTimeFrom, equipments }) {
-    const [open, setOpen] = useState(false);
-    const [items, setItems] = useState([]);
-    let handleItems = () => {
-        let selectItems = [];
-        for (let i = 0; i < equipments.length; i++) {
-            selectItems.push({
-                label: equipments[i]?.detailSubServiceName,
-                value: equipments[i]?.id
-            })
-        }
-        setItems(selectItems)
-    }
-
-    useEffect(() => {
-        handleItems()
-    }, [equipments])
-
-
-    return (
-        <View style={styles.widthContent}>
-            <Text style={styles.txtTitle}>Thiết bị</Text>
-            <DropDownPicker
-                open={open}
-                value={timeFrom}
-                items={items}
-                setOpen={setOpen}
-                setValue={handleTimeFrom}
-                setItems={setItems}
-                placeholder={items[0]?.label}
-                style={{ height: 30 }}
-                containerStyle={{ width: 150 }}
-            />
-        </View>
-    )
-}
 
 
 function Count({ timeTo, handleTimeTo, problems }) {
@@ -226,35 +182,13 @@ function Count({ timeTo, handleTimeTo, problems }) {
                 placeholder={items[0]?.label}
                 style={{ height: 30 }}
                 containerStyle={{ width: 150 }}
+                zIndex={16}
             />
             <View style={styles.separator} />
         </View>
     )
 }
 
-
-function Description({ text, handleText }) {
-    let richText = useRef()
-
-    return (
-        <>
-            <View style={{ padding: 15 }}>
-
-
-                <TextInput
-                    onChangeText={value => handleText(value)}
-                    value={text}
-                    placeholder={"Mô tả..."}
-                    placeholderTextColor="#888"
-                    style={[styles.inputText]}
-                    underlineColorAndroid="transparent"
-
-                />
-
-            </View>
-        </>
-    )
-}
 
 
 
@@ -274,12 +208,13 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderColor: '#eaeaea'
     },
-    shareNow: { backgroundColor: '#006633', width: '100%', height: 50, borderRadius: 10, alignItems: 'center', display: 'flex', justifyContent: 'center' },
-    shareNowText: { color: '#fff', fontSize: 14, fontWeight: "bold", textTransform: 'uppercase' },
+    shareNow: { backgroundColor: 'transparent', width: '90%', height: 50, borderRadius: 10, alignItems: 'center', display: 'flex', justifyContent: 'center', borderWidth: 2, borderColor: 'orange' },
+    shareNowText: { color: 'orange', fontSize: 14, fontWeight: "bold", textTransform: 'uppercase' },
     wrapContent: {
         flex: 1
     },
     footerBottom: {
+
         flexDirection: 'row',
         display: "flex",
         justifyContent: 'center',
@@ -287,8 +222,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         alignItems: 'center',
         width: '100%',
-        paddingLeft: 15,
-        paddingRight: 15
     },
     separator: {
         height: 1, backgroundColor: '#fff', width: 150,
@@ -298,34 +231,37 @@ const styles = StyleSheet.create({
     widthContent: {
         width: 150,
         display: 'flex',
-
+        // position:'absolute',
+        // zIndex:12,
         justifyContent: 'center'
     },
     selectDate: {
         paddingTop: 30,
-        paddingLeft: 15,
+
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 15,
-        justifyContent: 'space-between',
-        marginRight: 15
+        justifyContent: 'space-around',
+
+
     },
     inputDate: {
 
         marginRight: 15,
-        height: 40,
+        height: 35,
         backgroundColor: '#fff',
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: '#333',
         display: 'flex',
-        width: 200,
+        width: 150,
         paddingLeft: 15,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingRight: 30
+        paddingRight: 30,
+        borderRadius: 10
     },
     wrapperText: {
         flex: 1,
@@ -368,7 +304,7 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     wrapTime: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-between',
         marginBottom: 30,
         margin: 15

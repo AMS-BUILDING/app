@@ -6,10 +6,10 @@ export default function HeaderApp({ navigation }) {
     return (
         <Header
             placement="left"
-          
+
             centerComponent={{ text: 'RESIDENT APP', style: { color: '#fff' } }}
             rightComponent={<MyCustomRightComponent navigation={navigation} />}
-            backgroundColor='#006633'
+            backgroundColor='#333333'
         />
     )
 };

@@ -7,73 +7,115 @@ import RNPickerSelect from "react-native-picker-select";
 import { TouchableOpacity } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Dimensions } from 'react-native';
+import API from '../components/lib/API';
+import { useSelector } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function FeeNotice({ navigation }) {
-    const [monthFrom, setMonthFrom] = useState("16")
+    let date = new Date();
+
+    const [monthFrom, setMonthFrom] = useState(date?.getMonth() > 9 ? date?.getMonth() : `${0}${date?.getMonth()}`)
     const handleTimeFrom = (hour) => {
         setMonthFrom(hour)
     }
 
-    const [yearFrom, setYearFrom] = useState("16")
+    const [yearFrom, setYearFrom] = useState(date.getFullYear().toString())
     const handleYearFrom = (hour) => {
         setYearFrom(hour)
     }
+    const token = useSelector(state => state.user?.token)
+    const [data, setData] = useState();
+    const isFocus = useIsFocused()
+    useEffect(() => {
+        search()
+    }, [])
+    useEffect(() => {
+        search()
+    }, [isFocus, monthFrom, yearFrom])
 
+    const search = async () => {
+        let path = `/tenant/notification-fee-apartment?billingMonth=${monthFrom}/${yearFrom}`;
+
+        let resp = await API.authorizedJSONGET(path, token);
+        if (resp.ok) {
+            let response = await resp.json();
+            setData(response)
+        } else {
+            setData()
+        }
+    }
+    const currencyFormat = (num) => {
+        return num?.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' VNĐ'
+    }
     return <View style={styles.wrapper}>
         {/* <Header navigation={navigation} /> */}
         <ImageBackground source={bgScreen} style={styles.image}>
             <View style={[styles.wrapContent, { position: 'absolute', zIndex: 5, width: '100%', height: '100%' }]}>
-
                 <View style={styles.main}>
-                    {/* <View style={styles.confirm}>
-                        <TouchableOpacity onPress={() => navigation.goBack()}><AntDesign name="arrowleft" size={25} color="#9966FF" /></TouchableOpacity>
-                        <Text style={styles.textConfirm}>Thông báo phí</Text>
-                    </View> */}
                     <View style={styles.wrapSelect}>
                         <TimeFrom monthFrom={monthFrom} handleTimeFrom={handleTimeFrom} />
                         <YearFrom yearFrom={yearFrom} handleYearFrom={handleYearFrom} />
                     </View>
-                    <View style={styles.detail}>
+                    {data ? <View style={styles.detail}>
                         <ScrollView style={styles.detailList}>
                             <View style={styles.detailItem}>
-                                <Text style={styles.detailText}>Thay vòi nước</Text>
-                                <Text style={styles.detailText}>2000000</Text>
+                                <Text style={styles.detailText}>{data?.generalFeeName}</Text>
+                                <Text style={styles.detailText}>{currencyFormat(data?.feeGeneralFee?.toString())}</Text>
                             </View>
-                            <View style={styles.detailItem}>
-                                <Text style={styles.detailText}>Thay vòi nước</Text>
-                                <Text style={styles.detailText}>200</Text>
-                            </View>
-                            <View style={styles.detailItem}>
-                                <Text style={styles.detailText}>Thay vòi nước</Text>
-                                <Text style={styles.detailText}>2000000</Text>
-                            </View>
-                            <View style={styles.detailItem}>
-                                <Text style={styles.detailText}>Thay vòi nước</Text>
-                                <Text style={styles.detailText}>200</Text>
-                            </View>
-                            <View style={styles.detailItem}>
-                                <Text style={styles.detailText}>Thay vòi nước</Text>
-                                <Text style={styles.detailText}>2000000</Text>
-                            </View>
-
-
+                            {data?.vehicleName &&
+                                <View style={styles.detailItem}>
+                                    <Text style={styles.detailText}>{data?.vehicleName}</Text>
+                                    <Text style={styles.detailText}>{currencyFormat(data?.feeVehicleName?.toString())}</Text>
+                                </View>
+                            }
+                            {data?.apartmentCardName &&
+                                <View style={styles.detailItem}>
+                                    <Text style={styles.detailText}>{data?.apartmentCardName}</Text>
+                                    <Text style={styles.detailText}>{currencyFormat(data?.feeApartmentCard?.toString())}</Text>
+                                </View>
+                            }
+                            {data?.services?.length > 0 &&
+                                data?.services?.map((item, index) => {
+                                    return (
+                                        <View style={styles.detailItem} key={index}>
+                                            <Text style={styles.detailText}>Phí {item?.serviceName}</Text>
+                                            <Text style={styles.detailText}>{currencyFormat(item?.feeService?.toString())}</Text>
+                                        </View>
+                                    )
+                                })
+                            }
                         </ScrollView>
                         <View style={[styles.detailItem, styles.lastItem]}>
                             <Text style={styles.detailTotal}>Tổng tiền</Text>
-                            <Text style={styles.detailTotal}>2200000</Text>
+                            <Text style={styles.detailTotal}>{currencyFormat(data?.total?.toString())}</Text>
                         </View>
-                    </View>
-                    <Text style={styles.date}>Hạn chót thanh toán phải trả 6/6/2021</Text>
-                    <View style={styles.wrapBtn}>
-                        <View style={styles.btnConfirm}>
-                            <Button title="Thanh toán" color="#006633" onPress={() => navigation.navigate('Payment')} />
-                        </View>
-                    </View>
+                    </View> :
+                        <Text style={{ color: '#fff', marginTop: 50, textAlign: 'center' }}>Chưa phát sinh phí</Text>
+                    }
+
+                    {data &&
+                        <>
+                            <Text style={styles.date}>{data?.status}</Text>
+                            {data?.status !== "Đã thanh toán"
+                                && <View style={styles.wrapBtn}>
+                                    <View style={styles.btnConfirm}>
+                                        <Text style={{ color: 'orange', textAlign: 'center' }} onPress={() => navigation.navigate('Payment', {
+                                            data: {
+                                                day: data?.billingMonth,
+                                                total: currencyFormat(data?.total?.toString())
+                                            }
+                                        })} >THANH TOÁN</Text>
+                                    </View>
+                                </View>
+                            }
+                        </>
+                    }
+
                 </View>
 
             </View>
             <View style={{
-                backgroundColor: '#000', opacity: .5,
+                backgroundColor: '#000', opacity: .7,
                 position: "absolute",
                 zIndex: 4,
                 width: '100%',
@@ -84,22 +126,22 @@ export default function FeeNotice({ navigation }) {
 }
 
 function TimeFrom({ monthFrom, handleTimeFrom }) {
-    // let selectItems = [];
-    // selectItems = [
-    //     { label: "Trưa", value: "11:00-14:00" },
-    //     { label: "Tối", value: "18:30-21:00" }
-    // ]
+
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
-        { label: "6h - 8h", value: "06:00-08:00" },
-        { label: "8h - 10h", value: "08:00-10:00" },
-        { label: "10h - 12h", value: "10:00-12:00" },
-        { label: "12h - 14h", value: "12:00-14:00" },
-        { label: "14h - 16h", value: "14:00-16:00" },
-        { label: "16h - 18h", value: "16:00-18:00" },
-        { label: "18h - 20h", value: "18:00-20:00" },
-        { label: "20h - 22h", value: "20:00-22:00" }
+        { label: "Tháng 1", value: "01" },
+        { label: "Tháng 2", value: "02" },
+        { label: "Tháng 3", value: "03" },
+        { label: "Tháng 4", value: "04" },
+        { label: "Tháng 5", value: "05" },
+        { label: "Tháng 6", value: "06" },
+        { label: "Tháng 7", value: "07" },
+        { label: "Tháng 8", value: "08" },
+        { label: "Tháng 9", value: "09" },
+        { label: "Tháng 10", value: "10" },
+        { label: "Tháng 11", value: "11" },
+        { label: "Tháng 12", value: "12" }
     ]);
     return (
         <View style={styles.widthContent}>
@@ -120,22 +162,17 @@ function TimeFrom({ monthFrom, handleTimeFrom }) {
     )
 }
 function YearFrom({ yearFrom, handleYearFrom }) {
-    // let selectItems = [];
-    // selectItems = [
-    //     { label: "Trưa", value: "11:00-14:00" },
-    //     { label: "Tối", value: "18:30-21:00" }
-    // ]
+
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
-        { label: "6h - 8h", value: "06:00-08:00" },
-        { label: "8h - 10h", value: "08:00-10:00" },
-        { label: "10h - 12h", value: "10:00-12:00" },
-        { label: "12h - 14h", value: "12:00-14:00" },
-        { label: "14h - 16h", value: "14:00-16:00" },
-        { label: "16h - 18h", value: "16:00-18:00" },
-        { label: "18h - 20h", value: "18:00-20:00" },
-        { label: "20h - 22h", value: "20:00-22:00" }
+        { label: "Năm 2021", value: "2021" },
+        { label: "Năm 2022", value: "2022" },
+        { label: "Năm 2023", value: "2023" },
+        { label: "Năm 2024", value: "2024" },
+        { label: "Năm 2025", value: "2025" },
+        { label: "Năm 2026", value: "2026" },
+
     ]);
     return (
         <View style={styles.widthContent}>
@@ -184,8 +221,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     wrapContent: {
-        width: '100%',
-        paddingTop: Dimensions.get('window').height * 1 / 10
+        width: '100%'
     },
     image: {
         resizeMode: "cover",
@@ -245,14 +281,21 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     wrapBtn: {
-        paddingTop: 10,
         marginTop: 15,
-        borderRadius: 10
+
     },
     date: {
         fontSize: 14,
         marginTop: 10,
         color: 'white'
+    },
+    btnConfirm: {
+        borderRadius: 10,
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        borderColor: 'orange',
+        paddingBottom: 15,
+        paddingTop: 15
     }
 
 });

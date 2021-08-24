@@ -38,7 +38,6 @@ export default function PriceRequest(props) {
             if (resp.ok) {
                 setLoading(false);
                 let response = await resp.json();
-              
                 Toast.show({
                     type: 'success',
                     position: 'bottom',
@@ -46,7 +45,7 @@ export default function PriceRequest(props) {
                     text1: 'Thành công',
                     text2: 'Ấn vào đây theo dõi tiến trình!.',
                     onPress: () => {
-                        navigation.navigate("DetailProcess", { id: response });
+                        navigation.navigate("DetailProcess", { id: response?.serviceId, typeRequest: response?.typeService });
                         Toast.hide()
                     }
                 })
