@@ -411,7 +411,7 @@ function ProfileStackScreen({ handleLogin }) {
       <Stack.Screen name="ProfileStack" component={ProfileScreen} options={{ headerShown: false }} />
       <Stack.Screen name="MenuProfile" children={() => <MenuProfile handleLogin={handleLogin} />}
         options={{
-          title: 'Menu',
+          title: 'Thiết lập tài khoản',
           headerStyle: {
             backgroundColor: '#333333'
           },

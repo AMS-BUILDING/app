@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     },
     contentImage: {
         width: '100%',
-        margin: 15
+        padding: 15
     },
     group: {
         flexDirection: 'row',
@@ -102,8 +102,8 @@ const styles = StyleSheet.create({
         color: 'black'
     },
     image: {
-        resizeMode: 'contain',
-        width: '90%',
-        height: 200
+        resizeMode: 'cover',
+        width: '100%',
+        height: 300,
     }
 });
