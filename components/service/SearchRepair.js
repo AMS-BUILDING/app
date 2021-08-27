@@ -290,6 +290,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     inputDate: {
+
         height: 30,
         backgroundColor: '#fff',
         borderWidth: 1,
@@ -297,9 +298,11 @@ const styles = StyleSheet.create({
         borderColor: '#333',
         display: 'flex',
         width: 160,
+
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+
         borderRadius: 10,
         paddingLeft: 10,
         paddingRight: 10

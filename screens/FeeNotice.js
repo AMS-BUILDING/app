@@ -104,7 +104,7 @@ export default function FeeNotice({ navigation }) {
                                                 day: data?.billingMonth,
                                                 total: currencyFormat(data?.total?.toString())
                                             }
-                                        })} >THANH TOÁN</Text>
+                                        })}>THANH TOÁN</Text>
                                     </View>
                                 </View>
                             }

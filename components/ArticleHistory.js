@@ -1,11 +1,18 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default function ArticleHistory({ data }) {
+    let navigation = useNavigation()
     return <View style={styles.wrapper}>
         <Text style={styles.title}>{data?.serviceName}</Text>
         <Text style={styles.desc}>{data?.description}</Text>
-        <Text style={styles.desc}>{data?.time}</Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Text style={styles.desc}>{data?.time}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("FeedBack")}>
+                <Text>Đánh giá</Text>
+            </TouchableOpacity>
+        </View>
     </View>
 };
 

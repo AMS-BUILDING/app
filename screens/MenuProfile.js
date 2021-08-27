@@ -143,9 +143,9 @@ export default function MenuProfile({ handleLogin }) {
                         <TouchableOpacity style={[styles.button, { backgroundColor: '#fff' }]} onPress={() => navigation.navigate("ChangePassword")}>
                             <Text style={[styles.loginButton, { color: '#333' }]}><FontAwesome5 name={"edit"} size={16} color={'#333'} /> Thay đổi mật khẩu</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.button, { backgroundColor: '#fff' }]} onPress={() => navigation.navigate("FeedBack")}>
+                        {/* <TouchableOpacity style={[styles.button, { backgroundColor: '#fff' }]} onPress={() => navigation.navigate("FeedBack")}>
                             <Text style={[styles.loginButton, { color: '#333' }]}><FontAwesome5 name={"help-circle"} size={16} color={'#333'} /> Đánh giá</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                         <TouchableOpacity style={[styles.button, { backgroundColor: '#fff' }]} onPress={() => navigation.navigate("ApartmentProfile")}>
                             <Text style={[styles.loginButton, { color: '#333' }]}><FontAwesome5 name={"book-open"} size={16} color={'#333'} /> Chung cư</Text>
                         </TouchableOpacity>

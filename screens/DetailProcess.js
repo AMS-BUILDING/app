@@ -54,24 +54,23 @@ export default function DetailProcess(props) {
                     activeStepIconColor={"#fff"}
                     disabledStepIconColor={"#333"}
                     activeStep={data?.statusId}
+                    completedStepIconColor="orange"
+
                 >
                     <ProgressStep label="Đã nhận"
                         nextBtnDisabled={true}
                         nextBtnText=""
                     >
-                        <View style={{ alignItems: 'center' }}>
-                            <Text>Đã nhận</Text>
-                        </View>
+
                     </ProgressStep>
                     <ProgressStep label="Kiểm tra"
                         nextBtnDisabled={true}
                         nextBtnText=""
                         previousBtnText=""
                         previousBtnDisabled={true}
+
                     >
-                        <View style={{ alignItems: 'center' }}>
-                            <Text>Kiểm tra</Text>
-                        </View>
+
                     </ProgressStep>
                     <ProgressStep label="Đang thực hiện"
                         nextBtnDisabled={true}
@@ -79,9 +78,7 @@ export default function DetailProcess(props) {
                         previousBtnText=""
                         previousBtnDisabled={true}
                     >
-                        <View style={{ alignItems: 'center' }}>
-                            <Text>Đang thực hiện</Text>
-                        </View>
+
                     </ProgressStep>
                     <ProgressStep label="Hoàn thành"
                         previousBtnText=""
@@ -89,9 +86,7 @@ export default function DetailProcess(props) {
                         nextBtnDisabled={true}
                         finishBtnText=""
                     >
-                        <View style={{ alignItems: 'center' }}>
-                            <Text>Hoàn thành</Text>
-                        </View>
+
                     </ProgressStep>
                 </ProgressSteps>
             </View>
@@ -125,7 +120,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         backgroundColor: 'black',
-        opacity: 0.7,
+        opacity: 0.6,
     },
     textBanner: {
         position: 'absolute',

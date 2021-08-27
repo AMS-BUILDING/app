@@ -43,8 +43,12 @@ import LoginEmailScreen from './screens/LoginEmailScreen';
 import LoginResetPassword from './screens/LoginResetPassword';
 import NotificationScreen from './screens/NotificationScreen';
 import FamilyScreen from './screens/FamilyScreen'
+import NotificationTab from './NotificationTab'
+import Market from './screens/Market';
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
 export default function App() {
 
   return (
@@ -78,8 +82,8 @@ function AppWrapper() {
   const handleLogin = () => {
     setIsLogin(!isLogin)
   }
-  const accountIdRedux = useSelector(state => state.user.accountId);
 
+  const accountIdRedux = useSelector(state => state.user.accountId);
   let handleAccountId = () => {
     setAccountId(accountIdRedux)
   }
@@ -145,6 +149,10 @@ function AppContainer({ handleLogin }) {
   )
 }
 function BottomTabNavigation({ handleLogin }) {
+  const [isRead, setRead] = useState(false)
+  const handleRead = () => {
+    setRead(!isRead)
+  }
   return (
     <NavigationContainer >
       <Tab.Navigator
@@ -170,21 +178,13 @@ function BottomTabNavigation({ handleLogin }) {
           tabBarIcon: ({ color }) =>
             (<Feather name="message-circle" size={25} color={color} />),
         }} />
-        <Tab.Screen name="NotificationStack" component={NotificationStackScreen} options={{
+        <Tab.Screen name="NotificationStack" children={() => <NotificationStackScreen handleRead={handleRead} />} options={{
           tabBarLabel: "Thông báo",
           tabBarIcon: ({ color }) =>
-          (<View style={{ position: 'relative' }}>
-            <Feather name="bell" size={25} color={color} />
-            {/* <View style={{
-              position: 'absolute', width: 20, height: 20, borderRadius: 10, backgroundColor: 'red',
-              right: -10, display: 'flex', justifyContent: 'center', alignItems: 'center', top: -5
-            }}>
-              <Text style={{ color: 'green' }}>2</Text>
-            </View> */}
-          </View>),
+            (<NotificationTab color={color} isRead={isRead} />)
         }} />
-        <Tab.Screen name="MarketStack" component={HomeStackScreen} options={{
-          tabBarLabel: "Đi chợ",
+        <Tab.Screen name="MarketStack" component={MarketStackScreen} options={{
+          tabBarLabel: "Đặt hàng",
           tabBarIcon: ({ color }) =>
             (<Feather name="shopping-bag" size={25} color={color} />),
         }} />
@@ -384,10 +384,10 @@ function MessageStackScreen() {
   )
 }
 
-function NotificationStackScreen() {
+function NotificationStackScreen({ handleRead }) {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Notification" component={NotificationScreen} options={{
+      <Stack.Screen name="Notification" children={() => <NotificationScreen handleRead={handleRead} />} options={{
         title: 'Thông báo',
         headerStyle: {
           backgroundColor: '#333333'
@@ -401,7 +401,9 @@ function NotificationStackScreen() {
 function MarketStackScreen() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      <Stack.Screen name="Market" component={Market} options={{
+        headerShown: false,
+      }} />
     </Stack.Navigator>
   )
 }
@@ -411,7 +413,7 @@ function ProfileStackScreen({ handleLogin }) {
       <Stack.Screen name="ProfileStack" component={ProfileScreen} options={{ headerShown: false }} />
       <Stack.Screen name="MenuProfile" children={() => <MenuProfile handleLogin={handleLogin} />}
         options={{
-          title: 'Thiết lập tài khoản',
+          title: 'Tài khoản của tôi',
           headerStyle: {
             backgroundColor: '#333333'
           },
