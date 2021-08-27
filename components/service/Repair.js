@@ -14,7 +14,7 @@ import SearchRepair from './SearchRepair';
 export default function Repair() {
     let navigation = useNavigation();
     const [loading, setLoading] = useState(false);
-
+    
     useEffect(() => {
         const parent = navigation.dangerouslyGetParent();
 
@@ -27,6 +27,8 @@ export default function Repair() {
             });
 
     }, []);
+    const [times,setTimes] = useState([]);
+    
     const [text, setText] = useState();
     const handleText = (value) => {
         setText(value)

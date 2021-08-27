@@ -1,6 +1,6 @@
 
-const BASE_URL = "http://103.130.212.222:8080/api";
-export const BASE_DOWNLOAD_URL = "http://103.130.212.222:8080/download?image="
+const BASE_URL = "http://192.168.1.9:8080/api";
+export const BASE_DOWNLOAD_URL = "http://192.168.1.9:8080/download?image="
 const API = {
     authorizedJSONPost: async (path, data, token) => {
 

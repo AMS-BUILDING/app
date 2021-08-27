@@ -8,13 +8,14 @@ import NotiItem from '../components/notification-home/NotiItem';
 import homeImage from '../assets/images/bgscreen.png';
 import API from '../components/lib/API';
 
-export default function NotificationScreen() {
+export default function NotificationScreen({ handleRead }) {
     const [data, setData] = useState();
     const isFocus = useIsFocused()
     const token = useSelector(state => state.user?.token);
 
     useEffect(() => {
         search()
+        handleRead()
     }, [])
     useEffect(() => {
         search()
