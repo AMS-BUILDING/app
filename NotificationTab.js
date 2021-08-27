@@ -39,7 +39,7 @@ export default function NotificationTab({ color, isRead }) {
                     position: 'absolute', width: 20, height: 20, borderRadius: 10, backgroundColor: 'red',
                     right: -10, display: 'flex', justifyContent: 'center', alignItems: 'center', top: -5
                 }}>
-                    <Text style={{ color: 'green' }}>{number}</Text>
+                    <Text style={{ color: 'white' }}>{number}</Text>
                 </View>}
 
             </View>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
 import ArticleTracking from '../components/ArticleTracking';
-import homeImage from '../assets/images/home.png'
+import homeImage from '../assets/images/bgscreen.png'
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import { useNavigation } from '@react-navigation/native';
 import API from '../components/lib/API';
@@ -61,16 +61,16 @@ export default function DetailProcess(props) {
                         nextBtnDisabled={true}
                         nextBtnText=""
                     >
-                       
+
                     </ProgressStep>
                     <ProgressStep label="Kiểm tra"
                         nextBtnDisabled={true}
                         nextBtnText=""
                         previousBtnText=""
                         previousBtnDisabled={true}
-                        
+
                     >
-                        
+
                     </ProgressStep>
                     <ProgressStep label="Đang thực hiện"
                         nextBtnDisabled={true}
@@ -78,7 +78,7 @@ export default function DetailProcess(props) {
                         previousBtnText=""
                         previousBtnDisabled={true}
                     >
-                        
+
                     </ProgressStep>
                     <ProgressStep label="Hoàn thành"
                         previousBtnText=""
@@ -86,7 +86,7 @@ export default function DetailProcess(props) {
                         nextBtnDisabled={true}
                         finishBtnText=""
                     >
-                       
+
                     </ProgressStep>
                 </ProgressSteps>
             </View>

@@ -44,6 +44,8 @@ import LoginResetPassword from './screens/LoginResetPassword';
 import NotificationScreen from './screens/NotificationScreen';
 import FamilyScreen from './screens/FamilyScreen'
 import NotificationTab from './NotificationTab'
+import Market from './screens/Market';
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -181,8 +183,8 @@ function BottomTabNavigation({ handleLogin }) {
           tabBarIcon: ({ color }) =>
             (<NotificationTab color={color} isRead={isRead} />)
         }} />
-        <Tab.Screen name="MarketStack" component={HomeStackScreen} options={{
-          tabBarLabel: "Đi chợ",
+        <Tab.Screen name="MarketStack" component={MarketStackScreen} options={{
+          tabBarLabel: "Đặt hàng",
           tabBarIcon: ({ color }) =>
             (<Feather name="shopping-bag" size={25} color={color} />),
         }} />
@@ -399,7 +401,9 @@ function NotificationStackScreen({ handleRead }) {
 function MarketStackScreen() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      <Stack.Screen name="Market" component={Market} options={{
+        headerShown: false,
+      }} />
     </Stack.Navigator>
   )
 }

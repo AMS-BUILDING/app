@@ -2,7 +2,7 @@ import React from 'react';
 import { View, TextInput, StyleSheet, Text } from 'react-native';
 
 export default function GroupFamily({ data }) {
-    return <View style={{ padding: 15, borderBottomWidth: 1, borderColor: 'pink' }}>
+    return <View style={{ padding: 15, borderBottomWidth: 1, borderColor: 'gray' }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 }}>
             <Text style={{ width: 150, fontSize: 16, fontWeight: '700' }}>Tên:</Text>
             <View style={{ width: '100%' }}>
