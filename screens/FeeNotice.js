@@ -10,6 +10,7 @@ import { Dimensions } from 'react-native';
 import API from '../components/lib/API';
 import { useSelector } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 
 export default function FeeNotice({ navigation }) {
     let date = new Date();
@@ -46,6 +47,25 @@ export default function FeeNotice({ navigation }) {
     }
     const currencyFormat = (num) => {
         return num?.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' VNĐ'
+    }
+    const roleId = useSelector(state => state.user?.roleId)
+    const handlePayment = () => {
+        if (roleId == 3) {
+            navigation.navigate('Payment', {
+                data: {
+                    day: data?.billingMonth,
+                    total: currencyFormat(data?.total?.toString())
+                }
+            })
+        } else {
+            Toast.show({
+                type: 'error',
+                position: 'bottom',
+                bottomOffset: 50,
+                text1: 'Error',
+                text2: "Tài khoản không có quyền truy cập"
+            })
+        }
     }
     return <View style={styles.wrapper}>
         {/* <Header navigation={navigation} /> */}
@@ -99,12 +119,7 @@ export default function FeeNotice({ navigation }) {
                             {data?.status !== "Đã thanh toán"
                                 && <View style={styles.wrapBtn}>
                                     <View style={styles.btnConfirm}>
-                                        <Text style={{ color: 'orange', textAlign: 'center' }} onPress={() => navigation.navigate('Payment', {
-                                            data: {
-                                                day: data?.billingMonth,
-                                                total: currencyFormat(data?.total?.toString())
-                                            }
-                                        })}>THANH TOÁN</Text>
+                                        <Button title="Thanh toán" color="#006633" onPress={() => handlePayment()} />
                                     </View>
                                 </View>
                             }
@@ -115,7 +130,7 @@ export default function FeeNotice({ navigation }) {
 
             </View>
             <View style={{
-                backgroundColor: '#000', opacity: .7,
+                backgroundColor: '#000', opacity: .5,
                 position: "absolute",
                 zIndex: 4,
                 width: '100%',
@@ -124,6 +139,8 @@ export default function FeeNotice({ navigation }) {
         </ImageBackground>
     </View>
 }
+
+
 
 function TimeFrom({ monthFrom, handleTimeFrom }) {
 
@@ -281,21 +298,14 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     wrapBtn: {
+        paddingTop: 10,
         marginTop: 15,
-
+        borderRadius: 10
     },
     date: {
         fontSize: 14,
         marginTop: 10,
         color: 'white'
-    },
-    btnConfirm: {
-        borderRadius: 10,
-        backgroundColor: 'transparent',
-        borderWidth: 2,
-        borderColor: 'orange',
-        paddingBottom: 15,
-        paddingTop: 15
     }
 
 });

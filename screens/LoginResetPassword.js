@@ -80,7 +80,7 @@ export default function LoginResetPassword() {
                                         value={value}
                                         placeholder={"Mã xác minh"}
                                         placeholderTextColor="white"
-                                        style={[styles.inputText]}
+                                        style={[styles.inputText, errors.token ? styles.errorsInput : undefined]}
                                         underlineColorAndroid="transparent"
                                         color='white'
                                     />
@@ -104,7 +104,7 @@ export default function LoginResetPassword() {
                                         value={value}
                                         placeholder={"Mật khẩu mới"}
                                         placeholderTextColor="white"
-                                        style={[styles.inputText]}
+                                        style={[styles.inputText, errors.password ? styles.errorsInput : undefined]}
                                         underlineColorAndroid="transparent"
                                         keyboardType="default"
                                         secureTextEntry={true}
@@ -132,7 +132,7 @@ export default function LoginResetPassword() {
                                         value={value}
                                         placeholder={"Nhập lại mật khẩu"}
                                         placeholderTextColor="white"
-                                        style={[styles.inputText]}
+                                        style={[styles.inputText, errors.ps ? styles.errorsInput : undefined]}
                                         underlineColorAndroid="transparent"
                                         keyboardType="default"
                                         secureTextEntry={true}
@@ -168,8 +168,10 @@ const styles = StyleSheet.create({
     wrapContent: {
         flex: 1
     },
-    errorInput: {
-        borderColor: 'red'
+    errorsInput: {
+        borderColor: 'orange',
+        borderBottomWidth: 3,
+        borderStyle: 'solid'
     },
     container: {
         width: '100%',

@@ -22,7 +22,7 @@ export default function ProgressTracking({ navigation }) {
 
         }
     }
-    console.log(data)
+   
     return <View style={styles.wrapper}>
         <ImageBackground source={homeImage} style={styles.imageBanner} >
             <View style={styles.overlay}>

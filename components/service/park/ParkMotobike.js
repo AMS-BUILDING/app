@@ -16,6 +16,7 @@ export default function ParkMotobike() {
     const { control, reset, handleSubmit, formState: { errors } } = useForm();
     const token = useSelector(state => state.user?.token)
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
+    const roleId = useSelector(state => state.user?.roleId)
 
     const accountIdRedux = useSelector(state => state.user?.accountId)
     let navigation = useNavigation()
@@ -24,39 +25,49 @@ export default function ParkMotobike() {
 
         try {
             if (toggleCheckBox) {
-                setLoading(true);
-                let path = '/landlord/vehicle_card/add';
-                let objReq = {
-                    vehicleId: 2,
-                    accountId: accountIdRedux,
-                    vehicleBranch: form?.vehicleBranch,
-                    licensePlate: form?.licensePlate,
-                    vehicleColor: form?.vehicleColor
-                }
-                let resp = await API.authorizedJSONPost(path, [objReq], token);
-                if (resp.ok) {
-                    setLoading(false)
-                    let response = await resp.json();
+                if (roleId == 3) {
+                    setLoading(true);
+                    let path = '/landlord/vehicle_card/add';
+                    let objReq = {
+                        vehicleId: 2,
+                        accountId: accountIdRedux,
+                        vehicleBranch: form?.vehicleBranch,
+                        licensePlate: form?.licensePlate,
+                        vehicleColor: form?.vehicleColor
+                    }
+                    let resp = await API.authorizedJSONPost(path, [objReq], token);
+                    if (resp.ok) {
+                        setLoading(false)
+                        let response = await resp.json();
 
-                    reset()
-                    Toast.show({
-                        type: 'success',
-                        position: 'bottom',
-                        bottomOffset: 50,
-                        text1: 'Bạn đã gửi yêu cầu thành công',
-                        text2: "Ấn vào đây để theo dõi tiến trình nhé!",
-                        onPress: () => {
-                            navigation.navigate("DetailProcess", { id: response?.serviceId, typeRequest: response?.typeService })
-                        }
-                    })
+                        reset()
+                        Toast.show({
+                            type: 'success',
+                            position: 'bottom',
+                            bottomOffset: 50,
+                            text1: 'Bạn đã gửi yêu cầu thành công',
+                            text2: "Ấn vào đây để theo dõi tiến trình nhé!",
+                            onPress: () => {
+                                navigation.navigate("DetailProcess", { id: response?.serviceId, typeRequest: response?.typeService })
+                            }
+                        })
+                    } else {
+                        setLoading(false)
+                        Toast.show({
+                            type: 'error',
+                            position: 'bottom',
+                            bottomOffset: 50,
+                            text1: 'Error',
+                            text2: 'Đã xảy ra lỗi, thử lại?.'
+                        })
+                    }
                 } else {
-                    setLoading(false)
                     Toast.show({
                         type: 'error',
                         position: 'bottom',
                         bottomOffset: 50,
                         text1: 'Error',
-                        text2: 'Đã xảy ra lỗi, thử lại?.'
+                        text2: "Tài khoản không có quyền truy cập"
                     })
                 }
             } else {

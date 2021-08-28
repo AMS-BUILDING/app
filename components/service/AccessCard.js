@@ -29,38 +29,46 @@ export default function AccessCard() {
                 tabBarVisible: true
             });
     }, []);
+    const roleId = useSelector(state => state.user?.roleId)
 
     let addService = async () => {
-
-
         if (toggleCheckBox) {
-            setLoading(true)
-          
-            let path = `/landlord/resident_card/add?amount=${number}`
-            let resp = await API.authorizedJSONPost(path, null, token);
-            if (resp.ok) {
-                let response = await resp.json();
-                setLoading(false);
-                setNumber(1)
-                Toast.show({
-                    type: 'success',
-                    position: 'bottom',
-                    bottomOffset: 50,
-                    text1: 'Bạn đã gửi yêu cầu thành công',
-                    text2: "Ấn vào đây để theo dõi tiến trình nhé!",
-                    onPress: () => {
-                        navigation.navigate("DetailProcess", { id: response?.serviceId?.[0], typeRequest: response?.typeService })
-                    }
-                })
+            if (roleId == 3) {
+                setLoading(true)
+                let path = `/landlord/resident_card/add?amount=${number}`
+                let resp = await API.authorizedJSONPost(path, null, token);
+                if (resp.ok) {
+                    let response = await resp.json();
+                    setLoading(false);
+                    setNumber(1)
+                    Toast.show({
+                        type: 'success',
+                        position: 'bottom',
+                        bottomOffset: 50,
+                        text1: 'Bạn đã gửi yêu cầu thành công',
+                        text2: "Ấn vào đây để theo dõi tiến trình nhé!",
+                        onPress: () => {
+                            navigation.navigate("DetailProcess", { id: response?.serviceId?.[0], typeRequest: response?.typeService })
+                        }
+                    })
+                } else {
+                    setLoading(false);
+                    let response = await resp.json();
+                    Toast.show({
+                        type: 'error',
+                        position: 'bottom',
+                        bottomOffset: 50,
+                        text1: 'Error',
+                        text2: response?.message
+                    })
+                }
             } else {
-                setLoading(false);
-                let response = await resp.json();
                 Toast.show({
                     type: 'error',
                     position: 'bottom',
                     bottomOffset: 50,
                     text1: 'Error',
-                    text2: response?.message
+                    text2: "Tài khoản không có quyền truy cập"
                 })
             }
         } else {

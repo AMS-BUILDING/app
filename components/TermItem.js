@@ -13,7 +13,7 @@ export default function TermItem() {
 
 const styles = StyleSheet.create({
     wrapper: {
-        borderBottomColor: 'gray',
+        borderBottomColor: 'pink',
         borderBottomWidth: 1
     },
     container: {
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     },
     number: {
         fontWeight: 'bold',
-        fontSize: 16
+        fontSize:16
     },
     desc: {
         marginLeft: 10,

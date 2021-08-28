@@ -58,7 +58,7 @@ export default function LoginEmailScreen() {
                                         value={value}
                                         placeholder={"Email"}
                                         placeholderTextColor="white"
-                                        style={[styles.inputText]}
+                                        style={[styles.inputText, errors.email ? styles.errorsInput : undefined]}
                                         underlineColorAndroid="transparent"
                                         color='white'
                                     />
@@ -162,5 +162,10 @@ const styles = StyleSheet.create({
         zIndex: 4,
         width: '100%',
         height: '100%'
+    },
+    errorsInput: {
+        borderColor: 'orange',
+        borderBottomWidth: 3,
+        borderStyle: 'solid'
     }
 })

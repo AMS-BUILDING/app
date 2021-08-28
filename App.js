@@ -44,6 +44,8 @@ import LoginResetPassword from './screens/LoginResetPassword';
 import NotificationScreen from './screens/NotificationScreen';
 import FamilyScreen from './screens/FamilyScreen'
 import NotificationTab from './NotificationTab'
+import { Image } from 'react-native';
+import QRScreen from './screens/QRScreen';
 import Market from './screens/Market';
 
 const Tab = createBottomTabNavigator();
@@ -173,15 +175,20 @@ function BottomTabNavigation({ handleLogin }) {
           tabBarIcon: ({ color }) =>
             (<Feather name="home" size={25} color={color} />),
         }} />
-        <Tab.Screen name="MessageStack" component={HomeStackScreen} options={{
-          tabBarLabel: "Tin nhắn",
-          tabBarIcon: ({ color }) =>
-            (<Feather name="message-circle" size={25} color={color} />),
-        }} />
+
         <Tab.Screen name="NotificationStack" children={() => <NotificationStackScreen handleRead={handleRead} />} options={{
           tabBarLabel: "Thông báo",
           tabBarIcon: ({ color }) =>
             (<NotificationTab color={color} isRead={isRead} />)
+        }} />
+        <Tab.Screen name="MessageStack" component={MessageStackScreen} options={{
+          tabBarLabel: "",
+          tabBarIcon: ({ color }) =>
+          (
+            <View style={{ width: 40, height: 40, marginTop: 15 }} >
+              <Image source={require('./assets/qr.png')} style={{ width: 40, height: 40 }} />
+            </View>
+          ),
         }} />
         <Tab.Screen name="MarketStack" component={MarketStackScreen} options={{
           tabBarLabel: "Đặt hàng",
@@ -379,7 +386,7 @@ function HomeStackScreen() {
 function MessageStackScreen() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      <Stack.Screen name="Home" component={QRScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }
@@ -387,13 +394,14 @@ function MessageStackScreen() {
 function NotificationStackScreen({ handleRead }) {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Notification" children={() => <NotificationScreen handleRead={handleRead} />} options={{
-        title: 'Thông báo',
-        headerStyle: {
-          backgroundColor: '#333333'
-        },
-        headerTintColor: '#fff'
-      }} />
+      <Stack.Screen name="Notification" children={() => <NotificationScreen handleRead={handleRead} />}
+        options={{
+          title: 'Thông báo',
+          headerStyle: {
+            backgroundColor: '#333333'
+          },
+          headerTintColor: '#fff'
+        }} />
     </Stack.Navigator>
   )
 }
@@ -401,8 +409,12 @@ function NotificationStackScreen({ handleRead }) {
 function MarketStackScreen() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Market" component={Market} options={{
-        headerShown: false,
+      <Stack.Screen name="Home" component={Market} options={{
+        title: 'Đặt hàng',
+        headerStyle: {
+          backgroundColor: '#333333'
+        },
+        headerTintColor: '#fff'
       }} />
     </Stack.Navigator>
   )

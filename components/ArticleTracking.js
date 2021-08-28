@@ -6,49 +6,60 @@ import API from './lib/API';
 
 export default function ArticleTracking({ navigation, data, search }) {
     const token = useSelector(state => state.user?.token);
-    console.log(data)
+    const roleId = useSelector(state => state.user?.roleId)
+
     let cancel = () => {
         try {
-            if (data?.statusId == 1) {
-                Toast.show({
-                    type: 'info',
-                    position: 'bottom',
-                    autoHide: false,
-                    bottomOffset: 50,
-                    text1: 'Thông báo',
-                    text2: 'Bạn chắc chắn muốn hủy dịch vụ?',
-                    onPress: async () => {
-                        let path = `/landlord/request-service/update-app/${data?.id}?statusId=4&typeRequest=${data?.typeRequest}`;
-                        Toast.hide()
-                      
-                        let resp = await API.authorizedJSONPost(path, null, token);
-                        if (resp.ok) {
-                            search()
-                            Toast.show({
-                                type: 'success',
-                                position: 'bottom',
-                                bottomOffset: 50,
-                                text1: 'Thành công',
-                                text2: 'Bạn đã hủy dịch vụ thành công!.'
-                            })
-                        } else {
-                            Toast.show({
-                                type: 'error',
-                                position: 'bottom',
-                                bottomOffset: 50,
-                                text1: 'Thành công',
-                                text2: 'Bạn đã hủy dịch vụ thành công!.'
-                            })
+            if (roleId == 3) {
+                if (data?.statusId == 1) {
+                    Toast.show({
+                        type: 'info',
+                        position: 'bottom',
+                        autoHide: false,
+                        bottomOffset: 50,
+                        text1: 'Thông báo',
+                        text2: 'Bạn chắc chắn muốn hủy dịch vụ?',
+                        onPress: async () => {
+                            let path = `/landlord/request-service/update-app/${data?.id}?statusId=4&typeRequest=${data?.typeRequest}`;
+                            Toast.hide()
+
+                            let resp = await API.authorizedJSONPost(path, null, token);
+                            if (resp.ok) {
+                                search()
+                                Toast.show({
+                                    type: 'success',
+                                    position: 'bottom',
+                                    bottomOffset: 50,
+                                    text1: 'Thành công',
+                                    text2: 'Bạn đã hủy dịch vụ thành công!.'
+                                })
+                            } else {
+                                Toast.show({
+                                    type: 'error',
+                                    position: 'bottom',
+                                    bottomOffset: 50,
+                                    text1: 'Thành công',
+                                    text2: 'Bạn đã hủy dịch vụ thành công!.'
+                                })
+                            }
                         }
-                    }
-                })
+                    })
+                } else {
+                    Toast.show({
+                        type: 'info',
+                        position: 'bottom',
+                        bottomOffset: 50,
+                        text1: 'Thông báo',
+                        text2: 'Bạn không thể hủy dịch vụ này!.'
+                    })
+                }
             } else {
                 Toast.show({
-                    type: 'info',
+                    type: 'error',
                     position: 'bottom',
                     bottomOffset: 50,
-                    text1: 'Thông báo',
-                    text2: 'Bạn không thể hủy dịch vụ này!.'
+                    text1: 'Error',
+                    text2: "Tài khoản không có quyền truy cập"
                 })
             }
         } catch (error) {

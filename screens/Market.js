@@ -1,7 +1,6 @@
 import { AntDesign } from '@expo/vector-icons';
 import React from 'react';
-import { ImageBackground, StyleSheet, Text, View, Image } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ImageBackground, StyleSheet, Text, View, Image, TouchableOpacity, Linking } from 'react-native';
 import HomeImage from '../assets/images/bgscreen.png';
 import Header from '../components/Header';
 import Grab from '../assets/images/grab.png';
@@ -9,8 +8,22 @@ import Now from '../assets/images/now.png';
 import Tiki from '../assets/images/tiki.png';
 import Shopee from '../assets/images/shopee.png';
 export default function Home({ navigation }) {
+    let openGrab = () => {
+        Linking.openURL("grab://app")
+    }
+    let openNow = () => {
+        Linking.openURL("now://app")
+    }
+    let openTiki = () => {
+        Linking.openURL("tiki://app")
+    }
+    let openShopee = () => {
+        Linking.openURL("shopee://app")
+    }
+
+
     return <View style={styles.wrapper}>
-        <Header navigation={navigation} />
+        {/* <Header navigation={navigation} /> */}
         <View style={styles.wrapContent}>
             <ImageBackground source={HomeImage} style={styles.image}>
 
@@ -18,15 +31,25 @@ export default function Home({ navigation }) {
                     <View style={{ marginBottom: 20, borderBottomColor: 'gray', borderBottomWidth: 2 }}>
                         <Text style={{ color: 'white', marginLeft: 10, marginBottom: 30, fontWeight: 'bold' }}>Ứng dụng thương mại điện tử</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 30 }}>
-                            <Image source={Shopee} style={{ width: 50, height: 50 }} />
-                            <Image source={Tiki} style={{ width: 50, height: 50 }} />
+                            <TouchableOpacity onPress={openShopee}>
+                                <Image source={Shopee} style={{ width: 50, height: 50 }} />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={openTiki}>
+                                <Image source={Tiki} style={{ width: 50, height: 50 }} />
+                            </TouchableOpacity>
+
                         </View>
                     </View>
                     <View>
                         <Text style={{ color: 'white', marginLeft: 10, marginBottom: 30, fontWeight: 'bold' }}>Ứng dụng đặt đồ ăn</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 30 }}>
-                            <Image source={Grab} style={{ width: 50, height: 50 }} />
-                            <Image source={Now} style={{ width: 50, height: 50 }} />
+                            <TouchableOpacity onPress={openGrab}>
+                                <Image source={Grab} style={{ width: 50, height: 50 }} />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={openNow}>
+                                <Image source={Now} style={{ width: 50, height: 50 }} />
+                            </TouchableOpacity>
+
                         </View>
 
                     </View>

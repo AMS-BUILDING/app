@@ -157,6 +157,7 @@ function Count({ timeTo, handleTimeTo, problems }) {
 
 function Time({ time, handleTime }) {
     const [open, setOpen] = useState(false);
+    
     const [items, setItems] = useState([
         { label: '1h', value: "01:00" },
         { label: '2h', value: "02:00" },
