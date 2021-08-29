@@ -25,11 +25,15 @@ const userSlice = createSlice({
             state.roleId = action.payload;
             return state;
         },
+        addRoomNumber: (state, action) => {
+            state.roomNumber = action.payload;
+            return state;
+        },
         clearState: () => {
             return {}
         }
     }
 })
 
-export const { addToken, addAccountId, clearState, addUser ,addRole} = userSlice.actions
+export const { addToken, addAccountId, clearState, addUser, addRole, addRoomNumber } = userSlice.actions
 export default userSlice.reducer
