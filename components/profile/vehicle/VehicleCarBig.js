@@ -13,7 +13,7 @@ export default function VehicleCarBig() {
     }, [])
     let search = async () => {
         try {
-            let path = `/tenant/vehicle-by-account-id/${accountIdRedux}?typeId=4`;
+            let path = `/landlord/vehicle-by-account-id/${accountIdRedux}?typeId=4`;
             let resp = await API.authorizedJSONGET(path, token);
             if (resp.ok) {
                 let response = await resp.json();

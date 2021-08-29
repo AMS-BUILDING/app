@@ -19,17 +19,15 @@ export default function NotificationTab({ color, isRead }) {
 
     let search = async () => {
         try {
-            let path = `/tenant/notifications/numbers`;
+            let path = `/landlord/notifications/numbers`;
             let resp = await API.authorizedJSONGET(path, token);
             if (resp.ok) {
                 let response = await resp.json();
                 setNumber(response)
             }
         } catch (error) {
-
         }
     }
-
 
     return (
         <>
