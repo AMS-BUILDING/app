@@ -21,7 +21,7 @@ export default function NotificationAll() {
         searchPrivate()
     }, [isFocus])
     const search = async () => {
-        let path = '/landlord/notifications';
+        let path = '/tenant/notifications';
         let resp = await API.authorizedJSONGET(path, token);
         if (resp.ok) {
             let response = await resp.json();
