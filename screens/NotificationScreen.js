@@ -12,20 +12,37 @@ export default function NotificationScreen({ handleRead }) {
     const [data, setData] = useState();
     const isFocus = useIsFocused()
     const token = useSelector(state => state.user?.token);
-
+    const [noti, setNoti] = useState()
     useEffect(() => {
         search()
-        handleRead()
+        searchPrivate()
     }, [])
     useEffect(() => {
         search()
+        searchPrivate()
+        removeNotification()
     }, [isFocus])
     const search = async () => {
-        let path = '/landlord/notifications/private';
+        let path = '/landlord/notifications';
         let resp = await API.authorizedJSONGET(path, token);
         if (resp.ok) {
             let response = await resp.json();
             setData(response)
+        }
+    }
+    const searchPrivate = async () => {
+        let path = '/landlord/notifications/private';
+        let resp = await API.authorizedJSONGET(path, token);
+        if (resp.ok) {
+            let response = await resp.json();
+            setNoti(response)
+        }
+    }
+    const removeNotification = async () => {
+        let path = '/landlord/update-status';
+        let resp = await API.authorizedJSONPost(path, null, token);
+        if (resp.ok) {
+            handleRead()
         }
     }
     return (
@@ -35,6 +52,11 @@ export default function NotificationScreen({ handleRead }) {
                     <View style={[{ position: 'absolute', zIndex: 5, width: '100%', height: '100%' }]}>
                         <ScrollView>
                             {data?.map((item, index) => {
+                                return (
+                                    <NotiItem key={index} data={item} search={search} />
+                                )
+                            })}
+                            {noti?.map((item, index) => {
                                 return (
                                     <NotiItem key={index} data={item} search={search} />
                                 )

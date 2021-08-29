@@ -14,7 +14,7 @@ import SearchRepair from './SearchRepair';
 export default function Repair() {
     let navigation = useNavigation();
     const [loading, setLoading] = useState(false);
-    
+
     useEffect(() => {
         const parent = navigation.dangerouslyGetParent();
 
@@ -27,8 +27,8 @@ export default function Repair() {
             });
 
     }, []);
-    const [times,setTimes] = useState([]);
-    
+    const [times, setTimes] = useState([]);
+
     const [text, setText] = useState();
     const handleText = (value) => {
         setText(value)
@@ -62,48 +62,60 @@ export default function Repair() {
     let handleTime = value => {
         setTime(value)
     }
+    const roleId = useSelector(state => state.user?.roleId)
+
     let addService = async () => {
         setLoading(true)
         try {
-            let path = '/landlord/service_request/add';
-            let resp = await API.authorizedJSONPost(path, {
-                reasonDetailSubServiceId: timeTo,
-                accountId: accountIdRedux,
-                startDate: `${moment(date, "DD-MM-YYYY").format("YYYY/MM/DD")} ${time}`,
-                endDate: ""
-            }, token);
-            if (resp.ok) {
-                setLoading(false);
-                let response = await resp.json();
-              
-                Toast.show({
-                    type: 'success',
-                    position: 'bottom',
-                    bottomOffset: 50,
-                    text1: 'Bạn đã gửi yêu cầu thành công',
-                    text2: "Ấn vào đây để theo dõi tiến trình nhé!",
-                    onPress: () => {
-                        setTimeFrom("21")
-                        setTimeTo("21")
-                        setTime("01:00")
-                        setDate(new Date())
-                        navigation.navigate("DetailProcess", { id: response?.serviceId, typeRequest: response?.typeService })
-                    }
-                })
+            if (roleId == 3) {
+                let path = '/landlord/service_request/add';
+                let resp = await API.authorizedJSONPost(path, {
+                    reasonDetailSubServiceId: timeTo,
+                    accountId: accountIdRedux,
+                    startDate: `${moment(date, "DD-MM-YYYY").format("YYYY/MM/DD")} ${time}`,
+                    endDate: ""
+                }, token);
+                if (resp.ok) {
+                    setLoading(false);
+                    let response = await resp.json();
+
+                    Toast.show({
+                        type: 'success',
+                        position: 'bottom',
+                        bottomOffset: 50,
+                        text1: 'Bạn đã gửi yêu cầu thành công',
+                        text2: "Ấn vào đây để theo dõi tiến trình nhé!",
+                        onPress: () => {
+                            setTimeFrom("21")
+                            setTimeTo("21")
+                            setTime("01:00")
+                            setDate(new Date())
+                            navigation.navigate("DetailProcess", { id: response?.serviceId, typeRequest: response?.typeService })
+                        }
+                    })
+
+                } else {
+                    setLoading(false)
+                    let response = await resp.json();
+                    Toast.show({
+                        type: 'error',
+                        position: 'bottom',
+                        bottomOffset: 50,
+                        text1: 'Error',
+                        text2: response?.message
+                    })
+                }
+
 
             } else {
-                setLoading(false)
-                let response = await resp.json();
                 Toast.show({
                     type: 'error',
                     position: 'bottom',
                     bottomOffset: 50,
                     text1: 'Error',
-                    text2: response?.message
+                    text2: "Tài khoản không có quyền truy cập"
                 })
             }
-
-
         } catch (error) {
 
         }

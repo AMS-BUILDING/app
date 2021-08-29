@@ -18,43 +18,54 @@ export default function ParkElectric() {
     const accountIdRedux = useSelector(state => state.user?.accountId)
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     let navigation = useNavigation()
+    const roleId = useSelector(state => state.user?.roleId)
 
     let addPark = async (form) => {
 
         try {
             if (toggleCheckBox) {
-                setLoading(true);
-                let path = '/landlord/vehicle_card/add';
-                let objReq = {
-                    vehicleId: 1,
-                    accountId: accountIdRedux,
-                    vehicleBranch: form?.vehicleBranch,
-                    licensePlate: form?.licensePlate,
-                    vehicleColor: form?.vehicleColor
-                }
-                let resp = await API.authorizedJSONPost(path, [objReq], token);
-                if (resp.ok) {
-                    setLoading(false)
-                    let response = await resp.json();
-                    reset()
-                    Toast.show({
-                        type: 'success',
-                        position: 'bottom',
-                        bottomOffset: 50,
-                        text1: 'Bạn đã gửi yêu cầu thành công',
-                        text2: "Ấn vào đây để theo dõi tiến trình nhé!",
-                        onPress: () => {
-                            navigation.navigate("DetailProcess", { id: response?.serviceId, typeRequest: response?.typeService })
-                        }
-                    })
+                if (roleId == 3) {
+                    setLoading(true);
+                    let path = '/landlord/vehicle_card/add';
+                    let objReq = {
+                        vehicleId: 1,
+                        accountId: accountIdRedux,
+                        vehicleBranch: form?.vehicleBranch,
+                        licensePlate: form?.licensePlate,
+                        vehicleColor: form?.vehicleColor
+                    }
+                    let resp = await API.authorizedJSONPost(path, [objReq], token);
+                    if (resp.ok) {
+                        setLoading(false)
+                        let response = await resp.json();
+                        reset()
+                        Toast.show({
+                            type: 'success',
+                            position: 'bottom',
+                            bottomOffset: 50,
+                            text1: 'Bạn đã gửi yêu cầu thành công',
+                            text2: "Ấn vào đây để theo dõi tiến trình nhé!",
+                            onPress: () => {
+                                navigation.navigate("DetailProcess", { id: response?.serviceId, typeRequest: response?.typeService })
+                            }
+                        })
+                    } else {
+                        setLoading(false)
+                        Toast.show({
+                            type: 'error',
+                            position: 'bottom',
+                            bottomOffset: 50,
+                            text1: 'Error',
+                            text2: 'Đã xảy ra lỗi, thử lại?.'
+                        })
+                    }
                 } else {
-                    setLoading(false)
                     Toast.show({
                         type: 'error',
                         position: 'bottom',
                         bottomOffset: 50,
                         text1: 'Error',
-                        text2: 'Đã xảy ra lỗi, thử lại?.'
+                        text2: "Tài khoản không có quyền truy cập"
                     })
                 }
             } else {

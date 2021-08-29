@@ -32,7 +32,7 @@ export default function BBQ() {
         markedDates: {}
     })
     const token = useSelector(state => state.user?.token)
-    console.log(token)
+
     const accountIdRedux = useSelector(state => state.user?.accountId)
 
     const getSelectedDayEvents = date => {
@@ -49,28 +49,39 @@ export default function BBQ() {
     const handleTimeFrom = (hour) => {
         setTimeFrom(hour)
     }
+    const roleId = useSelector(state => state.user?.roleId)
 
     let addService = async () => {
         try {
             if (toggleCheckBox) {
-
-                let objReq = {
-                    reasonDetailSubServiceId: 1,
-                    accountId: accountIdRedux,
-                    startDate: `${moment(dateObj?.selectedDate, "DD-MM-YYYY").format("YYYY/MM/DD")} ${timeFrom.slice(0, 5)}`,
-                    endDate: `${moment(dateObj?.selectedDate, "DD-MM-YYYY").format("YYYY/MM/DD")} ${timeFrom.slice(6, 11)}`,
-                    name: "BBQ",
-                    description: ""
+                if (roleId == 3) {
+                    let objReq = {
+                        reasonDetailSubServiceId: 1,
+                        accountId: accountIdRedux,
+                        startDate: `${moment(dateObj?.selectedDate, "DD-MM-YYYY").format("YYYY/MM/DD")} ${timeFrom.slice(0, 5)}`,
+                        endDate: `${moment(dateObj?.selectedDate, "DD-MM-YYYY").format("YYYY/MM/DD")} ${timeFrom.slice(6, 11)}`,
+                        name: "BBQ",
+                        description: ""
+                    }
+                    navigation.navigate('PriceRequest', {
+                        data: objReq
+                    })
+                    setToggleCheckBox(false)
+                    setDateObj({
+                        selectedDate: moment(new Date(Date.now())).format("DD-MM-YYYY"),
+                        markedDates: {}
+                    })
+                    setTimeFrom("06:00-08:00")
+                } else {
+                    Toast.show({
+                        type: 'error',
+                        position: 'bottom',
+                        bottomOffset: 50,
+                        text1: 'Error',
+                        text2: "Tài khoản không có quyền truy cập"
+                    })
                 }
-                navigation.navigate('PriceRequest', {
-                    data: objReq
-                })
-                setToggleCheckBox(false)
-                setDateObj({
-                    selectedDate: moment(new Date(Date.now())).format("DD-MM-YYYY"),
-                    markedDates: {}
-                })
-                setTimeFrom("06:00-08:00")
+
             } else {
                 Toast.show({
                     type: 'error',

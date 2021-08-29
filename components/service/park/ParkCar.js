@@ -23,6 +23,7 @@ export default function ParkCar() {
         { label: "7 chỗ", value: "4" }
     ]);
     const [id, setId] = useState("3")
+    const roleId = useSelector(state => state.user?.roleId)
 
     const token = useSelector(state => state.user?.token)
     const accountIdRedux = useSelector(state => state.user?.accountId)
@@ -31,39 +32,49 @@ export default function ParkCar() {
 
         try {
             if (toggleCheckBox) {
-                setLoading(true);
-                let path = '/landlord/vehicle_card/add';
-                let objReq = {
-                    vehicleId: id,
-                    accountId: accountIdRedux,
-                    vehicleBranch: form?.vehicleBranch,
-                    licensePlate: form?.licensePlate,
-                    vehicleColor: form?.vehicleColor
-                }
-                let resp = await API.authorizedJSONPost(path, [objReq], token);
-                if (resp.ok) {
-                    setLoading(false)
-                    let response = await resp.json();
-                    setId("3");
-                    reset()
-                    Toast.show({
-                        type: 'success',
-                        position: 'bottom',
-                        bottomOffset: 50,
-                        text1: 'Bạn đã gửi yêu cầu thành công',
-                        text2: "Ấn vào đây để theo dõi tiến trình nhé!",
-                        onPress: () => {
-                            navigation.navigate("DetailProcess", { id: response?.serviceId, typeRequest: response?.typeService })
-                        }
-                    })
+                if (roleId == 3) {
+                    setLoading(true);
+                    let path = '/landlord/vehicle_card/add';
+                    let objReq = {
+                        vehicleId: id,
+                        accountId: accountIdRedux,
+                        vehicleBranch: form?.vehicleBranch,
+                        licensePlate: form?.licensePlate,
+                        vehicleColor: form?.vehicleColor
+                    }
+                    let resp = await API.authorizedJSONPost(path, [objReq], token);
+                    if (resp.ok) {
+                        setLoading(false)
+                        let response = await resp.json();
+                        setId("3");
+                        reset()
+                        Toast.show({
+                            type: 'success',
+                            position: 'bottom',
+                            bottomOffset: 50,
+                            text1: 'Bạn đã gửi yêu cầu thành công',
+                            text2: "Ấn vào đây để theo dõi tiến trình nhé!",
+                            onPress: () => {
+                                navigation.navigate("DetailProcess", { id: response?.serviceId, typeRequest: response?.typeService })
+                            }
+                        })
+                    } else {
+                        setLoading(false)
+                        Toast.show({
+                            type: 'error',
+                            position: 'bottom',
+                            bottomOffset: 50,
+                            text1: 'Error',
+                            text2: 'Đã xảy ra lỗi, thử lại?.'
+                        })
+                    }
                 } else {
-                    setLoading(false)
                     Toast.show({
                         type: 'error',
                         position: 'bottom',
                         bottomOffset: 50,
                         text1: 'Error',
-                        text2: 'Đã xảy ra lỗi, thử lại?.'
+                        text2: "Tài khoản không có quyền truy cập"
                     })
                 }
             } else {

@@ -53,45 +53,57 @@ export default function ApartmentCleaning() {
     const handleTimeTo = (hour) => {
         setTimeTo(hour)
     }
+    const roleId = useSelector(state => state.user?.roleId)
+
     let addService = async () => {
         try {
             if (toggleCheckBox) {
-                let path = '/landlord/service_request/add';
-                let resp = await API.authorizedJSONPost(path, {
-                    reasonDetailSubServiceId: timeTo,
-                    accountId: accountIdRedux,
-                    startDate: `${moment(dateObj?.selectedDate, "DD-MM-YYYY").format("YYYY/MM/DD")} ${timeFrom.slice(0, 5)}`,
-                    endDate: `${moment(dateObj?.selectedDate, "DD-MM-YYYY").format("YYYY/MM/DD")} ${timeFrom.slice(6, 11)}`,
-                    endDate: ""
-                }, token);
-                if (resp.ok) {
-                    let response = await resp.json();
-                    Toast.show({
-                        type: 'success',
-                        position: 'bottom',
-                        bottomOffset: 50,
-                        text1: 'Bạn đã gửi yêu cầu thành công',
-                        text2: "Ấn vào đây để theo dõi tiến trình nhé!",
-                        onPress: () => {
-                            setToggleCheckBox(false)
-                            setDateObj({
-                                selectedDate: moment(new Date(Date.now())).format("DD-MM-YYYY"),
-                                markedDates: {}
-                            })
-                            setTimeFrom("06:00-08:00")
-                            setTimeTo("16")
-                            navigation.navigate("DetailProcess", { id: response?.serviceId, typeRequest: response?.typeService })
-                        }
-                    })
+                if (roleId == 3) {
+                    let path = '/landlord/service_request/add';
+                    let resp = await API.authorizedJSONPost(path, {
+                        reasonDetailSubServiceId: timeTo,
+                        accountId: accountIdRedux,
+                        startDate: `${moment(dateObj?.selectedDate, "DD-MM-YYYY").format("YYYY/MM/DD")} ${timeFrom.slice(0, 5)}`,
+                        endDate: `${moment(dateObj?.selectedDate, "DD-MM-YYYY").format("YYYY/MM/DD")} ${timeFrom.slice(6, 11)}`,
+                        endDate: ""
+                    }, token);
+                    if (resp.ok) {
+                        let response = await resp.json();
+                        Toast.show({
+                            type: 'success',
+                            position: 'bottom',
+                            bottomOffset: 50,
+                            text1: 'Bạn đã gửi yêu cầu thành công',
+                            text2: "Ấn vào đây để theo dõi tiến trình nhé!",
+                            onPress: () => {
+                                setToggleCheckBox(false)
+                                setDateObj({
+                                    selectedDate: moment(new Date(Date.now())).format("DD-MM-YYYY"),
+                                    markedDates: {}
+                                })
+                                setTimeFrom("06:00-08:00")
+                                setTimeTo("16")
+                                navigation.navigate("DetailProcess", { id: response?.serviceId, typeRequest: response?.typeService })
+                            }
+                        })
+                    } else {
+                        setLoading(false)
+                        let response = await resp.json();
+                        Toast.show({
+                            type: 'error',
+                            position: 'bottom',
+                            bottomOffset: 50,
+                            text1: 'Error',
+                            text2: response?.message
+                        })
+                    }
                 } else {
-                    setLoading(false)
-                    let response = await resp.json();
                     Toast.show({
                         type: 'error',
                         position: 'bottom',
                         bottomOffset: 50,
                         text1: 'Error',
-                        text2: response?.message
+                        text2: "Tài khoản không có quyền truy cập"
                     })
                 }
             } else {
