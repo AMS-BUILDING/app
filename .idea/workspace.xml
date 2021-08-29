@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d6ef2368-bda4-4742-80b8-97db59623308" name="Default Changelist" comment="update" />
+    <list default="true" id="d6ef2368-bda4-4742-80b8-97db59623308" name="Default Changelist" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,7 +12,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="TuanNA_Realease_01" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -48,6 +50,7 @@
       <workItem from="1629956844613" duration="70000" />
       <workItem from="1629963539500" duration="16000" />
       <workItem from="1630043514614" duration="645000" />
+      <workItem from="1630168471973" duration="693000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1629883330871</created>

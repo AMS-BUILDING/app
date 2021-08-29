@@ -18,7 +18,7 @@ export default function NotificationScreen({ handleRead }) {
     }, [])
     useEffect(() => {
         search()
-        removeNotification
+        removeNotification()
     }, [isFocus])
     const search = async () => {
         let path = '/landlord/notifications/private';
@@ -30,7 +30,7 @@ export default function NotificationScreen({ handleRead }) {
     }
     const removeNotification = async () => {
         let path = '/landlord/update-status';
-        let resp = await API.authorizedJSONPost(path,null,token);
+        let resp = await API.authorizedJSONPost(path, null, token);
         if (resp.ok) {
             handleRead()
         }

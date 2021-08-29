@@ -32,7 +32,7 @@ export default function QRScreen() {
                             size={200}
                         />
                     </View>
-                    <Text style={{ color: 'green', marginTop: 20 }}>
+                    <Text style={{ color: 'black', marginTop: 20 }}>
                         Tự động cập nhập sau <Text style={{ fontWeight: '700' }}>{seconds}</Text> giây
                     </Text>
                 </View>

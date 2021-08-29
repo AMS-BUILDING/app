@@ -185,8 +185,8 @@ function BottomTabNavigation({ handleLogin }) {
           tabBarLabel: "",
           tabBarIcon: ({ color }) =>
           (
-            <View style={{ width: 40, height: 40, marginTop: 15 }} >
-              <Image source={require('./assets/qr.png')} style={{ width: 40, height: 40 }} />
+            <View style={{ width: 40, height: 40, marginTop: 15, backgroundColor: 'red', justifyContent: 'center', alignItems: 'center', borderRadius: 10 }} >
+              <Image source={require('./assets/qr.png')} style={{ width: 30, height: 30 }} />
             </View>
           ),
         }} />
