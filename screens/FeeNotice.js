@@ -119,7 +119,7 @@ export default function FeeNotice({ navigation }) {
                             {data?.status !== "Đã thanh toán"
                                 && <View style={styles.wrapBtn}>
                                     <View style={styles.btnConfirm}>
-                                        <Button title="Thanh toán" color="#006633" onPress={() => handlePayment()} />
+                                        <Text onPress={() => handlePayment()} style={{ color: 'orange', textAlign: 'center' }}>THANH TOÁN</Text>
                                     </View>
                                 </View>
                             }
@@ -306,6 +306,14 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginTop: 10,
         color: 'white'
+    },
+    btnConfirm: {
+        backgroundColor: 'transparent',
+        borderColor: 'orange',
+        borderWidth: 2,
+        borderRadius: 10,
+        paddingTop: 10,
+        paddingBottom: 10
     }
 
 });

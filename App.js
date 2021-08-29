@@ -47,6 +47,7 @@ import NotificationTab from './NotificationTab'
 import { Image } from 'react-native';
 import QRScreen from './screens/QRScreen';
 import Market from './screens/Market';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -186,7 +187,7 @@ function BottomTabNavigation({ handleLogin }) {
           tabBarIcon: ({ color }) =>
           (
             <View style={{ width: 40, height: 40, marginTop: 15, backgroundColor: 'red', justifyContent: 'center', alignItems: 'center', borderRadius: 10 }} >
-              <Image source={require('./assets/qr.png')} style={{ width: 30, height: 30 }} />
+              <MaterialCommunityIcons name="qrcode-scan" size={25} color="white" />
             </View>
           ),
         }} />

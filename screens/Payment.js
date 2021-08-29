@@ -37,7 +37,7 @@ export default function Payment(props) {
 
                 <View style={styles.main}>
                     <View>
-                        <Text style={styles.title}>Căn hộ 099</Text>
+                        <Text style={styles.title}>Căn hộ {data?.roomNumber}</Text>
                         <View style={styles.content}>
                             <Text style={styles.textContent}>Nội dung</Text>
                             <Text style={styles.textContent}>Nộp tiền phí dịch vụ</Text>
