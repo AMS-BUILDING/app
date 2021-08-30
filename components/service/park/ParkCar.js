@@ -65,7 +65,7 @@ export default function ParkCar() {
                             type: 'error',
                             position: 'bottom',
                             bottomOffset: 50,
-                            text1: 'Error',
+                            text1: 'Lỗi!',
                             text2: response?.message
                         })
                     }
@@ -74,7 +74,7 @@ export default function ParkCar() {
                         type: 'error',
                         position: 'bottom',
                         bottomOffset: 50,
-                        text1: 'Error',
+                        text1: 'Lỗi!',
                         text2: "Tài khoản không có quyền truy cập"
                     })
                 }
@@ -83,7 +83,7 @@ export default function ParkCar() {
                     type: 'error',
                     position: 'bottom',
                     bottomOffset: 50,
-                    text1: 'Error',
+                    text1: 'Lỗi!',
                     text2: 'Bạn cần đọc và cam kết!.'
                 })
             }

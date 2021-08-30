@@ -58,7 +58,7 @@ export default function ArticleTracking({ navigation, data, search }) {
                     type: 'error',
                     position: 'bottom',
                     bottomOffset: 50,
-                    text1: 'Error',
+                    text1: 'Lỗi!',
                     text2: "Tài khoản không có quyền truy cập"
                 })
             }

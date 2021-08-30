@@ -68,7 +68,7 @@ export default function MenuProfile({ handleLogin }) {
                     type: 'error',
                     position: 'bottom',
                     bottomOffset: 50,
-                    text1: 'Error',
+                    text1: 'Lỗi!',
                     text2: 'Vui lòng kiểm tra lại thông tin.'
                 })
             }

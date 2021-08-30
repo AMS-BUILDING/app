@@ -62,7 +62,7 @@ export default function ChangeProfile(props) {
                     type: 'success',
                     position: 'bottom',
                     bottomOffset: 50,
-                    text1: 'OK',
+                    text1: 'Thành công',
                     text2: 'Bạn đã cập nhập thông tin thành công!.'
                 })
             } else {
@@ -73,7 +73,7 @@ export default function ChangeProfile(props) {
                     type: 'error',
                     position: 'bottom',
                     bottomOffset: 50,
-                    text1: 'Error',
+                    text1: 'Lỗi!',
                     text2: response?.message
                 })
             }

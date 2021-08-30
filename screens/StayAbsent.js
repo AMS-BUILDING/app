@@ -73,7 +73,7 @@ function StayAbsentItem({ absentType }) {
                 type: 'error',
                 position: 'bottom',
                 bottomOffset: 50,
-                text1: 'Error',
+                text1: 'Lỗi!',
                 text2: "Ngày đến phải sau ngày đi"
             })
         } else {
@@ -100,7 +100,7 @@ function StayAbsentItem({ absentType }) {
                     position: 'bottom',
                     bottomOffset: 50,
                     autoHide: false,
-                    text1: 'OK',
+                    text1: 'Thành công',
                     text2: 'Bạn đã đăng ký thành công!.',
                     onPress: async () => {
                         await Toast.hide()
@@ -120,7 +120,7 @@ function StayAbsentItem({ absentType }) {
                     type: 'error',
                     position: 'bottom',
                     bottomOffset: 50,
-                    text1: 'Error',
+                    text1: 'Lỗi!',
                     text2: message
                 })
             }

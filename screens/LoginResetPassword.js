@@ -25,7 +25,7 @@ export default function LoginResetPassword() {
                 type: 'error',
                 position: 'bottom',
                 bottomOffset: 20,
-                text1: 'Error',
+                text1: 'Lỗi!',
                 text2: 'Mật khẩu bạn nhập lại chưa đúng!.',
 
             })
@@ -54,7 +54,7 @@ export default function LoginResetPassword() {
                     type: 'error',
                     position: 'bottom',
                     bottomOffset: 20,
-                    text1: 'Error',
+                    text1: 'Lỗi!',
                     text2: 'Mã xác minh chưa đúng!.',
 
                 })

@@ -21,8 +21,8 @@ export const pickupPhoto = (maxWidth, maxHeight, quality = 0.8) => {
                     type: 'error',
                     position: 'bottom',
                     bottomOffset: 50,
-                    text1: "Error",
-                    text2: "Error",
+                    text1: "Lỗi!",
+                    text2: "Lỗi!",
                 });
                 reject()
                 return;
@@ -31,8 +31,8 @@ export const pickupPhoto = (maxWidth, maxHeight, quality = 0.8) => {
                     type: 'error',
                     position: 'bottom',
                     bottomOffset: 50,
-                    text1: "Error",
-                    text2: "Error",
+                    text1: "Lỗi!",
+                    text2: "Lỗi!",
                     onPress: async () => {
                         Toast.hide()
                         Linking.openSettings()
@@ -45,8 +45,8 @@ export const pickupPhoto = (maxWidth, maxHeight, quality = 0.8) => {
                     type: 'error',
                     position: 'bottom',
                     bottomOffset: 50,
-                    text1: "Error",
-                    text2: "Error",
+                    text1: "Lỗi!",
+                    text2: "Lỗi!",
                 });
                 reject()
                 return;

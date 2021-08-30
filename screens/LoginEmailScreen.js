@@ -33,7 +33,7 @@ export default function LoginEmailScreen() {
                 type: 'error',
                 position: 'bottom',
                 bottomOffset: 20,
-                text1: 'Error',
+                text1: 'Lỗi!',
                 text2: 'Tài khoản đăng nhập chưa đúng!.',
 
             })

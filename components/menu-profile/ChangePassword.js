@@ -23,7 +23,7 @@ export default function ChangePassword() {
                 type: 'error',
                 position: 'bottom',
                 bottomOffset: 50,
-                text1: 'Error',
+                text1: 'Lỗi',
                 text2: "Mật khẩu bạn nhập lại chưa đúng!"
             })
         } else {
@@ -39,7 +39,7 @@ export default function ChangePassword() {
                     type: 'success',
                     position: 'bottom',
                     bottomOffset: 50,
-                    text1: 'OK',
+                    text1: 'Thành công',
                     text2: 'Bạn đã thay đổi mật khẩu thành công!.'
                 })
             } else {
@@ -51,7 +51,7 @@ export default function ChangePassword() {
                     type: 'error',
                     position: 'bottom',
                     bottomOffset: 50,
-                    text1: 'Error',
+                    text1: 'Lỗi',
                     text2: response?.message
                 })
             }

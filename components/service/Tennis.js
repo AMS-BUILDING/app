@@ -58,7 +58,7 @@ export default function Tennis() {
                         type: 'error',
                         position: 'bottom',
                         bottomOffset: 50,
-                        text1: 'Error',
+                        text1: 'Lỗi!',
                         text2: "Tài khoản không có quyền truy cập"
                     })
                 }
@@ -67,7 +67,7 @@ export default function Tennis() {
                     type: 'error',
                     position: 'bottom',
                     bottomOffset: 50,
-                    text1: 'Error',
+                    text1: 'Lỗi!',
                     text2: 'Bạn cần đọc và cam kết!.'
                 })
             }
