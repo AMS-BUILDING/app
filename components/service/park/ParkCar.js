@@ -15,9 +15,8 @@ export default function ParkCar() {
 
     const [loading, setLoading] = useState(false);
     const { control, reset, handleSubmit, formState: { errors } } = useForm();
-
+    const [message, setMessage] = useState();
     const [open, setOpen] = useState(false);
-
     const [items, setItems] = useState([
         { label: "5 chỗ", value: "3" },
         { label: "7 chỗ", value: "4" }
@@ -59,13 +58,15 @@ export default function ParkCar() {
                             }
                         })
                     } else {
+                        let response = await resp.json();
                         setLoading(false)
+                        setMessage(response?.message)
                         Toast.show({
                             type: 'error',
                             position: 'bottom',
                             bottomOffset: 50,
                             text1: 'Error',
-                            text2: 'Đã xảy ra lỗi, thử lại?.'
+                            text2: response?.message
                         })
                     }
                 } else {
