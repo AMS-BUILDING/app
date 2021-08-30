@@ -2,7 +2,7 @@ import { AntDesign } from '@expo/vector-icons';
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import HomeImage from '../assets/images/home.png';
+import HomeImage from '../assets/images/bgscreen.png';
 import Header from '../components/Header';
 
 export default function Home({ navigation }) {
@@ -11,11 +11,11 @@ export default function Home({ navigation }) {
         <View style={styles.wrapContent}>
             <ImageBackground source={HomeImage} style={styles.image}>
                 <View style={styles.featureList}>
-                    <TouchableOpacity style={styles.featureItem} onPress={() => navigation.push('Notification')} activeOpacity={0.8}>
+                    <TouchableOpacity style={styles.featureItem} onPress={() => navigation.navigate('NotificationHome')} activeOpacity={0.8}>
                         <Text style={styles.title}>Thông báo chung</Text>
                         <AntDesign name="right" size={18} color="white" style={styles.icon} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.featureItem} onPress={() => navigation.push('ServiceRequest')} activeOpacity={0.8}>
+                    <TouchableOpacity style={styles.featureItem} onPress={() => navigation.navigate('ServiceRequest')} activeOpacity={0.8}>
                         <Text style={styles.title}>Yêu cầu dịch vụ</Text>
                         <AntDesign name="right" size={18} color="white" style={styles.icon} />
                     </TouchableOpacity >
@@ -32,7 +32,7 @@ export default function Home({ navigation }) {
 
                 </View>
             </ImageBackground>
-            <View style={styles.overlay}></View>
+            {/* <View style={styles.overlay}></View> */}
         </View>
     </View>
 }
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     },
     overlay: {
         backgroundColor: '#000',
-        opacity: .5,
+        opacity: .7,
         width: '100%',
         height: '100%'
     }

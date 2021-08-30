@@ -1,118 +1,126 @@
 import { AntDesign } from '@expo/vector-icons';
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-elements';
-import { Searchbar } from 'react-native-paper';
+import { ImageBackground, StyleSheet, Text, View, Image, TouchableOpacity, Linking } from 'react-native';
+import HomeImage from '../assets/images/bgscreen.png';
 import Header from '../components/Header';
+import Grab from '../assets/images/grab.png';
+import Now from '../assets/images/now.png';
+import Tiki from '../assets/images/tiki.png';
+import Shopee from '../assets/images/shopee.png';
+export default function Home({ navigation }) {
+    let openGrab = () => {
+        try {
+            Linking.openURL("https://food.grab.com/vn/vi/")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    let openNow = () => {
+        try {
+            Linking.openURL("https://shopeefood.vn/")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    let openTiki = () => {
+        try {
+            Linking.openURL("https://tiki.vn/")
+        } catch (error) {
+            console.log(error)
+        }
 
-export default function Market({ navigation }) {
+    }
+    let openShopee = () => {
+        try {
+            Linking.openURL("https://shopee.vn/")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return <View style={styles.wrapper}>
-        <Header navigation={navigation} />
-        <View style={styles.container}>
-            <View style={styles.wrapHeader}>
-                <View style={styles.confirm}>
-                    <AntDesign name="arrowleft" size={40} color="white" />
-                    <Text style={styles.textHeader}>Đi chợ</Text>
+        {/* <Header navigation={navigation} /> */}
+        <View style={styles.wrapContent}>
+            <ImageBackground source={HomeImage} style={styles.image}>
+
+                <View style={styles.featureList}>
+                    <View style={{ marginBottom: 20, borderBottomColor: 'gray', borderBottomWidth: 2 }}>
+                        <Text style={{ color: 'white', marginLeft: 10, marginBottom: 30, fontWeight: 'bold' }}>Ứng dụng thương mại điện tử</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 30 }}>
+                            <TouchableOpacity onPress={openShopee}>
+                                <Image source={Shopee} style={{ width: 50, height: 50 }} />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={openTiki}>
+                                <Image source={Tiki} style={{ width: 50, height: 50 }} />
+                            </TouchableOpacity>
+
+                        </View>
+                    </View>
+                    <View>
+                        <Text style={{ color: 'white', marginLeft: 10, marginBottom: 30, fontWeight: 'bold' }}>Ứng dụng đặt đồ ăn</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 30 }}>
+                            <TouchableOpacity onPress={openGrab}>
+                                <Image source={Grab} style={{ width: 50, height: 50 }} />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={openNow}>
+                                <Image source={Now} style={{ width: 50, height: 50 }} />
+                            </TouchableOpacity>
+
+                        </View>
+
+                    </View>
                 </View>
-                <AntDesign name="shoppingcart" size={40} color="white" onPress={() => navigation.navigate('Cart')} />
-            </View>
-            <View style={styles.wrapSearch}>
-                <Searchbar
-                    placeholder="Search"
-                />
-            </View>
-            <ScrollView>
-                <View style={styles.wrapBtn}>
-                    <Button
-                        title="Thực phẩm tươi"
-                        buttonStyle={buttonText}
-                    />
-                    <Button
-                        title="Rau"
-                        buttonStyle={buttonText}
-                    />
+
+                <View style={styles.overlay}>
+
                 </View>
-                <View style={styles.wrapBtn}>
-                    <Button
-                        title="Đồ dùng cá nhân"
-                        buttonStyle={buttonText}
-                    />
-                    <Button
-                        title="Đồ uống"
-                        buttonStyle={buttonText}
-                    />
-                </View>
-                <View style={styles.wrapBtn}>
-                    <Button
-                        title="Mỹ phẩm"
-                        buttonStyle={buttonText}
-                    />
-                    <Button
-                        title="Đồ chơi"
-                        buttonStyle={buttonText}
-                    />
-                </View>
-                <View style={styles.wrapBtn}>
-                    <Button
-                        title="Đồ ăn nhanh"
-                        buttonStyle={buttonText}
-                    />
-                    <Button
-                        title="Thẻ điện thoại"
-                        buttonStyle={buttonText}
-                    />
-                </View>
-                <View style={styles.wrapBtn}>
-                    <Button
-                        title="Quần áo"
-                        buttonStyle={buttonText}
-                        onPress={() => navigation.navigate('MarketFilter')}
-                    />
-                    <Button
-                        title="Giày dép"
-                        buttonStyle={buttonText}
-                    />
-                </View>
-            </ScrollView>
+            </ImageBackground>
+            {/* <View style={styles.overlay}></View> */}
         </View>
     </View>
-};
-
-const buttonText = StyleSheet.create({
-    width: 180,
-    padding: 15
-});
+}
 
 const styles = StyleSheet.create({
     wrapper: {
-        flex: 1
+        marginTop: 0,
+        flex: 1,
     },
-    container: {
-        flex: 1
+    wrapContent: {
+        flex: 1,
     },
-    wrapHeader: {
+    image: {
+        resizeMode: "cover",
+        justifyContent: "center",
+        height: '100%',
+        position: 'relative'
+    },
+    featureList: {
+        width: 400,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        position: 'absolute',
+        zIndex: 9,
+        left: 0,
+        top: 50
+    },
+    featureItem: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
-        padding: 15,
-        backgroundColor: '#666666',
-        marginBottom: 10
+        justifyContent: 'space-between',
+        borderBottomColor: 'white',
+        borderBottomWidth: 2,
+        marginBottom: 20,
+        padding: 10
     },
-    confirm: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    textHeader: {
+    title: {
         color: 'white',
-        fontSize: 30,
-        marginLeft: 10
+        fontSize: 18,
+        fontWeight: '600'
     },
-    wrapSearch: {
-        padding: 15
-    },
-    wrapBtn: {
-        padding: 15,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
+    overlay: {
+        backgroundColor: '#000',
+        opacity: .7,
+        width: '100%',
+        height: '100%'
     }
 })

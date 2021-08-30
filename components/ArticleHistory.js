@@ -1,14 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-export default function ArticleHistory() {
+export default function ArticleHistory({ data }) {
+    let navigation = useNavigation()
     return <View style={styles.wrapper}>
-        <Text style={styles.title}>Sử dụng dịch vụ bể bơi - 4/6/2021</Text>
-        <Text style={styles.desc}>Đã sử dụng dịch vụ bể bơi lúc 15h ngày 5/6/2021</Text>
-        <View style={styles.note}>
-            <Text style={styles.time}>12 phút trước</Text>
+        <Text style={styles.title}>{data?.serviceName}</Text>
+        <Text style={styles.desc}>{data?.description}</Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Text style={styles.desc}>{data?.time}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("FeedBack")}>
+                <Text>Đánh giá</Text>
+            </TouchableOpacity>
         </View>
     </View>
 };
@@ -17,18 +20,17 @@ const styles = StyleSheet.create({
     wrapper: {
         justifyContent: 'center',
         padding: 25,
-        borderBottomWidth: 2,
-        borderBottomColor: 'black'
+        borderBottomWidth: 1,
+        borderBottomColor: '#ececec'
     },
     title: {
-        color: '#9966FF',
-     
+        color: '#333',
         fontWeight: 'bold',
         fontSize: 18,
         marginBottom: 10
     },
     desc: {
-       
+
         fontSize: 14,
         marginBottom: 10
     },
@@ -40,6 +42,6 @@ const styles = StyleSheet.create({
     time: {
         color: '#868686',
         fontSize: 12,
-        
+
     },
 });

@@ -1,27 +1,40 @@
-import { AntDesign } from '@expo/vector-icons';
-import React from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { useSelector } from 'react-redux';
 import GroupFamily from '../components/GroupFamily';
-import Header from '../components/Header';
+import API from '../components/lib/API';
 
-export default function FamilyScreen({ navigation }) {
+export default function FamilyScreen() {
+    const token = useSelector(state => state.user.token);
+    const [data, setData] = useState();
+    const isFocus = useIsFocused();
+    useEffect(() => {
+        search()
+    }, [])
+    useEffect(() => {
+        search()
+    }, [isFocus])
+    const search = async () => {
+        let path = '/tenant/dependent-person';
+        let resp = await API.authorizedJSONGET(path, token);
+        if (resp.ok) {
+            let response = await resp.json()
+            setData(response)
+        }
+    }
+    console.log(data)
     return <View style={styles.wrapper}>
-        <Header navigation={navigation} />
+
         <View style={styles.container}>
-            <View style={styles.wrapHeader}>
-                <View style={styles.confirm}>
-                    <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.goBack()}>
-                        <AntDesign name="arrowleft" size={20} color="white" />
-                    </TouchableOpacity>
-                    <Text style={styles.textHeader}>Gia đình</Text>
-                </View>
-            </View>
             <ScrollView>
-                <GroupFamily />
-                <GroupFamily />
-                <GroupFamily />
-                <GroupFamily />
-                <GroupFamily />
+                {data?.map((item, index) => {
+                    return (
+                        <GroupFamily data={item} key={index} />
+                    )
+                })}
+
+
             </ScrollView>
 
         </View>
@@ -35,6 +48,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1
     },
+    
     wrapHeader: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -51,6 +65,6 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 18,
         marginLeft: 10,
-        fontWeight:'700'
+        fontWeight: '700'
     },
 })

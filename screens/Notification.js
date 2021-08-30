@@ -10,7 +10,6 @@ export default function Notification({ navigation }) {
     return <View style={styles.wrapper}>
         <Header navigation={navigation} />
         <View style={styles.wrapContent}>
-
             <View style={styles.wrapSearch}>
                 <FontAwesome name="search" size={18} color="gray" style={{ marginRight: 20 }} />
                 <TextInput placeholder="Tìm kiếm" style={styles.textSearch} />
@@ -40,6 +39,7 @@ export default function Notification({ navigation }) {
 
     </View>
 };
+
 const styles = StyleSheet.create({
     wrapper: {
         flex: 1
