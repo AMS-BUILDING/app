@@ -17,6 +17,7 @@ export default function ParkElectric() {
     const token = useSelector(state => state.user?.token)
     const accountIdRedux = useSelector(state => state.user?.accountId)
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
+    const [message, setMessage] = useState();
     let navigation = useNavigation()
     const roleId = useSelector(state => state.user?.roleId)
 
@@ -50,13 +51,15 @@ export default function ParkElectric() {
                             }
                         })
                     } else {
+                        let response = await resp.json();
                         setLoading(false)
+                        setMessage(response?.message)
                         Toast.show({
                             type: 'error',
                             position: 'bottom',
                             bottomOffset: 50,
                             text1: 'Error',
-                            text2: 'Đã xảy ra lỗi, thử lại?.'
+                            text2: response?.message
                         })
                     }
                 } else {
