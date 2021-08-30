@@ -9,18 +9,34 @@ import Tiki from '../assets/images/tiki.png';
 import Shopee from '../assets/images/shopee.png';
 export default function Home({ navigation }) {
     let openGrab = () => {
-        Linking.openURL("grab://app")
+        try {
+            Linking.openURL("https://food.grab.com/vn/vi/")
+        } catch (error) {
+            console.log(error)
+        }
     }
     let openNow = () => {
-        Linking.openURL("now://app")
+        try {
+            Linking.openURL("https://shopeefood.vn/")
+        } catch (error) {
+            console.log(error)
+        }
     }
     let openTiki = () => {
-        Linking.openURL("tiki://app")
+        try {
+            Linking.openURL("https://tiki.vn/")
+        } catch (error) {
+            console.log(error)
+        }
+
     }
     let openShopee = () => {
-        Linking.openURL("shopee://app")
+        try {
+            Linking.openURL("https://shopee.vn/")
+        } catch (error) {
+            console.log(error)
+        }
     }
-
 
     return <View style={styles.wrapper}>
         {/* <Header navigation={navigation} /> */}
