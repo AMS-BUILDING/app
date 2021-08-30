@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import bgLogin from '../assets/images/bgLogin.png';
 import API from '../components/lib/API';
 import LoadingProgressBar from '../components/LoadingProgressBar';
-import { addAccountId, addToken, addRole } from '../redux/UserSlice';
+import { addAccountId, addToken, addRole, addRoomNumber } from '../redux/UserSlice';
 
 
 
@@ -36,6 +36,7 @@ export default function Login({ handleLogin }) {
             dispatch(addToken(response?.accessToken))
             dispatch(addAccountId(response?.accountId))
             dispatch(addRole(response?.roleId))
+            dispatch(addRoomNumber(response?.roomNumber))
             handleLogin()
 
         } else {

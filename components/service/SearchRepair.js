@@ -27,7 +27,7 @@ export default function SearchRepair({ timeFrom, timeTo, handleTimeFrom, handleT
     }, [timeFrom])
     let searchEquipemt = async () => {
         try {
-            let path = '/landlord/detail_sub_service/search?subServiceId=9';
+            let path = '/tenant/detail_sub_service/search?subServiceId=9';
             let resp = await API.authorizedJSONGET(path, token);
             if (resp.ok) {
                 let response = await resp.json();
@@ -41,7 +41,7 @@ export default function SearchRepair({ timeFrom, timeTo, handleTimeFrom, handleT
     let searchProblems = async () => {
 
         try {
-            let path = `/landlord/reason_detail_sub_service/search?detailSubServiceId=${timeFrom}`;
+            let path = `/tenant/reason_detail_sub_service/search?detailSubServiceId=${timeFrom}`;
             let resp = await API.authorizedJSONGET(path, token);
             if (resp.ok) {
                 let response = await resp.json();

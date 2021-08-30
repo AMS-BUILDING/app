@@ -54,7 +54,6 @@ export default function DetailProcess(props) {
                     activeStepIconColor={"#fff"}
                     disabledStepIconColor={"#333"}
                     activeStep={data?.statusId}
-                    completedStepIconColor="orange"
 
                 >
                     <ProgressStep label="Đã nhận"

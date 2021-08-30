@@ -6,6 +6,7 @@ import ViettelPay from '../assets/images/viettelpay.png';
 import Feather from 'react-native-vector-icons/Feather';
 import Clipboard from '@react-native-clipboard/clipboard';
 import Toast from 'react-native-toast-message';
+import { useSelector } from 'react-redux';
 
 export default function Payment(props) {
     let data = props?.route?.params?.data;
@@ -30,14 +31,16 @@ export default function Payment(props) {
         } catch (error) {
 
         }
+
     };
+    const roomNumber = useSelector(state => state.user?.roomNumber);
     return <View style={styles.wrapper}>
         <ImageBackground source={bgScreen} style={styles.image}>
             <View style={[styles.wrapContent, { position: 'absolute', zIndex: 5, width: '100%', height: '100%' }]}>
 
                 <View style={styles.main}>
                     <View>
-                        <Text style={styles.title}>Căn hộ 099</Text>
+                        {roomNumber && <Text style={styles.title}>Căn hộ {roomNumber}</Text>}
                         <View style={styles.content}>
                             <Text style={styles.textContent}>Nội dung</Text>
                             <Text style={styles.textContent}>Nộp tiền phí dịch vụ</Text>

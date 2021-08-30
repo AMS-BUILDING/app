@@ -4,19 +4,20 @@ import { useSelector } from 'react-redux';
 import BannerImage from '../../assets/images/banner1.png';
 import ArticleHistory from '../ArticleHistory';
 import API from '../lib/API';
-import { useIsFocused } from '@react-navigation/core';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function ServiceHistory() {
     let [data, setData] = useState();
     const accountIdRedux = useSelector(state => state.user.accountId);
     const token = useSelector(state => state.user?.token)
+    const isFocus = useIsFocused();
     useEffect(() => {
         search()
     }, [])
     useEffect(() => {
         search()
     }, [isFocus])
-    let isFocus = useIsFocused();
+
 
     let search = async () => {
         try {
