@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, View,Text } from 'react-native';
+import { ScrollView, StyleSheet, View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import Car from '../../Car';
 import API from '../../lib/API';
+import { useIsFocused } from '@react-navigation/native'
 
 export default function VehicleCar() {
     const token = useSelector(state => state.user?.token)
     const [data, setData] = useState()
     const accountIdRedux = useSelector(state => state.user?.accountId)
+    const isFocused = useIsFocused()
     useEffect(() => {
         search()
     }, [])
+    useEffect(() => {
+        search()
+    }, [isFocused])
     let search = async () => {
         try {
             let path = `/tenant/vehicle-by-account-id/${accountIdRedux}?typeId=3`;

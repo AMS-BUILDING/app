@@ -74,7 +74,7 @@ export default function ChangeProfile(props) {
                     position: 'bottom',
                     bottomOffset: 50,
                     text1: 'Error',
-                    text2: 'Vui lòng kiểm tra lại thông tin.'
+                    text2: response?.message
                 })
             }
         } catch (error) {
